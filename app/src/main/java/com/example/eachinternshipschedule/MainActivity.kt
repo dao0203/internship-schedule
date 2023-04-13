@@ -29,7 +29,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
 sealed class Routes(route : String){
     object PostScheduleScreen : Routes("postScheduleScreen")
     object ScheduleListScreen : Routes("scheduleListScreen")
