@@ -6,14 +6,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.eachinternshipschedule.ui.theme.EachInternshipScheduleTheme
+import com.example.eachinternshipschedule.view.post_schedule.PostScheduleScreen
 
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,13 +24,14 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navHost = rememberNavController()
-
                     NavHost(
                         navController = navHost,
-                        startDestination = Routes.ScheduleListScreen.route
+                        startDestination = Routes.PostScheduleScreen.route
                     ) {
                         composable(Routes.ScheduleListScreen.route) {}
-                        composable(Routes.PostScheduleScreen.route){}
+                        composable(Routes.PostScheduleScreen.route){
+                            PostScheduleScreen(navController = navHost)
+                        }
                         }
                     }
                 }
