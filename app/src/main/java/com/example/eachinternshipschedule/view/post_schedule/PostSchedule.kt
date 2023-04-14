@@ -1,6 +1,7 @@
 package com.example.eachinternshipschedule.view.post_schedule
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -26,13 +27,14 @@ fun PostScheduleScreen(
     }
     var statusExpanded by remember { mutableStateOf(false) }
 
-    val routeItems = listOf<String>("書類", "一次面接", "二次面接", "三次面接", "最終面接", "")
+    val routeItems = listOf<String>("書類", "一次面接", "二次面接", "三次面接", "最終面接")
     var selectedRouteItem: String? = null
     Scaffold(
         modifier = modifier.padding(
             start = 8.dp,
             end = 8.dp,
         ),
+
     )
     {
         Column(
@@ -40,26 +42,21 @@ fun PostScheduleScreen(
                 .padding(it)
                 .padding(horizontal = 16.dp),
         ) {
-            TextField(
-                value = "",
-                onValueChange = {},
-                label = { Text("Company Name") },
+            PostScheduleEditField(
+                label = "会社名",
+                isError = false,
             )
-            TextField(
-                value = "",
-                onValueChange = {},
-                label = { Text("Internship Name") },
+            PostScheduleEditField(
+                label = "インターンシップ名",
+                isError = false,
             )
-            TextField(
-                value = "",
-                onValueChange = {},
-                label = { Text("日付") },
-
+            PostScheduleEditField(
+                label = "日付",
+                isError = false,
             )
-            TextField(
-                value = "",
-                onValueChange = {},
-                label = { Text("状況") },
+            PostScheduleEditField(
+                label = "選考状況",
+                isError = false,
             )
         }
 
