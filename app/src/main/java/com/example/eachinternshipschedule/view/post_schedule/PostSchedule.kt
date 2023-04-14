@@ -66,3 +66,22 @@ fun PostScheduleScreen(
     }
 }
 
+@ExperimentalMaterial3Api
+@Composable
+fun PostScheduleEditField(
+    label: String,
+//    onTextFieldValueChange: (String) -> Unit,
+    isError: Boolean
+) {
+    OutlinedTextField(
+        value = "",
+        modifier = Modifier.fillMaxWidth(),
+        onValueChange = {},
+        label = { Text(label) },
+        singleLine = true,
+        isError = isError,
+        supportingText = {
+
+        })
+}
+
