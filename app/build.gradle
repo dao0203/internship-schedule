@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.eachinternshipschedule'
+    namespace 'com.schedule.eachinternshipschedule'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.eachinternshipschedule"
+        applicationId "com.schedule.eachinternshipschedule"
         minSdk 33
         targetSdk 33
         versionCode 1
