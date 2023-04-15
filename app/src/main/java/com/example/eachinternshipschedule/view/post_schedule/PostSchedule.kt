@@ -26,9 +26,7 @@ fun PostScheduleScreen(
     modifier: Modifier = Modifier,
     navController: NavController = rememberNavController()
 ) {
-    var routeExpanded by remember {
-        mutableStateOf(false)
-    }
+    var routeExpanded by remember { mutableStateOf(false) }
     var statusExpanded by remember { mutableStateOf(false) }
 
     //選考に必要なデータ
@@ -88,9 +86,8 @@ fun PostScheduleScreen(
                 expanded = routeExpanded,
                 onExpandedChange = { routeExpanded = !routeExpanded },
             ) {
-                TextField(
-                    value = selectedRouteItems,
-
+                OutlinedTextField(
+                    value = selectedRouteItem,
                     readOnly = true,
                     onValueChange = {},
                     trailingIcon = {
@@ -101,19 +98,21 @@ fun PostScheduleScreen(
                     modifier = Modifier
                         .menuAnchor()
                         .fillMaxWidth(),
-                    colors = ExposedDropdownMenuDefaults.textFieldColors(),
+                    colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
                     label = { Text(text = "選考") }
                 )
-                ExposedDropdownMenu(expanded = routeExpanded, onDismissRequest = {
-                    routeExpanded = false
-                }) {
+                ExposedDropdownMenu(
+                    expanded = routeExpanded,
+                    onDismissRequest = {
+                        routeExpanded = false
+                    }) {
                     repeat(routeItems.size) {
                         DropdownMenuItem(
                             text = {
                                 Text(text = routeItems[it])
                             },
                             onClick = {
-                                selectedRouteItems = routeItems[it]
+                                selectedRouteItem = routeItems[it]
                                 routeExpanded = false
                             },
                         )
@@ -123,10 +122,44 @@ fun PostScheduleScreen(
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
             )
-            PostScheduleEditField(
-                label = "選考状況",
-                isError = false,
-            )
+            ExposedDropdownMenuBox(
+                expanded = statusExpanded,
+                onExpandedChange = { statusExpanded = !statusExpanded },
+            ) {
+                OutlinedTextField(
+                    value = selectedStatusItem,
+                    readOnly = true,
+                    onValueChange = {},
+                    trailingIcon = {
+                        ExposedDropdownMenuDefaults.TrailingIcon(
+                            expanded = statusExpanded,
+                        )
+                    },
+                    modifier = Modifier
+                        .menuAnchor()
+                        .fillMaxWidth(),
+                    colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
+                    label = { Text(text = "選考状況") }
+                )
+                ExposedDropdownMenu(
+                    expanded = statusExpanded,
+                    onDismissRequest = {
+                        statusExpanded = false
+                    }
+                ) {
+                    repeat(statusItems.size) {
+                        DropdownMenuItem(
+                            text = {
+                                Text(text = statusItems[it])
+                            },
+                            onClick = {
+                                selectedStatusItem = statusItems[it]
+                                statusExpanded = false
+                            },
+                        )
+                    }
+                }
+            }
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
             )
