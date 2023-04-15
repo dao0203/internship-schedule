@@ -30,11 +30,15 @@ fun PostScheduleScreen(
     val routeItems = listOf<String>("書類", "一次面接", "二次面接", "三次面接", "最終面接")
     var selectedRouteItem: String? = null
     Scaffold(
-        modifier = modifier.padding(
-            start = 8.dp,
-            end = 8.dp,
-        ),
-
+        modifier = modifier.fillMaxSize(),
+        topBar = {
+            TopAppBar(
+                title = { Text(
+                    text = "スケジュール投稿",
+                    ) },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(MaterialTheme.colorScheme.primary),
+            )
+        }
     )
     {
         Column(
@@ -58,6 +62,15 @@ fun PostScheduleScreen(
                 label = "選考状況",
                 isError = false,
             )
+            Spacer(
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
+            ElevatedButton(
+                onClick = { /*TODO*/ },
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
+            ) {
+                Text(text = "投稿する")
+            }
         }
 
     }
