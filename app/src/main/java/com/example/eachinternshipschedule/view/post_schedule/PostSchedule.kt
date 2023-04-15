@@ -48,13 +48,22 @@ fun PostScheduleScreen(
                 .padding(it)
                 .padding(horizontal = 16.dp),
         ) {
+            Spacer(
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
             PostScheduleEditField(
                 label = "会社名",
                 isError = false,
             )
+            Spacer(
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
             PostScheduleEditField(
                 label = "インターンシップ名",
                 isError = false,
+            )
+            Spacer(
+                modifier = Modifier.padding(vertical = 8.dp)
             )
             PostScheduleEditField(
                 label = "日付",
