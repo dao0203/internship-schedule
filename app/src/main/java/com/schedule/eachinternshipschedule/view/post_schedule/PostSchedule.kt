@@ -16,15 +16,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.schedule.eachinternshipschedule.viewmodel.PostScheduleViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(name = "PostScheduleScreen")
 @Composable
 fun PostScheduleScreen(
     modifier: Modifier = Modifier,
-    navController: NavController = rememberNavController()
+    navController: NavController = rememberNavController(),
+    postScheduleViewModel: PostScheduleViewModel = viewModel()
 ) {
     var routeExpanded by remember { mutableStateOf(false) }
     var statusExpanded by remember { mutableStateOf(false) }
