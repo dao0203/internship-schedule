@@ -1,6 +1,8 @@
 package com.example.eachinternshipschedule.view.post_schedule
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
@@ -57,6 +59,16 @@ fun PostScheduleScreen(
             PostScheduleEditField(
                 label = "日付",
                 isError = false,
+            )
+            Spacer(
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
+            PostScheduleEditField(
+                label = "審査",
+                isError = false,
+            )
+            Spacer(
+                modifier = Modifier.padding(vertical = 8.dp)
             )
             PostScheduleEditField(
                 label = "選考状況",
