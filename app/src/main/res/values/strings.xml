@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">EachInternshipSchedule</string>
+    <string name="company_name">会社名</string>>
+    <string name="internship_name">インターンシップ名</string>
+    <string name="date">日付</string>
+    <string name="selection_status">選考状況</string>
 </resources>
