@@ -31,8 +31,8 @@ fun PostScheduleScreen(
     }
     var statusExpanded by remember { mutableStateOf(false) }
 
-    val routeItems = listOf<String>("書類", "一次面接", "二次面接", "三次面接", "最終面接")
-    var selectedRouteItem: String? = null
+    val routeItems = listOf<String>("選考を選択してください", "書類", "一次面接", "二次面接", "三次面接", "最終面接")
+    var selectedRouteItems by remember { mutableStateOf(routeItems[0]) }
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
