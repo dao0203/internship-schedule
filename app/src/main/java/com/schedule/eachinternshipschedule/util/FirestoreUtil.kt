@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule.Util
+package com.schedule.eachinternshipschedule.util
 
 import com.google.firebase.firestore.FirebaseFirestore
 
