@@ -1,4 +1,4 @@
-package com.example.eachinternshipschedule.ui.theme
+package com.schedule.eachinternshipschedule.ui.theme
 
 import android.app.Activity
 import android.os.Build

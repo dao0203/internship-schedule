@@ -1,4 +1,4 @@
-package com.example.eachinternshipschedule
+package com.schedule.eachinternshipschedule
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
