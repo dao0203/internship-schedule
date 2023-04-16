@@ -183,7 +183,9 @@ fun PostScheduleScreen(
                 modifier = Modifier.padding(vertical = 8.dp)
             )
             ElevatedButton(
-                onClick = { /*TODO*/ },
+                onClick = {
+                          postScheduleViewModel.insertSchedule(uiState.schedule)
+                },
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
             ) {
                 Text(text = "投稿する")
