@@ -7,8 +7,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -19,7 +19,7 @@ import com.schedule.eachinternshipschedule.viewmodel.ScheduleListViewModel
 import com.schedule.eachinternshipschedule.viewmodel.ScheduleListViewModelFactory
 
 
-@ExperimentalMaterial3Api
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScheduleListScreen(
     modifier: Modifier = Modifier,
@@ -33,15 +33,20 @@ fun ScheduleListScreen(
     )
 ) {
     val uiState: ScheduleListUiState by scheduleListViewModel.uiState.collectAsState()
-    val composableScope = rememberCoroutineScope()
 
     Scaffold(
-
+        modifier = modifier.padding(
+            vertical = 8.dp
+        )
     ) {
         Box(
             modifier = modifier.padding(it),
         ) {
-
+            when(uiState){
+                is ScheduleListUiState.Loading -> {}
+                is ScheduleListUiState.Success -> {}
+                is ScheduleListUiState.Error -> {}
+            }
         }
 
     }
