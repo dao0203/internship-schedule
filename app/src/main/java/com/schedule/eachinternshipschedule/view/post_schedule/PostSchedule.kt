@@ -76,6 +76,10 @@ fun PostScheduleScreen(
             )
             PostScheduleEditField(
                 label = "会社名",
+                value = uiState.schedule.companyName,
+                onValueChange = { value ->
+                    postScheduleViewModel.onCompanyNameValueChange(value)
+                },
                 isError = false,
             )
             Spacer(
