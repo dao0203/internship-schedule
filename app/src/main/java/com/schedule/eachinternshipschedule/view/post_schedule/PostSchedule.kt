@@ -188,13 +188,14 @@ fun PostScheduleScreen(
 @Composable
 fun PostScheduleEditField(
     label: String,
-//    onTextFieldValueChange: (String) -> Unit,
+    value: String,
+    onValueChange: (String) -> Unit,
     isError: Boolean
 ) {
     OutlinedTextField(
-        value = "",
+        value = value,
         modifier = Modifier.fillMaxWidth(),
-        onValueChange = {},
+        onValueChange = onValueChange,
         label = { Text(label) },
         singleLine = true,
         isError = isError,
