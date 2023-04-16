@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,6 +22,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.schedule.eachinternshipschedule.repository.DefaultFirestoreRepository
+import com.schedule.eachinternshipschedule.viewmodel.PostScheduleUiState
 import com.schedule.eachinternshipschedule.viewmodel.PostScheduleViewModel
 import com.schedule.eachinternshipschedule.viewmodel.PostScheduleViewModelFactory
 
@@ -36,6 +38,7 @@ fun PostScheduleScreen(
         )
     )
 ) {
+    val uiState: PostScheduleUiState by postScheduleViewModel.uiState.collectAsState()
     var routeExpanded by remember { mutableStateOf(false) }
     var statusExpanded by remember { mutableStateOf(false) }
 
