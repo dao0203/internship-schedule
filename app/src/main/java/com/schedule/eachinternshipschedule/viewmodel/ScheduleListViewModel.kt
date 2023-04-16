@@ -13,7 +13,11 @@ class ScheduleListViewModel(private val repository: FirestoreRepository) : ViewM
     private var _uiState = MutableStateFlow<ScheduleListUiState>(ScheduleListUiState.Loading)
     val uiState = _uiState.asStateFlow()
 
-    fun getSchedule() {
+    init {
+        getSchedule()
+    }
+
+    private fun getSchedule() {
         viewModelScope.launch {
             try {
                 repository.getSchedule().collect {
