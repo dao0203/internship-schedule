@@ -39,17 +39,12 @@ fun PostScheduleScreen(
     )
 ) {
     val uiState: PostScheduleUiState by postScheduleViewModel.uiState.collectAsState()
-    var routeExpanded by remember { mutableStateOf(false) }
-    var statusExpanded by remember { mutableStateOf(false) }
-
     //選考に必要なデータ
     val routeItems =
         listOf<String>("選考を選択してください", "書類", "一次面接", "二次面接", "三次面接", "最終面接")
-    var selectedRouteItem by remember { mutableStateOf(routeItems[0]) }
-
     //選考状況に必要なデータ
     val statusItems = listOf<String>("選考状況を選択してください", "実施日(提出)", "通過")
-    var selectedStatusItem by remember { mutableStateOf(statusItems[0]) }
+
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
