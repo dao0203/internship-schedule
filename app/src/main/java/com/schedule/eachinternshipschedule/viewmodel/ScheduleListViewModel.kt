@@ -26,5 +26,5 @@ class ScheduleListViewModelFactory(private val repository: FirestoreRepository) 
 sealed interface ScheduleListUiState {
     object Loading : ScheduleListUiState
     data class Success(val scheduleList: List<Schedule>) : ScheduleListUiState
-    object Error : ScheduleListUiState
+    data class Error(val e: String) : ScheduleListUiState
 }
