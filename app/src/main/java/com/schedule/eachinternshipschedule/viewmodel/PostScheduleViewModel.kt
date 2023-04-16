@@ -33,14 +33,14 @@ class PostScheduleViewModelFactory(private val repository: FirestoreRepository) 
 
 data class PostScheduleUiState(
     val isLoading: Boolean = false,
-    val routeExpanded : Boolean = false,
-    val statusExpanded : Boolean = false,
+    val routeExpanded: Boolean = false,
+    val statusExpanded: Boolean = false,
     val schedule: Schedule = Schedule(
         companyName = "",
         internshipName = "",
         date = "",
-        route = "",
-        routeStatus = ""
+        route = "選考を選択してください",
+        routeStatus = "選考状況を選択してください"
     ),
     val scheduleErrorMsg: ScheduleErrorMsg = ScheduleErrorMsg(
         companyNameError = "",
