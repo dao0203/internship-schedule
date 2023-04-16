@@ -16,6 +16,70 @@ class PostScheduleViewModel(private val firestoreRepository: FirestoreRepository
     private val _uiState = MutableStateFlow(PostScheduleUiState())
     val uiState = _uiState.asStateFlow()
 
+    fun onCompanyNameValueChange(completedText: String) {
+        _uiState.value = _uiState.value.copy(
+            schedule = _uiState.value.schedule.copy(
+                companyName = completedText
+            )
+        )
+    }
+
+    fun onInternshipNameValueChange(completedText: String) {
+        _uiState.value = _uiState.value.copy(
+            schedule = _uiState.value.schedule.copy(
+                internshipName = completedText
+            )
+        )
+    }
+
+    fun onDateValueChange(completedDate: String){
+        _uiState.value = _uiState.value.copy(
+            schedule = _uiState.value.schedule.copy(
+                date = completedDate
+            )
+        )
+    }
+
+    fun onRouteValueChange(chosenItem:String){
+        _uiState.value = _uiState.value.copy(
+            schedule = _uiState.value.schedule.copy(
+                route = chosenItem
+            )
+        )
+    }
+
+    fun onRouteStatusValueChange(chosenItem: String){
+        _uiState.value = _uiState.value.copy(
+            schedule = _uiState.value.schedule.copy(
+                routeStatus = chosenItem
+            )
+        )
+    }
+
+    fun onRouteExpandedChange(routeExpanded:Boolean){
+        _uiState.value = _uiState.value.copy(
+            routeExpanded = !routeExpanded
+        )
+    }
+
+    fun onRouteDismissRequest(){
+        _uiState.value = _uiState.value.copy(
+            routeExpanded = false
+        )
+    }
+
+    fun onStatusExpandedChange(statusExpanded: Boolean){
+        _uiState.value = _uiState.value.copy(
+            statusExpanded = !statusExpanded
+        )
+    }
+
+    fun onStatusDismissRequest(){
+        _uiState.value = _uiState.value.copy(
+            routeExpanded = false
+        )
+    }
+
     fun insertSchedule(schedule: Schedule) {
         viewModelScope.launch {
             firestoreRepository.insertSchedule(schedule)
