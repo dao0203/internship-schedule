@@ -19,7 +19,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.firestore.FirebaseFirestore
+import com.schedule.eachinternshipschedule.repository.DefaultFirestoreRepository
 import com.schedule.eachinternshipschedule.viewmodel.PostScheduleViewModel
+import com.schedule.eachinternshipschedule.viewmodel.PostScheduleViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(name = "PostScheduleScreen")
@@ -27,7 +30,11 @@ import com.schedule.eachinternshipschedule.viewmodel.PostScheduleViewModel
 fun PostScheduleScreen(
     modifier: Modifier = Modifier,
     navController: NavController = rememberNavController(),
-    postScheduleViewModel: PostScheduleViewModel = viewModel()
+    postScheduleViewModel: PostScheduleViewModel = viewModel(
+        factory = PostScheduleViewModelFactory(
+            repository = DefaultFirestoreRepository(firestore = FirebaseFirestore.getInstance())
+        )
+    )
 ) {
     var routeExpanded by remember { mutableStateOf(false) }
     var statusExpanded by remember { mutableStateOf(false) }
