@@ -1,11 +1,15 @@
 package com.schedule.eachinternshipschedule.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.schedule.eachinternshipschedule.model.Schedule
-import com.schedule.eachinternshipschedule.repository.DefaultFirestoreRepository
+import com.schedule.eachinternshipschedule.repository.FirestoreRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
-class ScheduleListViewModel(private val repository: DefaultFirestoreRepository) : ViewModel() {
-
+class ScheduleListViewModel(private val repository: FirestoreRepository) : ViewModel() {
+    private val _uiState = MutableStateFlow(ScheduleListUiState.Loading)
+    val uiState = _uiState.asStateFlow()
 }
 
 class ScheduleListViewModelFactory(private val repository: FirestoreRepository) :
