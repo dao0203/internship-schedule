@@ -108,16 +108,18 @@ fun PostScheduleScreen(
                 modifier = Modifier.padding(vertical = 8.dp)
             )
             ExposedDropdownMenuBox(
-                expanded = routeExpanded,
-                onExpandedChange = { routeExpanded = !routeExpanded },
+                expanded = uiState.routeExpanded,
+                onExpandedChange = {
+                                   postScheduleViewModel.onRouteExpandedChange(uiState.routeExpanded)
+                },
             ) {
                 OutlinedTextField(
-                    value = selectedRouteItem,
+                    value = uiState.schedule.route,
                     readOnly = true,
                     onValueChange = {},
                     trailingIcon = {
                         ExposedDropdownMenuDefaults.TrailingIcon(
-                            expanded = routeExpanded,
+                            expanded = uiState.routeExpanded,
                         )
                     },
                     modifier = Modifier
@@ -127,9 +129,9 @@ fun PostScheduleScreen(
                     label = { Text(text = "選考") }
                 )
                 ExposedDropdownMenu(
-                    expanded = routeExpanded,
+                    expanded = uiState.routeExpanded,
                     onDismissRequest = {
-                        routeExpanded = false
+                        postScheduleViewModel.onRouteDismissRequest()
                     }) {
                     repeat(routeItems.size) {
                         DropdownMenuItem(
@@ -137,8 +139,8 @@ fun PostScheduleScreen(
                                 Text(text = routeItems[it])
                             },
                             onClick = {
-                                selectedRouteItem = routeItems[it]
-                                routeExpanded = false
+                                postScheduleViewModel.onRouteValueChange(routeItems[it])
+                                postScheduleViewModel.onRouteDismissRequest()
                             },
                         )
                     }
