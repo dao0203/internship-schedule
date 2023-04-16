@@ -98,6 +98,10 @@ fun PostScheduleScreen(
             )
             PostScheduleEditField(
                 label = "日付",
+                value = uiState.schedule.date,
+                onValueChange = {value->
+                    postScheduleViewModel.onDateValueChange(value)
+                },
                 isError = false,
             )
             Spacer(
