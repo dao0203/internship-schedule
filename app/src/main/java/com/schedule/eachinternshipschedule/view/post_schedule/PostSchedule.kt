@@ -87,6 +87,10 @@ fun PostScheduleScreen(
             )
             PostScheduleEditField(
                 label = "インターンシップ名",
+                value = uiState.schedule.internshipName,
+                onValueChange = { value ->
+                    postScheduleViewModel.onInternshipNameValueChange(value)
+                },
                 isError = false,
             )
             Spacer(
