@@ -8,11 +8,14 @@ import com.schedule.eachinternshipschedule.model.ScheduleErrorMsg
 import com.schedule.eachinternshipschedule.model.ScheduleValid
 import com.schedule.eachinternshipschedule.repository.FirestoreRepository
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class PostScheduleViewModel(private val firestoreRepository: FirestoreRepository) : ViewModel() {
 
     private val _uiState = MutableStateFlow(PostScheduleUiState())
+    val uiState = _uiState.asStateFlow()
+
     fun insertSchedule(schedule: Schedule) {
         viewModelScope.launch {
             firestoreRepository.insertSchedule(schedule)
