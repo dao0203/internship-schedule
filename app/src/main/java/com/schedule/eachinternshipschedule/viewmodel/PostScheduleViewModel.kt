@@ -32,7 +32,7 @@ class PostScheduleViewModel(private val firestoreRepository: FirestoreRepository
         )
     }
 
-    fun onDateValueChange(completedDate: String){
+    fun onDateValueChange(completedDate: String) {
         _uiState.value = _uiState.value.copy(
             schedule = _uiState.value.schedule.copy(
                 date = completedDate
@@ -40,43 +40,45 @@ class PostScheduleViewModel(private val firestoreRepository: FirestoreRepository
         )
     }
 
-    fun onRouteValueChange(chosenItem:String){
+    fun onRouteValueChange(chosenItem: String) {
         _uiState.value = _uiState.value.copy(
             schedule = _uiState.value.schedule.copy(
                 route = chosenItem
-            )
+            ),
+            routeExpanded = false
         )
     }
 
-    fun onRouteStatusValueChange(chosenItem: String){
+    fun onStatusValueChange(chosenItem: String) {
         _uiState.value = _uiState.value.copy(
             schedule = _uiState.value.schedule.copy(
                 routeStatus = chosenItem
-            )
+            ),
+            statusExpanded = false
         )
     }
 
-    fun onRouteExpandedChange(routeExpanded:Boolean){
+    fun onRouteExpandedChange(routeExpanded: Boolean) {
         _uiState.value = _uiState.value.copy(
             routeExpanded = !routeExpanded
         )
     }
 
-    fun onRouteDismissRequest(){
+    fun onRouteDismissRequest() {
         _uiState.value = _uiState.value.copy(
             routeExpanded = false
         )
     }
 
-    fun onStatusExpandedChange(statusExpanded: Boolean){
+    fun onStatusExpandedChange(statusExpanded: Boolean) {
         _uiState.value = _uiState.value.copy(
-            statusExpanded = !statusExpanded
+            statusExpanded = !statusExpanded,
         )
     }
 
-    fun onStatusDismissRequest(){
+    fun onStatusDismissRequest() {
         _uiState.value = _uiState.value.copy(
-            routeExpanded = false
+            statusExpanded = false
         )
     }
 
