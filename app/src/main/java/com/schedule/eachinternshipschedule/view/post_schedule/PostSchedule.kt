@@ -41,9 +41,9 @@ fun PostScheduleScreen(
     val uiState: PostScheduleUiState by postScheduleViewModel.uiState.collectAsState()
     //選考に必要なデータ
     val routeItems =
-        listOf<String>("選考を選択してください", "書類", "一次面接", "二次面接", "三次面接", "最終面接")
+        listOf("選考を選択してください", "書類", "一次面接", "二次面接", "三次面接", "最終面接")
     //選考状況に必要なデータ
-    val statusItems = listOf<String>("選考状況を選択してください", "実施日(提出)", "通過")
+    val statusItems = listOf("選考状況を選択してください", "実施日(提出)", "通過")
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
