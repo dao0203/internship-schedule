@@ -84,7 +84,13 @@ class PostScheduleViewModel(private val firestoreRepository: FirestoreRepository
 
     fun insertSchedule(schedule: Schedule) {
         viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(
+                isLoading = true
+            )
             firestoreRepository.insertSchedule(schedule)
+            _uiState.value = _uiState.value.copy(
+                isLoading = false
+            )
         }
     }
 }
