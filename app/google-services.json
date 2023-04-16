@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "930512477391",
+    "project_id": "eachinternshipschedule",
+    "storage_bucket": "eachinternshipschedule.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930512477391:android:700e55b270f50aaa31ebba",
+        "android_client_info": {
+          "package_name": "com.schedule.eachinternshipschedule"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930512477391-45o9v8jo8sl8s8ae2cn3tgrqcbpv8r3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmmmKj9YiLEiuWG2MVDIgmYDwYb0ng9JI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930512477391-45o9v8jo8sl8s8ae2cn3tgrqcbpv8r3m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-package com.example.eachinternshipschedule.ui.theme
+package com.schedule.eachinternshipschedule.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

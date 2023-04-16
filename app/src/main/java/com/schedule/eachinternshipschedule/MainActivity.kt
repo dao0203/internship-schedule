@@ -1,4 +1,4 @@
-package com.example.eachinternshipschedule
+package com.schedule.eachinternshipschedule
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.eachinternshipschedule.ui.theme.EachInternshipScheduleTheme
-import com.example.eachinternshipschedule.view.post_schedule.PostScheduleScreen
+import com.schedule.eachinternshipschedule.ui.theme.EachInternshipScheduleTheme
+import com.schedule.eachinternshipschedule.view.post_schedule.PostScheduleScreen
 
 class MainActivity : ComponentActivity() {
 

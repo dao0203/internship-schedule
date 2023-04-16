@@ -1,14 +1,15 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
     id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    namespace 'com.example.eachinternshipschedule'
+    namespace 'com.schedule.eachinternshipschedule'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.eachinternshipschedule"
+        applicationId "com.schedule.eachinternshipschedule"
         minSdk 33
         targetSdk 33
         versionCode 1
@@ -59,11 +60,14 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.0.1")
     implementation("androidx.compose.material3:material3-window-size-class:1.0.1")
 
-
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+
+    //Firebase BoMとFirestoreの依存関係を追加
+    implementation platform('com.google.firebase:firebase-bom:31.5.0')
+    implementation ('com.google.firebase:firebase-firestore-ktx')
 }
