@@ -43,8 +43,14 @@ fun ScheduleListScreen(
             modifier = modifier.padding(it),
         ) {
             when(uiState){
-                is ScheduleListUiState.Loading -> {}
-                is ScheduleListUiState.Success -> {}
+                is ScheduleListUiState.Loading -> {
+                    ScheduleListScreenWhenLoading()
+                }
+                is ScheduleListUiState.Success -> {
+                    ScheduleListScreenWhenSuccess(
+                        scheduleList = (uiState as ScheduleListUiState.Success).scheduleList,
+                    )
+                }
                 is ScheduleListUiState.Error -> {}
             }
         }
