@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.schedule.eachinternshipschedule.model.Schedule
-import com.schedule.eachinternshipschedule.repository.FirestoreRepository
+import com.schedule.eachinternshipschedule.data.repository.FirestoreRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

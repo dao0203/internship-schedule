@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule.repository
+package com.schedule.eachinternshipschedule.data.repository
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query

@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule.repository
+package com.schedule.eachinternshipschedule.data.repository
 
 import com.schedule.eachinternshipschedule.model.Schedule
 import kotlinx.coroutines.flow.Flow
