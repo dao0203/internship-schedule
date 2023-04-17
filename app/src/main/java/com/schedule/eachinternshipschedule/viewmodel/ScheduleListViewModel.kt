@@ -3,31 +3,19 @@ package com.schedule.eachinternshipschedule.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.schedule.eachinternshipschedule.model.Schedule
 import com.schedule.eachinternshipschedule.data.repository.FirestoreRepository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
 
 class ScheduleListViewModel(private val repository: FirestoreRepository) : ViewModel() {
-    private var _uiState = MutableStateFlow<ScheduleListUiState>(ScheduleListUiState.Loading)
-    val uiState = _uiState.asStateFlow()
-
-    init {
-        getSchedule()
-    }
-
-    private fun getSchedule() {
-        viewModelScope.launch {
-            try {
-                repository.getSchedule().collect {
-                    _uiState.value = ScheduleListUiState.Success(it)
-                }
-            } catch (e: Exception) {
-                _uiState.value = ScheduleListUiState.Error(e.toString())
-            }
-        }
-    }
+    val items: Flow<PagingData<Schedule>> = Pager(
+        config = PagingConfig(pageSize = 20, enablePlaceholders = false),
+        pagingSourceFactory = { repository.getSchedule() }
+    ).flow.cachedIn(viewModelScope)
 }
 
 class ScheduleListViewModelFactory(private val repository: FirestoreRepository) :
@@ -39,10 +27,4 @@ class ScheduleListViewModelFactory(private val repository: FirestoreRepository) 
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
-}
-
-sealed interface ScheduleListUiState {
-    object Loading : ScheduleListUiState
-    data class Success(val scheduleList: List<Schedule>) : ScheduleListUiState
-    data class Error(val e: String) : ScheduleListUiState
 }
