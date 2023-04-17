@@ -16,20 +16,20 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
 import com.google.firebase.firestore.FirebaseFirestore
 import com.schedule.eachinternshipschedule.model.Schedule
 import com.schedule.eachinternshipschedule.data.repository.DefaultFirestoreRepository
-import com.schedule.eachinternshipschedule.viewmodel.ScheduleListUiState
 import com.schedule.eachinternshipschedule.viewmodel.ScheduleListViewModel
 import com.schedule.eachinternshipschedule.viewmodel.ScheduleListViewModelFactory
+import androidx.paging.compose.collectAsLazyPagingItems
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -37,7 +37,7 @@ import com.schedule.eachinternshipschedule.viewmodel.ScheduleListViewModelFactor
 fun ScheduleListScreen(
     modifier: Modifier = Modifier,
     navController: NavController = rememberNavController(),
-    scheduleListViewModel: ScheduleListViewModel = viewModel(
+    scheduleListViewModel: ScheduleListViewModel = viewModel<ScheduleListViewModel>(
         factory = ScheduleListViewModelFactory(
             repository = DefaultFirestoreRepository(
                 firestore = FirebaseFirestore.getInstance(),
@@ -45,8 +45,7 @@ fun ScheduleListScreen(
         ),
     )
 ) {
-    val uiState: ScheduleListUiState by scheduleListViewModel.uiState.collectAsState()
-
+    val items: LazyPagingItems<Schedule> = scheduleListViewModel.items.collectAsLazyPagingItems()
     Scaffold(
         modifier = modifier.padding(
             vertical = 8.dp
@@ -55,40 +54,44 @@ fun ScheduleListScreen(
         Box(
             modifier = modifier.padding(it),
         ) {
-            when(uiState){
-                is ScheduleListUiState.Loading -> {
+            when (items.loadState.refresh) {
+                is LoadState.Loading -> {
                     ScheduleListScreenWhenLoading()
                 }
-                is ScheduleListUiState.Success -> {
+                is LoadState.NotLoading -> {
                     LazyColumn(
                         state = rememberLazyListState(),
-                        contentPadding = PaddingValues(8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        contentPadding = PaddingValues(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
                     )
                     {
-                        items((uiState as ScheduleListUiState.Success).scheduleList.size) { schedule ->
-                            ScheduleItem(schedule = (uiState as ScheduleListUiState.Success).scheduleList[schedule])
+                        items(items.itemCount) { schedule ->
+                            ScheduleItem(schedule = items[schedule]!!)
                         }
                     }
                 }
-                is ScheduleListUiState.Error -> {
-
+                is LoadState.Error -> {
+                    Text(
+                        text = "Error",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .align(Alignment.Center)
+                    )
                 }
             }
         }
-
     }
 }
 
 @Composable
 fun ScheduleListScreenWhenLoading(
     modifier: Modifier = Modifier
-){
-    Column (
+) {
+    Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
-    ){
+    ) {
         CircularProgressIndicator()
     }
 }
