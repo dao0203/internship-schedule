@@ -17,16 +17,16 @@ import com.schedule.eachinternshipschedule.model.Schedule
 
 @ExperimentalMaterial3Api
 @Composable
-fun ScheduleListScreenWhenSuccess (
+fun ScheduleListScreenWhenSuccess(
     modifier: Modifier = Modifier,
     scheduleList: List<Schedule>
-        ){
+) {
     LazyColumn(
-    contentPadding = PaddingValues(8.dp),
-    verticalArrangement = Arrangement.spacedBy(8.dp)
+        contentPadding = PaddingValues(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     )
     {
-        items(scheduleList.size){ schedule ->
+        items(scheduleList.size) { schedule ->
             ScheduleItem(schedule = scheduleList[schedule])
         }
     }
@@ -36,7 +36,7 @@ fun ScheduleListScreenWhenSuccess (
 @Composable
 fun ScheduleItem(
     schedule: Schedule,
-){
+) {
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth(),
@@ -44,10 +44,10 @@ fun ScheduleItem(
         onClick = {
 
         }
-    ){
+    ) {
         Column(
             modifier = Modifier.padding(8.dp)
-        ){
+        ) {
             Text(
                 text = schedule.companyName,
             )
