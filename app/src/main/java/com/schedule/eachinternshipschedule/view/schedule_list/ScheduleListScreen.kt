@@ -67,6 +67,7 @@ fun ScheduleListScreen(
                 onClick = {
                     navController.navigate(Routes.PostScheduleScreen.route)
                 },
+                containerColor = MaterialTheme.colorScheme.primary,
             ) {
                 Text(
                     text = "投稿",
