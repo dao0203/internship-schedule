@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -30,6 +31,7 @@ import com.schedule.eachinternshipschedule.data.repository.DefaultFirestoreRepos
 import com.schedule.eachinternshipschedule.viewmodel.ScheduleListViewModel
 import com.schedule.eachinternshipschedule.viewmodel.ScheduleListViewModelFactory
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.schedule.eachinternshipschedule.Routes
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,7 +51,18 @@ fun ScheduleListScreen(
     Scaffold(
         modifier = modifier.padding(
             vertical = 8.dp
-        )
+        ),
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    navController.navigate(Routes.PostScheduleScreen.route)
+                },
+            ) {
+                Text(
+                    text = "投稿",
+                )
+            }
+        },
     ) {
         Box(
             modifier = modifier.padding(it),
@@ -58,6 +71,7 @@ fun ScheduleListScreen(
                 is LoadState.Loading -> {
                     ScheduleListScreenWhenLoading()
                 }
+
                 is LoadState.NotLoading -> {
                     LazyColumn(
                         state = rememberLazyListState(),
@@ -70,6 +84,7 @@ fun ScheduleListScreen(
                         }
                     }
                 }
+
                 is LoadState.Error -> {
                     Text(
                         text = "Error",
