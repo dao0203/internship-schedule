@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     val navHost = rememberNavController()
                     NavHost(
                         navController = navHost,
-                        startDestination = Routes.PostScheduleScreen.route
+                        startDestination = Routes.ScheduleListScreen.route
                     ) {
                         composable(Routes.ScheduleListScreen.route) {
                             ScheduleListScreen(navController = navHost)
