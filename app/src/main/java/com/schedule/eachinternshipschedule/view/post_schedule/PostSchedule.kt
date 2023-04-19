@@ -49,6 +49,7 @@ fun PostScheduleScreen(
                 title = {
                     Text(
                         text = "スケジュール投稿",
+                        color = MaterialTheme.colorScheme.onPrimary,
                     )
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(MaterialTheme.colorScheme.primary),
