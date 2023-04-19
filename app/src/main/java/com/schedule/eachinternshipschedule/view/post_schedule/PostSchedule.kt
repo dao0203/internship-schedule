@@ -18,7 +18,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.firestore.FirebaseFirestore
-import com.schedule.eachinternshipschedule.repository.DefaultFirestoreRepository
+import com.schedule.eachinternshipschedule.data.repository.DefaultFirestoreRepository
 import com.schedule.eachinternshipschedule.viewmodel.PostScheduleUiState
 import com.schedule.eachinternshipschedule.viewmodel.PostScheduleViewModel
 import com.schedule.eachinternshipschedule.viewmodel.PostScheduleViewModelFactory

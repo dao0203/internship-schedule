@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.schedule.eachinternshipschedule.model.Schedule
 import com.schedule.eachinternshipschedule.model.ScheduleErrorMsg
 import com.schedule.eachinternshipschedule.model.ScheduleValid
-import com.schedule.eachinternshipschedule.repository.FirestoreRepository
+import com.schedule.eachinternshipschedule.data.repository.FirestoreRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

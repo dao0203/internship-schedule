@@ -59,6 +59,8 @@ dependencies {
     //Material3の依存関係を追加
     implementation("androidx.compose.material3:material3:1.0.1")
     implementation("androidx.compose.material3:material3-window-size-class:1.0.1")
+    //Paging3の依存関係を追加
+    implementation("androidx.paging:paging-compose:1.0.0-alpha12")
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

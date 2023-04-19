@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.schedule.eachinternshipschedule.ui.theme.EachInternshipScheduleTheme
 import com.schedule.eachinternshipschedule.view.post_schedule.PostScheduleScreen
+import com.schedule.eachinternshipschedule.view.schedule_list.ScheduleListScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -26,9 +27,11 @@ class MainActivity : ComponentActivity() {
                     val navHost = rememberNavController()
                     NavHost(
                         navController = navHost,
-                        startDestination = Routes.PostScheduleScreen.route
+                        startDestination = Routes.ScheduleListScreen.route
                     ) {
-                        composable(Routes.ScheduleListScreen.route) {}
+                        composable(Routes.ScheduleListScreen.route) {
+                            ScheduleListScreen(navController = navHost)
+                        }
                         composable(Routes.PostScheduleScreen.route){
                             PostScheduleScreen(navController = navHost)
                         }

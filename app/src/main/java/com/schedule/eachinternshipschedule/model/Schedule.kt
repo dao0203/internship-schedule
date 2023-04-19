@@ -6,4 +6,6 @@ data class Schedule(
     val date: String,
     val route: String,
     val routeStatus: String
-)
+) {
+    constructor() : this("", "", "", "", "")
+}
