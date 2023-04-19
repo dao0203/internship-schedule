@@ -16,6 +16,8 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,9 +51,17 @@ fun ScheduleListScreen(
 ) {
     val items: LazyPagingItems<Schedule> = scheduleListViewModel.items.collectAsLazyPagingItems()
     Scaffold(
-        modifier = modifier.padding(
-            vertical = 8.dp
-        ),
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "スケジュール一覧",
+                        color = MaterialTheme.colorScheme.onPrimary,
+                    )
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(MaterialTheme.colorScheme.primary),
+            )
+        },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
@@ -60,6 +70,7 @@ fun ScheduleListScreen(
             ) {
                 Text(
                     text = "投稿",
+                    color = MaterialTheme.colorScheme.onPrimary,
                 )
             }
         },
