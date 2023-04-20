@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule.view.schedule_list
+package com.schedule.eachinternshipschedule.ui.view.schedule_list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
