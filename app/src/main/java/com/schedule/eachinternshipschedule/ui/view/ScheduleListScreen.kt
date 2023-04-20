@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule.ui.view.schedule_list
+package com.schedule.eachinternshipschedule.ui.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,7 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.schedule.eachinternshipschedule.model.Schedule
-import com.schedule.eachinternshipschedule.viewmodel.ScheduleListViewModel
+import com.schedule.eachinternshipschedule.ui.viewmodel.ScheduleListViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.schedule.eachinternshipschedule.Routes
 

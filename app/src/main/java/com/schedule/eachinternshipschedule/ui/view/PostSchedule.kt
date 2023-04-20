@@ -17,8 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.schedule.eachinternshipschedule.viewmodel.PostScheduleUiState
-import com.schedule.eachinternshipschedule.viewmodel.PostScheduleViewModel
+import com.schedule.eachinternshipschedule.ui.viewmodel.PostScheduleUiState
+import com.schedule.eachinternshipschedule.ui.viewmodel.PostScheduleViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(name = "PostScheduleScreen")
@@ -26,9 +26,9 @@ import com.schedule.eachinternshipschedule.viewmodel.PostScheduleViewModel
 fun PostScheduleScreen(
     modifier: Modifier = Modifier,
     navController: NavController = rememberNavController(),
-    postScheduleViewModel: PostScheduleViewModel = viewModel()
+    viewModel: PostScheduleViewModel = viewModel()
 ) {
-    val uiState: PostScheduleUiState by postScheduleViewModel.uiState.collectAsState()
+    val uiState: PostScheduleUiState by viewModel.uiState.collectAsState()
     //選考に必要なデータ
     val routeItems =
         listOf("選考を選択してください", "書類", "一次面接", "二次面接", "三次面接", "最終面接")
@@ -64,7 +64,7 @@ fun PostScheduleScreen(
                 label = "会社名",
                 value = uiState.schedule.companyName,
                 onValueChange = { value ->
-                    postScheduleViewModel.onCompanyNameValueChange(value)
+                    viewModel.onCompanyNameValueChange(value)
                 },
                 isError = false,
             )
@@ -75,7 +75,7 @@ fun PostScheduleScreen(
                 label = "インターンシップ名",
                 value = uiState.schedule.internshipName,
                 onValueChange = { value ->
-                    postScheduleViewModel.onInternshipNameValueChange(value)
+                    viewModel.onInternshipNameValueChange(value)
                 },
                 isError = false,
             )
@@ -86,7 +86,7 @@ fun PostScheduleScreen(
                 label = "日付",
                 value = uiState.schedule.date,
                 onValueChange = { value ->
-                    postScheduleViewModel.onDateValueChange(value)
+                    viewModel.onDateValueChange(value)
                 },
                 isError = false,
             )
@@ -96,7 +96,7 @@ fun PostScheduleScreen(
             ExposedDropdownMenuBox(
                 expanded = uiState.routeExpanded,
                 onExpandedChange = {
-                    postScheduleViewModel.onRouteExpandedChange(uiState.routeExpanded)
+                    viewModel.onRouteExpandedChange(uiState.routeExpanded)
                 },
             ) {
                 OutlinedTextField(
@@ -117,7 +117,7 @@ fun PostScheduleScreen(
                 ExposedDropdownMenu(
                     expanded = uiState.routeExpanded,
                     onDismissRequest = {
-                        postScheduleViewModel.onRouteDismissRequest()
+                        viewModel.onRouteDismissRequest()
                     }) {
                     repeat(routeItems.size) {
                         DropdownMenuItem(
@@ -125,7 +125,7 @@ fun PostScheduleScreen(
                                 Text(text = routeItems[it])
                             },
                             onClick = {
-                                postScheduleViewModel.onRouteValueChange(routeItems[it])
+                                viewModel.onRouteValueChange(routeItems[it])
                             },
                         )
                     }
@@ -137,7 +137,7 @@ fun PostScheduleScreen(
             ExposedDropdownMenuBox(
                 expanded = uiState.statusExpanded,
                 onExpandedChange = {
-                    postScheduleViewModel.onStatusExpandedChange(uiState.statusExpanded)
+                    viewModel.onStatusExpandedChange(uiState.statusExpanded)
                 },
             ) {
                 OutlinedTextField(
@@ -158,7 +158,7 @@ fun PostScheduleScreen(
                 ExposedDropdownMenu(
                     expanded = uiState.statusExpanded,
                     onDismissRequest = {
-                        postScheduleViewModel.onStatusDismissRequest()
+                        viewModel.onStatusDismissRequest()
                     }
                 ) {
                     repeat(statusItems.size) {
@@ -167,7 +167,7 @@ fun PostScheduleScreen(
                                 Text(text = statusItems[it])
                             },
                             onClick = {
-                                postScheduleViewModel.onStatusValueChange(statusItems[it])
+                                viewModel.onStatusValueChange(statusItems[it])
                             },
                         )
                     }
@@ -178,7 +178,7 @@ fun PostScheduleScreen(
             )
             ElevatedButton(
                 onClick = {
-                          postScheduleViewModel.insertSchedule(uiState.schedule)
+                          viewModel.insertSchedule(uiState.schedule)
                 },
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
             ) {

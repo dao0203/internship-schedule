@@ -1,7 +1,6 @@
-package com.schedule.eachinternshipschedule.viewmodel
+package com.schedule.eachinternshipschedule.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -22,14 +21,3 @@ class ScheduleListViewModel @Inject constructor(
         pagingSourceFactory = { repository.getSchedule() }
     ).flow.cachedIn(viewModelScope)
 }
-
-//class ScheduleListViewModelFactory(private val repository: FirestoreRepository) :
-//    ViewModelProvider.Factory {
-//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//        if (modelClass.isAssignableFrom(ScheduleListViewModel::class.java)) {
-//            @Suppress("UNCHECKED_CAST")
-//            return ScheduleListViewModel(repository) as T
-//        }
-//        throw IllegalArgumentException("Unknown ViewModel class")
-//    }
-//}

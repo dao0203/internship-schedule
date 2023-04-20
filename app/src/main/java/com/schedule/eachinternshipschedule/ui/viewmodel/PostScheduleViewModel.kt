@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule.viewmodel
+package com.schedule.eachinternshipschedule.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -98,17 +98,6 @@ class PostScheduleViewModel @Inject constructor(
         }
     }
 }
-
-//class PostScheduleViewModelFactory(private val repository: FirestoreRepository) :
-//    ViewModelProvider.Factory {
-//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//        if (modelClass.isAssignableFrom(PostScheduleViewModel::class.java)) {
-//            @Suppress("UNCHECKED_CAST")
-//            return PostScheduleViewModel(repository) as T
-//        }
-//        throw IllegalArgumentException("Unknown ViewModel class")
-//    }
-//}
 
 data class PostScheduleUiState(
     val isLoading: Boolean = false,
