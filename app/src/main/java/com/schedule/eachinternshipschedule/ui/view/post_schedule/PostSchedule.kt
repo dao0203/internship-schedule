@@ -17,11 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.google.firebase.firestore.FirebaseFirestore
-import com.schedule.eachinternshipschedule.data.repository.DefaultFirestoreRepository
 import com.schedule.eachinternshipschedule.viewmodel.PostScheduleUiState
 import com.schedule.eachinternshipschedule.viewmodel.PostScheduleViewModel
-import com.schedule.eachinternshipschedule.viewmodel.PostScheduleViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(name = "PostScheduleScreen")
@@ -29,11 +26,7 @@ import com.schedule.eachinternshipschedule.viewmodel.PostScheduleViewModelFactor
 fun PostScheduleScreen(
     modifier: Modifier = Modifier,
     navController: NavController = rememberNavController(),
-    postScheduleViewModel: PostScheduleViewModel = viewModel(
-        factory = PostScheduleViewModelFactory(
-            repository = DefaultFirestoreRepository(firestore = FirebaseFirestore.getInstance())
-        )
-    )
+    postScheduleViewModel: PostScheduleViewModel = viewModel()
 ) {
     val uiState: PostScheduleUiState by postScheduleViewModel.uiState.collectAsState()
     //選考に必要なデータ

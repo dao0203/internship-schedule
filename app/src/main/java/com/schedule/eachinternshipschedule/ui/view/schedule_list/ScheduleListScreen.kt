@@ -27,11 +27,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.google.firebase.firestore.FirebaseFirestore
 import com.schedule.eachinternshipschedule.model.Schedule
-import com.schedule.eachinternshipschedule.data.repository.DefaultFirestoreRepository
 import com.schedule.eachinternshipschedule.viewmodel.ScheduleListViewModel
-import com.schedule.eachinternshipschedule.viewmodel.ScheduleListViewModelFactory
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.schedule.eachinternshipschedule.Routes
 
@@ -41,13 +38,7 @@ import com.schedule.eachinternshipschedule.Routes
 fun ScheduleListScreen(
     modifier: Modifier = Modifier,
     navController: NavController = rememberNavController(),
-    scheduleListViewModel: ScheduleListViewModel = viewModel<ScheduleListViewModel>(
-        factory = ScheduleListViewModelFactory(
-            repository = DefaultFirestoreRepository(
-                firestore = FirebaseFirestore.getInstance(),
-            ),
-        ),
-    )
+    scheduleListViewModel: ScheduleListViewModel = viewModel()
 ) {
     val items: LazyPagingItems<Schedule> = scheduleListViewModel.items.collectAsLazyPagingItems()
     Scaffold(

@@ -1,17 +1,21 @@
 package com.schedule.eachinternshipschedule.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.schedule.eachinternshipschedule.data.repository.FirestoreRepository
 import com.schedule.eachinternshipschedule.model.Schedule
 import com.schedule.eachinternshipschedule.model.ScheduleErrorMsg
 import com.schedule.eachinternshipschedule.model.ScheduleValid
-import com.schedule.eachinternshipschedule.data.repository.FirestoreRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class PostScheduleViewModel(private val firestoreRepository: FirestoreRepository) : ViewModel() {
+@HiltViewModel
+class PostScheduleViewModel @Inject constructor(
+    private val firestoreRepository: FirestoreRepository
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(PostScheduleUiState())
     val uiState = _uiState.asStateFlow()
@@ -95,16 +99,16 @@ class PostScheduleViewModel(private val firestoreRepository: FirestoreRepository
     }
 }
 
-class PostScheduleViewModelFactory(private val repository: FirestoreRepository) :
-    ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(PostScheduleViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return PostScheduleViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}
+//class PostScheduleViewModelFactory(private val repository: FirestoreRepository) :
+//    ViewModelProvider.Factory {
+//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//        if (modelClass.isAssignableFrom(PostScheduleViewModel::class.java)) {
+//            @Suppress("UNCHECKED_CAST")
+//            return PostScheduleViewModel(repository) as T
+//        }
+//        throw IllegalArgumentException("Unknown ViewModel class")
+//    }
+//}
 
 data class PostScheduleUiState(
     val isLoading: Boolean = false,

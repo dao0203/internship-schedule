@@ -1,4 +1,4 @@
-package com
+package com.schedule.eachinternshipschedule
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
