@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule.view.schedule_list
+package com.schedule.eachinternshipschedule.ui.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,32 +22,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.google.firebase.firestore.FirebaseFirestore
 import com.schedule.eachinternshipschedule.model.Schedule
-import com.schedule.eachinternshipschedule.data.repository.DefaultFirestoreRepository
-import com.schedule.eachinternshipschedule.viewmodel.ScheduleListViewModel
-import com.schedule.eachinternshipschedule.viewmodel.ScheduleListViewModelFactory
+import com.schedule.eachinternshipschedule.ui.viewmodel.ScheduleListViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.schedule.eachinternshipschedule.Routes
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScheduleListScreen(
     modifier: Modifier = Modifier,
     navController: NavController = rememberNavController(),
-    scheduleListViewModel: ScheduleListViewModel = viewModel<ScheduleListViewModel>(
-        factory = ScheduleListViewModelFactory(
-            repository = DefaultFirestoreRepository(
-                firestore = FirebaseFirestore.getInstance(),
-            ),
-        ),
-    )
+    scheduleListViewModel: ScheduleListViewModel = hiltViewModel()
 ) {
     val items: LazyPagingItems<Schedule> = scheduleListViewModel.items.collectAsLazyPagingItems()
     Scaffold(

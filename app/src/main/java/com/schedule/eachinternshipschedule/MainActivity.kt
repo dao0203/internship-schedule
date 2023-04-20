@@ -11,9 +11,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.schedule.eachinternshipschedule.ui.theme.EachInternshipScheduleTheme
-import com.schedule.eachinternshipschedule.view.post_schedule.PostScheduleScreen
-import com.schedule.eachinternshipschedule.view.schedule_list.ScheduleListScreen
+import com.schedule.eachinternshipschedule.ui.view.PostScheduleScreen
+import com.schedule.eachinternshipschedule.ui.view.ScheduleListScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
