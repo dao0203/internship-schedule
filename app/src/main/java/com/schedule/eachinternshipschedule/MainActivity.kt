@@ -13,7 +13,9 @@ import androidx.navigation.compose.rememberNavController
 import com.schedule.eachinternshipschedule.ui.theme.EachInternshipScheduleTheme
 import com.schedule.eachinternshipschedule.ui.view.post_schedule.PostScheduleScreen
 import com.schedule.eachinternshipschedule.ui.view.schedule_list.ScheduleListScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
