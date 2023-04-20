@@ -22,7 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.LoadState
@@ -32,13 +32,12 @@ import com.schedule.eachinternshipschedule.ui.viewmodel.ScheduleListViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.schedule.eachinternshipschedule.Routes
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScheduleListScreen(
     modifier: Modifier = Modifier,
     navController: NavController = rememberNavController(),
-    scheduleListViewModel: ScheduleListViewModel = viewModel()
+    scheduleListViewModel: ScheduleListViewModel = hiltViewModel()
 ) {
     val items: LazyPagingItems<Schedule> = scheduleListViewModel.items.collectAsLazyPagingItems()
     Scaffold(

@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule.ui.view.post_schedule
+package com.schedule.eachinternshipschedule.ui.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.schedule.eachinternshipschedule.ui.viewmodel.PostScheduleUiState
@@ -26,7 +26,7 @@ import com.schedule.eachinternshipschedule.ui.viewmodel.PostScheduleViewModel
 fun PostScheduleScreen(
     modifier: Modifier = Modifier,
     navController: NavController = rememberNavController(),
-    viewModel: PostScheduleViewModel = viewModel()
+    viewModel: PostScheduleViewModel = hiltViewModel()
 ) {
     val uiState: PostScheduleUiState by viewModel.uiState.collectAsState()
     //選考に必要なデータ
@@ -178,7 +178,7 @@ fun PostScheduleScreen(
             )
             ElevatedButton(
                 onClick = {
-                          viewModel.insertSchedule(uiState.schedule)
+                    viewModel.insertSchedule(uiState.schedule)
                 },
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
             ) {

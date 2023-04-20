@@ -17,7 +17,7 @@ class RepositoryModule {
     @Singleton
     fun provideFirestoreRepository(
         firestore: FirebaseFirestore
-    ): FirestoreRepository{
+    ): FirestoreRepository {
         return DefaultFirestoreRepository(firestore)
     }
 }

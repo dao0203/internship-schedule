@@ -32,8 +32,9 @@ class SchedulePagingSource(firestore: FirebaseFirestore) : PagingSource<QuerySna
                 prevKey = null,
                 nextKey = nextPage
             )
-        }catch (e: Exception){
-            LoadResult.Error(e)}
+        } catch (e: Exception) {
+            LoadResult.Error(e)
+        }
     }
 
 }
