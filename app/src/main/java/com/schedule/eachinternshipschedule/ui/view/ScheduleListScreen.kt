@@ -3,12 +3,10 @@ package com.schedule.eachinternshipschedule.ui.view
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -19,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -39,7 +38,8 @@ fun ScheduleListScreen(
     navController: NavController = rememberNavController(),
     scheduleListViewModel: ScheduleListViewModel = hiltViewModel()
 ) {
-    val items: LazyPagingItems<Schedule> = scheduleListViewModel.items.collectAsLazyPagingItems()
+    val schedules: LazyPagingItems<Schedule> =
+        scheduleListViewModel.items.collectAsLazyPagingItems()
     Scaffold(
         topBar = {
             TopAppBar(
@@ -69,32 +69,48 @@ fun ScheduleListScreen(
         Box(
             modifier = modifier.padding(it),
         ) {
-            when (items.loadState.refresh) {
-                is LoadState.Loading -> {
-                    ScheduleListScreenWhenLoading()
+            LazyColumn(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                items(
+                    schedules.itemCount,
+                ) { schedule ->
+                    ScheduleItem(schedule = schedules[schedule]!!)
                 }
+                when (schedules.loadState.refresh) {
+                    is LoadState.Loading -> {
+                        item {
+                            ScheduleListScreenWhenLoading(Modifier.fillParentMaxSize())
+                        }
 
-                is LoadState.NotLoading -> {
-                    LazyColumn(
-                        state = rememberLazyListState(),
-                        contentPadding = PaddingValues(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(16.dp)
-                    )
-                    {
-                        items(items.itemCount) { schedule ->
-                            ScheduleItem(schedule = items[schedule]!!)
+                    }
+
+                    is LoadState.Error -> {
+                        item {
+                            ScheduleListScreenWhenError(Modifier.fillParentMaxSize())
                         }
                     }
+
+                    else -> {}
+                }
+                when (schedules.loadState.append) {
+                    is LoadState.Loading -> {
+                        item {
+                            ScheduleListScreenWhenLoading(Modifier.fillMaxSize())
+                        }
+                    }
+
+                    is LoadState.Error -> {
+                        item {
+                            ScheduleListScreenWhenError(Modifier.fillMaxSize())
+                        }
+                    }
+
+                    else -> {}
                 }
 
-                is LoadState.Error -> {
-                    Text(
-                        text = "Error",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .align(Alignment.Center)
-                    )
-                }
             }
         }
     }
@@ -102,7 +118,7 @@ fun ScheduleListScreen(
 
 @Composable
 fun ScheduleListScreenWhenLoading(
-    modifier: Modifier = Modifier
+    modifier: Modifier
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
@@ -110,6 +126,22 @@ fun ScheduleListScreenWhenLoading(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CircularProgressIndicator()
+    }
+}
+
+@Composable
+fun ScheduleListScreenWhenError(
+    modifier: Modifier
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "エラーが発生しました",
+            modifier = Modifier.padding(8.dp)
+        )
     }
 }
 
