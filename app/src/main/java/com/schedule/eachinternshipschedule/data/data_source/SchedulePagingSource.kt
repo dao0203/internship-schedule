@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule.data.paging_source
+package com.schedule.eachinternshipschedule.data.data_source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
