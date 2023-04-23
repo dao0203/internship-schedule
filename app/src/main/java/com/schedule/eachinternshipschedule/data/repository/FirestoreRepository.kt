@@ -1,6 +1,6 @@
 package com.schedule.eachinternshipschedule.data.repository
 
-import com.schedule.eachinternshipschedule.data.api.SchedulePagingSource
+import com.schedule.eachinternshipschedule.data.SchedulePagingSource
 import com.schedule.eachinternshipschedule.model.Schedule
 
 interface FirestoreRepository {
