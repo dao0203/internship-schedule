@@ -3,18 +3,21 @@ package com.schedule.eachinternshipschedule
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.composable
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.schedule.eachinternshipschedule.ui.theme.EachInternshipScheduleTheme
 import com.schedule.eachinternshipschedule.ui.view.PostScheduleScreen
 import com.schedule.eachinternshipschedule.ui.view.ScheduleListScreen
 import dagger.hilt.android.AndroidEntryPoint
 
+@ExperimentalAnimationApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
@@ -26,25 +29,63 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val navHost = rememberNavController()
-                    NavHost(
-                        navController = navHost,
-                        startDestination = Routes.ScheduleListScreen.route
+                    val navController = rememberAnimatedNavController()
+                    AnimatedNavHost(
+                        navController = navController,
+                        startDestination = Routes.ScheduleListScreen.route,
                     ) {
-                        composable(Routes.ScheduleListScreen.route) {
-                            ScheduleListScreen(navController = navHost)
+                        //TODO: 画面遷移のアニメーションを追加する
+                        composable(
+                            route = Routes.ScheduleListScreen.route,
+
+                            exitTransition = {
+                                when (initialState.destination.route) {
+                                    Routes.PostScheduleScreen.route -> {
+                                        slideOutOfContainer(
+                                            AnimatedContentTransitionScope.SlideDirection.Start
+                                        )
+                                    }
+
+                                    else -> null
+                                }
+                            },
+                        ) {
+                            ScheduleListScreen(navController = navController)
                         }
-                        composable(Routes.PostScheduleScreen.route){
-                            PostScheduleScreen(navController = navHost)
-                        }
+                        composable(
+                            route = Routes.PostScheduleScreen.route,
+                            enterTransition = {
+                                when (initialState.destination.route) {
+                                    Routes.ScheduleListScreen.route -> {
+                                        slideIntoContainer(
+                                            AnimatedContentTransitionScope.SlideDirection.Start
+                                        )
+                                    }
+
+                                    else -> null
+                                }
+                            },
+                            popExitTransition = {
+                                when (targetState.destination.route) {
+                                    Routes.ScheduleListScreen.route -> {
+                                        slideOutOfContainer(
+                                            AnimatedContentTransitionScope.SlideDirection.End
+                                        )
+                                    }
+                                    else -> null
+                                }
+                            },
+                        ) {
+                            PostScheduleScreen(navController = navController)
                         }
                     }
                 }
             }
         }
     }
+}
 
-    sealed class Routes(val route: String) {
-        object PostScheduleScreen : Routes("postScheduleScreen")
-        object ScheduleListScreen : Routes("scheduleListScreen")
-    }
+sealed class Routes(val route: String) {
+    object PostScheduleScreen : Routes("postScheduleScreen")
+    object ScheduleListScreen : Routes("scheduleListScreen")
+}
