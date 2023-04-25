@@ -47,7 +47,21 @@ fun PostScheduleScreen(
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(MaterialTheme.colorScheme.primary),
             )
-        }
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    navController.popBackStack()
+                },
+                containerColor = MaterialTheme.colorScheme.primary,
+                content = {
+                    Text(
+                        text = "戻る",
+                        color = MaterialTheme.colorScheme.onPrimary,
+                    )
+                },
+            )
+        },
     )
     {
         Column(

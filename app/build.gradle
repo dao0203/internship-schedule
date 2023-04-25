@@ -57,7 +57,8 @@ dependencies {
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     //Navigationコンポーネントの依存関係を追加
-    implementation "androidx.navigation:navigation-compose:2.5.3"
+//    implementation "androidx.navigation:navigation-compose:2.5.3"
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.31.0-alpha")
     //Material3の依存関係を追加
     implementation("androidx.compose.material3:material3:1.0.1")
     implementation("androidx.compose.material3:material3-window-size-class:1.0.1")
