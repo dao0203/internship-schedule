@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.schedule.eachinternshipschedule.data.repository.FirestoreRepository
 import com.schedule.eachinternshipschedule.model.Schedule
+import com.schedule.eachinternshipschedule.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -138,9 +139,9 @@ data class TextFieldError(
 )
 
 data class TextFieldErrorMsg(
-    val companyNameError: String = "",
-    val internshipNameError: String = "",
-    val dateError: String = "",
-    val routeError: String= "",
-    val routeStatusError: String= ""
+    val companyName: String = Constants.BLANK_SPACE,
+    val internshipName: String = Constants.BLANK_SPACE,
+    val date: String = Constants.BLANK_SPACE,
+    val route: String= Constants.BLANK_SPACE,
+    val routeStatus: String= Constants.BLANK_SPACE
 )

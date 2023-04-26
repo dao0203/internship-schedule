@@ -21,6 +21,7 @@ import com.schedule.eachinternshipschedule.ui.viewmodel.PostScheduleUiState
 import com.schedule.eachinternshipschedule.ui.viewmodel.PostScheduleViewModel
 import com.schedule.eachinternshipschedule.ui.viewmodel.TextFieldError
 import com.schedule.eachinternshipschedule.ui.viewmodel.TextFieldErrorMsg
+import com.schedule.eachinternshipschedule.utils.Constants
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(name = "PostScheduleScreen")
@@ -40,10 +41,9 @@ fun PostScheduleScreen(
     val textFieldErrorMsgUiState: TextFieldErrorMsg by viewModel.textFieldErrorMsgUiState.collectAsState()
 
     //選考に必要なデータ
-    val routeItems =
-        listOf("選考を選択してください", "書類", "一次面接", "二次面接", "三次面接", "最終面接")
+    val routeItems = Constants.ROUTE_ITEMS
     //選考状況に必要なデータ
-    val statusItems = listOf("選考状況を選択してください", "実施日(提出)", "通過")
+    val statusItems = Constants.STATUS_ITEMS
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -91,7 +91,7 @@ fun PostScheduleScreen(
                     viewModel.onCompanyNameValueChange(value)
                 },
                 isError = textFieldErrorUiState.isCompanyNameValid,
-                errorMsg = textFieldErrorMsgUiState.companyNameError,
+                errorMsg = textFieldErrorMsgUiState.companyName,
             )
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -103,7 +103,7 @@ fun PostScheduleScreen(
                     viewModel.onInternshipNameValueChange(value)
                 },
                 isError = textFieldErrorUiState.isInternshipName,
-                errorMsg = textFieldErrorMsgUiState.internshipNameError,
+                errorMsg = textFieldErrorMsgUiState.internshipName,
             )
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -115,7 +115,7 @@ fun PostScheduleScreen(
                     viewModel.onDateValueChange(value)
                 },
                 isError = textFieldErrorUiState.isDateValid,
-                errorMsg = textFieldErrorMsgUiState.dateError,
+                errorMsg = textFieldErrorMsgUiState.date,
             )
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -143,7 +143,7 @@ fun PostScheduleScreen(
                     isError = textFieldErrorUiState.isRouteValid,
                     supportingText = {
                         if (textFieldErrorUiState.isRouteValid) {
-                            Text(text = textFieldErrorMsgUiState.routeError)
+                            Text(text = textFieldErrorMsgUiState.route)
                         }
                     }
                 )
@@ -190,7 +190,7 @@ fun PostScheduleScreen(
                     isError = textFieldErrorUiState.isRouteStatusValid,
                     supportingText = {
                         if (textFieldErrorUiState.isRouteStatusValid) {
-                            Text(text = textFieldErrorMsgUiState.routeStatusError)
+                            Text(text = textFieldErrorMsgUiState.routeStatus)
                         }
                     }
                 )
