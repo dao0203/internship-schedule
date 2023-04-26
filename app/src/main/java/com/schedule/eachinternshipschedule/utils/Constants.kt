@@ -16,4 +16,6 @@ object Constants {
         "選考中",
         "通過",
     )
+    const val DROPDOWN_MENU_OF_INITIAL_STATE_INDEX = 0
+    const val BLANK_SPACE = ""
 }
