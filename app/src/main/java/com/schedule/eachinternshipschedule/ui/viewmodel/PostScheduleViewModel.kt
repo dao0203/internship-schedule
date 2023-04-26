@@ -4,8 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.schedule.eachinternshipschedule.data.repository.FirestoreRepository
 import com.schedule.eachinternshipschedule.model.Schedule
-import com.schedule.eachinternshipschedule.model.ScheduleErrorMsg
-import com.schedule.eachinternshipschedule.model.ScheduleValid
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,36 +15,36 @@ class PostScheduleViewModel @Inject constructor(
     private val firestoreRepository: FirestoreRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(PostScheduleUiState())
-    val uiState = _uiState.asStateFlow()
+    private val _textFieldUiState = MutableStateFlow(PostScheduleUiState())
+    val textFieldUiState = _textFieldUiState.asStateFlow()
 
     fun onCompanyNameValueChange(completedText: String) {
-        _uiState.value = _uiState.value.copy(
-            schedule = _uiState.value.schedule.copy(
+        _textFieldUiState.value = _textFieldUiState.value.copy(
+            schedule = _textFieldUiState.value.schedule.copy(
                 companyName = completedText
             )
         )
     }
 
     fun onInternshipNameValueChange(completedText: String) {
-        _uiState.value = _uiState.value.copy(
-            schedule = _uiState.value.schedule.copy(
+        _textFieldUiState.value = _textFieldUiState.value.copy(
+            schedule = _textFieldUiState.value.schedule.copy(
                 internshipName = completedText
             )
         )
     }
 
     fun onDateValueChange(completedDate: String) {
-        _uiState.value = _uiState.value.copy(
-            schedule = _uiState.value.schedule.copy(
+        _textFieldUiState.value = _textFieldUiState.value.copy(
+            schedule = _textFieldUiState.value.schedule.copy(
                 date = completedDate
             )
         )
     }
 
     fun onRouteValueChange(chosenItem: String) {
-        _uiState.value = _uiState.value.copy(
-            schedule = _uiState.value.schedule.copy(
+        _textFieldUiState.value = _textFieldUiState.value.copy(
+            schedule = _textFieldUiState.value.schedule.copy(
                 route = chosenItem
             ),
             routeExpanded = false
@@ -54,8 +52,8 @@ class PostScheduleViewModel @Inject constructor(
     }
 
     fun onStatusValueChange(chosenItem: String) {
-        _uiState.value = _uiState.value.copy(
-            schedule = _uiState.value.schedule.copy(
+        _textFieldUiState.value = _textFieldUiState.value.copy(
+            schedule = _textFieldUiState.value.schedule.copy(
                 routeStatus = chosenItem
             ),
             statusExpanded = false
@@ -63,36 +61,36 @@ class PostScheduleViewModel @Inject constructor(
     }
 
     fun onRouteExpandedChange(routeExpanded: Boolean) {
-        _uiState.value = _uiState.value.copy(
+        _textFieldUiState.value = _textFieldUiState.value.copy(
             routeExpanded = !routeExpanded
         )
     }
 
     fun onRouteDismissRequest() {
-        _uiState.value = _uiState.value.copy(
+        _textFieldUiState.value = _textFieldUiState.value.copy(
             routeExpanded = false
         )
     }
 
     fun onStatusExpandedChange(statusExpanded: Boolean) {
-        _uiState.value = _uiState.value.copy(
+        _textFieldUiState.value = _textFieldUiState.value.copy(
             statusExpanded = !statusExpanded,
         )
     }
 
     fun onStatusDismissRequest() {
-        _uiState.value = _uiState.value.copy(
+        _textFieldUiState.value = _textFieldUiState.value.copy(
             statusExpanded = false
         )
     }
 
     fun insertSchedule(schedule: Schedule) {
         viewModelScope.launch {
-            _uiState.value = _uiState.value.copy(
+            _textFieldUiState.value = _textFieldUiState.value.copy(
                 isLoading = true
             )
             firestoreRepository.insertSchedule(schedule)
-            _uiState.value = _uiState.value.copy(
+            _textFieldUiState.value = _textFieldUiState.value.copy(
                 isLoading = false
             )
         }

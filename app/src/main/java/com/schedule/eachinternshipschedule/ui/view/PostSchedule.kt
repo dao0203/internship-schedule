@@ -28,7 +28,7 @@ fun PostScheduleScreen(
     navController: NavController = rememberNavController(),
     viewModel: PostScheduleViewModel = hiltViewModel()
 ) {
-    val uiState: PostScheduleUiState by viewModel.uiState.collectAsState()
+    val textFieldUiState: PostScheduleUiState by viewModel.textFieldUiState.collectAsState()
     //選考に必要なデータ
     val routeItems =
         listOf("選考を選択してください", "書類", "一次面接", "二次面接", "三次面接", "最終面接")
@@ -76,7 +76,7 @@ fun PostScheduleScreen(
             )
             PostScheduleEditField(
                 label = "会社名",
-                value = uiState.schedule.companyName,
+                value = textFieldUiState.schedule.companyName,
                 onValueChange = { value ->
                     viewModel.onCompanyNameValueChange(value)
                 },
@@ -87,7 +87,7 @@ fun PostScheduleScreen(
             )
             PostScheduleEditField(
                 label = "インターンシップ名",
-                value = uiState.schedule.internshipName,
+                value = textFieldUiState.schedule.internshipName,
                 onValueChange = { value ->
                     viewModel.onInternshipNameValueChange(value)
                 },
@@ -98,7 +98,7 @@ fun PostScheduleScreen(
             )
             PostScheduleEditField(
                 label = "日付",
-                value = uiState.schedule.date,
+                value = textFieldUiState.schedule.date,
                 onValueChange = { value ->
                     viewModel.onDateValueChange(value)
                 },
@@ -108,18 +108,18 @@ fun PostScheduleScreen(
                 modifier = Modifier.padding(vertical = 8.dp)
             )
             ExposedDropdownMenuBox(
-                expanded = uiState.routeExpanded,
+                expanded = textFieldUiState.routeExpanded,
                 onExpandedChange = {
-                    viewModel.onRouteExpandedChange(uiState.routeExpanded)
+                    viewModel.onRouteExpandedChange(textFieldUiState.routeExpanded)
                 },
             ) {
                 OutlinedTextField(
-                    value = uiState.schedule.route,
+                    value = textFieldUiState.schedule.route,
                     readOnly = true,
                     onValueChange = {},
                     trailingIcon = {
                         ExposedDropdownMenuDefaults.TrailingIcon(
-                            expanded = uiState.routeExpanded,
+                            expanded = textFieldUiState.routeExpanded,
                         )
                     },
                     modifier = Modifier
@@ -129,7 +129,7 @@ fun PostScheduleScreen(
                     label = { Text(text = "選考") }
                 )
                 ExposedDropdownMenu(
-                    expanded = uiState.routeExpanded,
+                    expanded = textFieldUiState.routeExpanded,
                     onDismissRequest = {
                         viewModel.onRouteDismissRequest()
                     }) {
@@ -149,18 +149,18 @@ fun PostScheduleScreen(
                 modifier = Modifier.padding(vertical = 8.dp)
             )
             ExposedDropdownMenuBox(
-                expanded = uiState.statusExpanded,
+                expanded = textFieldUiState.statusExpanded,
                 onExpandedChange = {
-                    viewModel.onStatusExpandedChange(uiState.statusExpanded)
+                    viewModel.onStatusExpandedChange(textFieldUiState.statusExpanded)
                 },
             ) {
                 OutlinedTextField(
-                    value = uiState.schedule.routeStatus,
+                    value = textFieldUiState.schedule.routeStatus,
                     readOnly = true,
                     onValueChange = {},
                     trailingIcon = {
                         ExposedDropdownMenuDefaults.TrailingIcon(
-                            expanded = uiState.statusExpanded,
+                            expanded = textFieldUiState.statusExpanded,
                         )
                     },
                     modifier = Modifier
@@ -170,7 +170,7 @@ fun PostScheduleScreen(
                     label = { Text(text = "選考状況") }
                 )
                 ExposedDropdownMenu(
-                    expanded = uiState.statusExpanded,
+                    expanded = textFieldUiState.statusExpanded,
                     onDismissRequest = {
                         viewModel.onStatusDismissRequest()
                     }
@@ -192,7 +192,7 @@ fun PostScheduleScreen(
             )
             ElevatedButton(
                 onClick = {
-                    viewModel.insertSchedule(uiState.schedule)
+                    viewModel.insertSchedule(textFieldUiState.schedule)
                 },
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
             ) {
