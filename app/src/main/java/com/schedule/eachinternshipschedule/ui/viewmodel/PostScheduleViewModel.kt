@@ -109,19 +109,21 @@ data class PostScheduleUiState(
         date = "",
         route = "選考を選択してください",
         routeStatus = "選考状況を選択してください"
-    ),
-    val scheduleErrorMsg: ScheduleErrorMsg = ScheduleErrorMsg(
-        companyNameError = "",
-        internshipNameError = "",
-        dateError = "",
-        routeError = "",
-        routeStatusError = "",
-    ),
-    val scheduleValid: ScheduleValid = ScheduleValid(
-        isCompanyNameValid = false,
-        isInternshipName = false,
-        isDateValid = false,
-        isRouteStatusValid = false,
-        isRouteValid = false,
     )
+)
+
+data class ScheduleValid(
+    val isCompanyNameValid: Boolean = false,
+    val isInternshipName: Boolean = false,
+    val isDateValid: Boolean = false,
+    val isRouteValid: Boolean = false,
+    val isRouteStatusValid: Boolean = false
+)
+
+data class ScheduleErrorMsg(
+    val companyNameError: String = "",
+    val internshipNameError: String = "",
+    val dateError: String = "",
+    val routeError: String= "",
+    val routeStatusError: String= ""
 )
