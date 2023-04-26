@@ -90,7 +90,7 @@ fun PostScheduleScreen(
                 onValueChange = { value ->
                     viewModel.onCompanyNameValueChange(value)
                 },
-                isError = false,
+                isError = textFieldErrorUiState.isCompanyNameValid,
             )
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -101,7 +101,7 @@ fun PostScheduleScreen(
                 onValueChange = { value ->
                     viewModel.onInternshipNameValueChange(value)
                 },
-                isError = false,
+                isError = textFieldErrorUiState.isInternshipName,
             )
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -112,7 +112,7 @@ fun PostScheduleScreen(
                 onValueChange = { value ->
                     viewModel.onDateValueChange(value)
                 },
-                isError = false,
+                isError = textFieldErrorUiState.isDateValid,
             )
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -136,7 +136,8 @@ fun PostScheduleScreen(
                         .menuAnchor()
                         .fillMaxWidth(),
                     colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
-                    label = { Text(text = "選考") }
+                    label = { Text(text = "選考") },
+                    isError = textFieldErrorUiState.isRouteValid
                 )
                 ExposedDropdownMenu(
                     expanded = textFieldUiState.routeExpanded,
@@ -177,7 +178,8 @@ fun PostScheduleScreen(
                         .menuAnchor()
                         .fillMaxWidth(),
                     colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
-                    label = { Text(text = "選考状況") }
+                    label = { Text(text = "選考状況") },
+                    isError = textFieldErrorUiState.isRouteStatusValid
                 )
                 ExposedDropdownMenu(
                     expanded = textFieldUiState.statusExpanded,
