@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule.ui.theme
+package com.schedule.shareships.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.schedule.eachinternshipschedule'
+    namespace 'com.schedule.shareships'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.schedule.eachinternshipschedule"
+        applicationId "com.schedule.shareships"
         minSdk 33
         targetSdk 33
         versionCode 1

@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule.ui.view
+package com.schedule.shareships.ui.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,12 +18,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.schedule.eachinternshipschedule.Routes
-import com.schedule.eachinternshipschedule.ui.viewmodel.PostScheduleUiState
-import com.schedule.eachinternshipschedule.ui.viewmodel.PostScheduleViewModel
-import com.schedule.eachinternshipschedule.ui.viewmodel.TextFieldError
-import com.schedule.eachinternshipschedule.ui.viewmodel.TextFieldErrorMsg
-import com.schedule.eachinternshipschedule.utils.Constants
+import com.schedule.shareships.Routes
+import com.schedule.shareships.ui.viewmodel.PostScheduleUiState
+import com.schedule.shareships.ui.viewmodel.PostScheduleViewModel
+import com.schedule.shareships.ui.viewmodel.TextFieldError
+import com.schedule.shareships.ui.viewmodel.TextFieldErrorMsg
+import com.schedule.shareships.utils.Constants
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(name = "PostScheduleScreen")

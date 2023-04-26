@@ -1,10 +1,10 @@
-package com.schedule.eachinternshipschedule.ui.viewmodel
+package com.schedule.shareships.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.schedule.eachinternshipschedule.data.repository.FirestoreRepository
-import com.schedule.eachinternshipschedule.model.Schedule
-import com.schedule.eachinternshipschedule.utils.Constants
+import com.schedule.shareships.data.repository.FirestoreRepository
+import com.schedule.shareships.model.Schedule
+import com.schedule.shareships.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow

@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule.di
+package com.schedule.shareships.di
 
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module

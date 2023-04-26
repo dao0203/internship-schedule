@@ -1,8 +1,8 @@
-package com.schedule.eachinternshipschedule.data
+package com.schedule.shareships.data
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.schedule.eachinternshipschedule.model.Schedule
+import com.schedule.shareships.model.Schedule
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule
+package com.schedule.shareships
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.schedule.eachinternshipschedule.ui.theme.EachInternshipScheduleTheme
-import com.schedule.eachinternshipschedule.ui.view.PostScheduleScreen
-import com.schedule.eachinternshipschedule.ui.view.ScheduleListScreen
+import com.schedule.shareships.ui.theme.EachInternshipScheduleTheme
+import com.schedule.shareships.ui.view.PostScheduleScreen
+import com.schedule.shareships.ui.view.ScheduleListScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalAnimationApi

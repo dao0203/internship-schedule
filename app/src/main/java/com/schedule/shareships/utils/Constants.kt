@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule.utils
+package com.schedule.shareships.utils
 
 object Constants {
     const val PAGE_SIZE = 20

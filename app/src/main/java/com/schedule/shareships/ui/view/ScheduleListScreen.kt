@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule.ui.view
+package com.schedule.shareships.ui.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,10 +25,10 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.schedule.eachinternshipschedule.model.Schedule
-import com.schedule.eachinternshipschedule.ui.viewmodel.ScheduleListViewModel
+import com.schedule.shareships.model.Schedule
+import com.schedule.shareships.ui.viewmodel.ScheduleListViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.schedule.eachinternshipschedule.Routes
+import com.schedule.shareships.Routes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

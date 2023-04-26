@@ -1,8 +1,8 @@
-package com.schedule.eachinternshipschedule.data.repository
+package com.schedule.shareships.data.repository
 
-import com.schedule.eachinternshipschedule.data.FirestoreDataSource
-import com.schedule.eachinternshipschedule.data.SchedulePagingSource
-import com.schedule.eachinternshipschedule.model.Schedule
+import com.schedule.shareships.data.FirestoreDataSource
+import com.schedule.shareships.data.SchedulePagingSource
+import com.schedule.shareships.model.Schedule
 import javax.inject.Inject
 import javax.inject.Singleton
 

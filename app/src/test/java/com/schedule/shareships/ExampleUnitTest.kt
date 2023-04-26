@@ -1,4 +1,4 @@
-package com.schedule.eachinternshipschedule
+package com.schedule.shareships
 
 import org.junit.Test
 

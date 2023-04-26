@@ -1,7 +1,7 @@
-package com.schedule.eachinternshipschedule.di
+package com.schedule.shareships.di
 
-import com.schedule.eachinternshipschedule.data.repository.DefaultFirestoreRepository
-import com.schedule.eachinternshipschedule.data.repository.FirestoreRepository
+import com.schedule.shareships.data.repository.DefaultFirestoreRepository
+import com.schedule.shareships.data.repository.FirestoreRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
