@@ -7,7 +7,9 @@ import com.schedule.eachinternshipschedule.model.Schedule
 import com.schedule.eachinternshipschedule.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
@@ -27,6 +29,10 @@ class PostScheduleViewModel @Inject constructor(
     //テキストフィールドのエラーメッセージ状態を管理する状態管理
     private val _textFieldErrorMsgUiState = MutableStateFlow(TextFieldErrorMsg())
     val textFieldErrorMsgUiState = _textFieldErrorMsgUiState.asStateFlow()
+
+    //投稿ボタンが押されたら、リスト画面に戻るイベント
+    private val _onPressedPostButtonEvent = MutableSharedFlow<Boolean>()
+    val onPressedPostButtonEvent = _onPressedPostButtonEvent.asSharedFlow()
 
     //会社名のテキストを管理するメソッド
     fun onCompanyNameValueChange(completedText: String) {
@@ -103,16 +109,14 @@ class PostScheduleViewModel @Inject constructor(
         )
     }
 
-    //投稿するボタンが押されたら、スケジュールを登録するメソッド
-    fun insertSchedule(schedule: Schedule) {
+    //投稿するボタンが押されたときの処理
+    fun onPressedPostButton(schedule: Schedule) {
         viewModelScope.launch {
             _textFieldUiState.value = _textFieldUiState.value.copy(
                 isLoading = true
             )
             firestoreRepository.insertSchedule(schedule)
-            _textFieldUiState.value = _textFieldUiState.value.copy(
-                isLoading = false
-            )
+            _onPressedPostButtonEvent.emit(true)
         }
     }
 }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -17,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.schedule.eachinternshipschedule.Routes
 import com.schedule.eachinternshipschedule.ui.viewmodel.PostScheduleUiState
 import com.schedule.eachinternshipschedule.ui.viewmodel.PostScheduleViewModel
 import com.schedule.eachinternshipschedule.ui.viewmodel.TextFieldError
@@ -39,6 +41,18 @@ fun PostScheduleScreen(
 
     //テキストフィールドのエラーメッセージ状態を管理する状態管理
     val textFieldErrorMsgUiState: TextFieldErrorMsg by viewModel.textFieldErrorMsgUiState.collectAsState()
+
+    //投稿ボタンが押されて処理が終わった後のイベント
+    LaunchedEffect(key1 = Unit){
+        viewModel.onPressedPostButtonEvent.collect{
+            //投稿ボタンの処理が正常に行われたら、リスト画面に戻る
+            navController.popBackStack(
+                Routes.ScheduleListScreen.route,
+                inclusive = true
+            )
+        }
+    }
+
 
     //選考に必要なデータ
     val routeItems = Constants.ROUTE_ITEMS
@@ -217,7 +231,7 @@ fun PostScheduleScreen(
             )
             ElevatedButton(
                 onClick = {
-                    viewModel.insertSchedule(textFieldUiState.schedule)
+                    viewModel.onPressedPostButton(textFieldUiState.schedule)
                 },
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
             ) {
