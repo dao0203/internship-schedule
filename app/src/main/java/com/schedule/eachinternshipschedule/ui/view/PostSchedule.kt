@@ -19,6 +19,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.schedule.eachinternshipschedule.ui.viewmodel.PostScheduleUiState
 import com.schedule.eachinternshipschedule.ui.viewmodel.PostScheduleViewModel
+import com.schedule.eachinternshipschedule.ui.viewmodel.TextFieldError
+import com.schedule.eachinternshipschedule.ui.viewmodel.TextFieldErrorMsg
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(name = "PostScheduleScreen")
@@ -28,7 +30,15 @@ fun PostScheduleScreen(
     navController: NavController = rememberNavController(),
     viewModel: PostScheduleViewModel = hiltViewModel()
 ) {
+    //テキストフィールドのUI状態やローディング状態を管理する状態管理
     val textFieldUiState: PostScheduleUiState by viewModel.textFieldUiState.collectAsState()
+
+    //テキストフィールドのエラー状態を管理する状態管理
+    val textFieldErrorUiState: TextFieldError by viewModel.textFieldErrorUiState.collectAsState()
+
+    //テキストフィールドのエラーメッセージ状態を管理する状態管理
+    val textFieldErrorMsgUiState: TextFieldErrorMsg by viewModel.textFieldErrorMsgUiState.collectAsState()
+
     //選考に必要なデータ
     val routeItems =
         listOf("選考を選択してください", "書類", "一次面接", "二次面接", "三次面接", "最終面接")
