@@ -27,6 +27,7 @@ class PostScheduleViewModel @Inject constructor(
     private val _textFieldErrorMsgUiState = MutableStateFlow(TextFieldErrorMsg())
     val textFieldErrorMsgUiState = _textFieldErrorMsgUiState.asStateFlow()
 
+    //会社名のテキストを管理するメソッド
     fun onCompanyNameValueChange(completedText: String) {
         _textFieldUiState.value = _textFieldUiState.value.copy(
             schedule = _textFieldUiState.value.schedule.copy(
@@ -35,6 +36,7 @@ class PostScheduleViewModel @Inject constructor(
         )
     }
 
+    //インターンシップ名のテキストを管理するメソッド
     fun onInternshipNameValueChange(completedText: String) {
         _textFieldUiState.value = _textFieldUiState.value.copy(
             schedule = _textFieldUiState.value.schedule.copy(
@@ -43,6 +45,7 @@ class PostScheduleViewModel @Inject constructor(
         )
     }
 
+    //日付のテキストを管理するメソッド
     fun onDateValueChange(completedDate: String) {
         _textFieldUiState.value = _textFieldUiState.value.copy(
             schedule = _textFieldUiState.value.schedule.copy(
@@ -51,6 +54,7 @@ class PostScheduleViewModel @Inject constructor(
         )
     }
 
+    //選考のテキストを管理するメソッド
     fun onRouteValueChange(chosenItem: String) {
         _textFieldUiState.value = _textFieldUiState.value.copy(
             schedule = _textFieldUiState.value.schedule.copy(
@@ -60,6 +64,7 @@ class PostScheduleViewModel @Inject constructor(
         )
     }
 
+    //選考状況のテキストを管理するメソッド
     fun onStatusValueChange(chosenItem: String) {
         _textFieldUiState.value = _textFieldUiState.value.copy(
             schedule = _textFieldUiState.value.schedule.copy(
@@ -69,30 +74,35 @@ class PostScheduleViewModel @Inject constructor(
         )
     }
 
+    //選考が選ばれたら、ドロップダウンリストを消去するメソッド
     fun onRouteExpandedChange(routeExpanded: Boolean) {
         _textFieldUiState.value = _textFieldUiState.value.copy(
             routeExpanded = !routeExpanded
         )
     }
 
+    //ドロップダウンリストの外面をタップしたら、ドロップダウンリストを消去するメソッド
     fun onRouteDismissRequest() {
         _textFieldUiState.value = _textFieldUiState.value.copy(
             routeExpanded = false
         )
     }
 
+    //選考状況が選ばれたら、ドロップダウンリストを消去するメソッド
     fun onStatusExpandedChange(statusExpanded: Boolean) {
         _textFieldUiState.value = _textFieldUiState.value.copy(
             statusExpanded = !statusExpanded,
         )
     }
 
+    //ドロップダウンリストの外面をタップしたら、ドロップダウンリストを消去するメソッド
     fun onStatusDismissRequest() {
         _textFieldUiState.value = _textFieldUiState.value.copy(
             statusExpanded = false
         )
     }
 
+    //投稿するボタンが押されたら、スケジュールを登録するメソッド
     fun insertSchedule(schedule: Schedule) {
         viewModelScope.launch {
             _textFieldUiState.value = _textFieldUiState.value.copy(
