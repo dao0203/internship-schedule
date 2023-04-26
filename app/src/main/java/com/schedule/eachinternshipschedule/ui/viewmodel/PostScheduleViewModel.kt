@@ -15,8 +15,17 @@ class PostScheduleViewModel @Inject constructor(
     private val firestoreRepository: FirestoreRepository
 ) : ViewModel() {
 
+    //テキストフィールドのUI状態やローディング状態を管理する状態管理
     private val _textFieldUiState = MutableStateFlow(PostScheduleUiState())
     val textFieldUiState = _textFieldUiState.asStateFlow()
+
+    //テキストフィールドのエラー状態を管理する状態管理
+    private val _textFieldErrorUiState = MutableStateFlow(TextFieldError())
+    val textFieldErrorUiState = _textFieldErrorUiState.asStateFlow()
+
+    //テキストフィールドのエラーメッセージ状態を管理する状態管理
+    private val _textFieldErrorMsgUiState = MutableStateFlow(TextFieldErrorMsg())
+    val textFieldErrorMsgUiState = _textFieldErrorMsgUiState.asStateFlow()
 
     fun onCompanyNameValueChange(completedText: String) {
         _textFieldUiState.value = _textFieldUiState.value.copy(
@@ -110,7 +119,7 @@ data class PostScheduleUiState(
     )
 )
 
-data class ScheduleValid(
+data class TextFieldError(
     val isCompanyNameValid: Boolean = false,
     val isInternshipName: Boolean = false,
     val isDateValid: Boolean = false,
@@ -118,7 +127,7 @@ data class ScheduleValid(
     val isRouteStatusValid: Boolean = false
 )
 
-data class ScheduleErrorMsg(
+data class TextFieldErrorMsg(
     val companyNameError: String = "",
     val internshipNameError: String = "",
     val dateError: String = "",
