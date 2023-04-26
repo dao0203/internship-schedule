@@ -91,6 +91,7 @@ fun PostScheduleScreen(
                     viewModel.onCompanyNameValueChange(value)
                 },
                 isError = textFieldErrorUiState.isCompanyNameValid,
+                errorMsg = textFieldErrorMsgUiState.companyNameError,
             )
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -102,6 +103,7 @@ fun PostScheduleScreen(
                     viewModel.onInternshipNameValueChange(value)
                 },
                 isError = textFieldErrorUiState.isInternshipName,
+                errorMsg = textFieldErrorMsgUiState.internshipNameError,
             )
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -113,6 +115,7 @@ fun PostScheduleScreen(
                     viewModel.onDateValueChange(value)
                 },
                 isError = textFieldErrorUiState.isDateValid,
+                errorMsg = textFieldErrorMsgUiState.dateError,
             )
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -137,7 +140,12 @@ fun PostScheduleScreen(
                         .fillMaxWidth(),
                     colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
                     label = { Text(text = "選考") },
-                    isError = textFieldErrorUiState.isRouteValid
+                    isError = textFieldErrorUiState.isRouteValid,
+                    supportingText = {
+                        if (textFieldErrorUiState.isRouteValid) {
+                            Text(text = textFieldErrorMsgUiState.routeError)
+                        }
+                    }
                 )
                 ExposedDropdownMenu(
                     expanded = textFieldUiState.routeExpanded,
@@ -179,7 +187,12 @@ fun PostScheduleScreen(
                         .fillMaxWidth(),
                     colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
                     label = { Text(text = "選考状況") },
-                    isError = textFieldErrorUiState.isRouteStatusValid
+                    isError = textFieldErrorUiState.isRouteStatusValid,
+                    supportingText = {
+                        if (textFieldErrorUiState.isRouteStatusValid) {
+                            Text(text = textFieldErrorMsgUiState.routeStatusError)
+                        }
+                    }
                 )
                 ExposedDropdownMenu(
                     expanded = textFieldUiState.statusExpanded,
@@ -221,7 +234,8 @@ fun PostScheduleEditField(
     label: String,
     value: String,
     onValueChange: (String) -> Unit,
-    isError: Boolean
+    isError: Boolean,
+    errorMsg: String
 ) {
     OutlinedTextField(
         value = value,
@@ -231,7 +245,9 @@ fun PostScheduleEditField(
         singleLine = true,
         isError = isError,
         supportingText = {
-
+            if (isError) {
+                Text(text = errorMsg)
+            }
         })
 }
 
