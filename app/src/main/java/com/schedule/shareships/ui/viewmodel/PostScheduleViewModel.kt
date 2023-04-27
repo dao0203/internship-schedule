@@ -129,8 +129,8 @@ data class PostScheduleUiState(
         companyName = Constants.BLANK_SPACE,
         internshipName = Constants.BLANK_SPACE,
         date = Constants.BLANK_SPACE,
-        route = Constants.ROUTE_ITEMS[0],
-        routeStatus = Constants.STATUS_ITEMS[0]
+        route = Constants.ROUTE_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX],
+        routeStatus = Constants.STATUS_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]
     )
 )
 
@@ -143,9 +143,9 @@ data class TextFieldError(
 )
 
 data class TextFieldErrorMsg(
-    val companyName: String = Constants.BLANK_SPACE,
-    val internshipName: String = Constants.BLANK_SPACE,
-    val date: String = Constants.BLANK_SPACE,
-    val route: String = Constants.BLANK_SPACE,
-    val routeStatus: String = Constants.BLANK_SPACE
+    val companyName: String = Constants.INPUT_ERROR_MSG,
+    val internshipName: String = Constants.INPUT_ERROR_MSG,
+    val date: String = Constants.INPUT_ERROR_MSG,
+    val route: String = Constants.INPUT_ERROR_MSG,
+    val routeStatus: String = Constants.INPUT_ERROR_MSG
 )
