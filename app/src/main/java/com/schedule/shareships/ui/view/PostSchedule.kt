@@ -100,7 +100,7 @@ fun PostScheduleScreen(
                 onValueChange = { value ->
                     viewModel.onCompanyNameValueChange(value)
                 },
-                isError = textFieldErrorUiState.isCompanyNameValid,
+                isError = textFieldErrorUiState.isCompanyNameInvalid,
             )
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -111,7 +111,7 @@ fun PostScheduleScreen(
                 onValueChange = { value ->
                     viewModel.onInternshipNameValueChange(value)
                 },
-                isError = textFieldErrorUiState.isInternshipNameValid,
+                isError = textFieldErrorUiState.isInternshipNameInvalid,
             )
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -122,7 +122,7 @@ fun PostScheduleScreen(
                 onValueChange = { value ->
                     viewModel.onDateValueChange(value)
                 },
-                isError = textFieldErrorUiState.isDateValid,
+                isError = textFieldErrorUiState.isDateInvalid,
             )
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -147,9 +147,9 @@ fun PostScheduleScreen(
                         .fillMaxWidth(),
                     colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
                     label = { Text(text = "選考") },
-                    isError = textFieldErrorUiState.isRouteValid,
+                    isError = textFieldErrorUiState.isRouteInvalid,
                     supportingText = {
-                        if (textFieldErrorUiState.isRouteValid) {
+                        if (textFieldErrorUiState.isRouteInvalid) {
                             Text(text = Constants.INPUT_ERROR_MSG)
                         }
                     }
@@ -194,9 +194,9 @@ fun PostScheduleScreen(
                         .fillMaxWidth(),
                     colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
                     label = { Text(text = "選考状況") },
-                    isError = textFieldErrorUiState.isRouteStatusValid,
+                    isError = textFieldErrorUiState.isRouteStatusInvalid,
                     supportingText = {
-                        if (textFieldErrorUiState.isRouteStatusValid) {
+                        if (textFieldErrorUiState.isRouteStatusInvalid) {
                             Text(text = Constants.INPUT_ERROR_MSG)
                         }
                     }

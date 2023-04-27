@@ -34,7 +34,7 @@ class PostScheduleViewModel @Inject constructor(
     fun onCompanyNameValueChange(completedText: String) {
         //エラーを非表示にする
         _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-            isCompanyNameValid = false
+            isCompanyNameInvalid = false
         )
 
         //入力されたテキストに更新する
@@ -47,7 +47,7 @@ class PostScheduleViewModel @Inject constructor(
         //もし、空白だったらエラーを出力する
         if (textFieldUiState.value.schedule.companyName == Constants.BLANK_SPACE) {
             _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-                isCompanyNameValid = true
+                isCompanyNameInvalid = true
             )
         }
     }
@@ -56,7 +56,7 @@ class PostScheduleViewModel @Inject constructor(
     fun onInternshipNameValueChange(completedText: String) {
         //エラーを非表示にする
         _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-            isInternshipNameValid = false
+            isInternshipNameInvalid = false
         )
 
         //入力されたテキストに更新する
@@ -68,7 +68,7 @@ class PostScheduleViewModel @Inject constructor(
         //もし、空白だったらエラーを出力する
         if (textFieldUiState.value.schedule.internshipName == Constants.BLANK_SPACE) {
             _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-                isInternshipNameValid = true
+                isInternshipNameInvalid = true
             )
         }
     }
@@ -77,7 +77,7 @@ class PostScheduleViewModel @Inject constructor(
     fun onDateValueChange(completedDate: String) {
         //エラーを非表示にする
         _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-            isDateValid = false
+            isDateInvalid = false
         )
 
         //入力されたテキストに更新する
@@ -89,7 +89,7 @@ class PostScheduleViewModel @Inject constructor(
         //もし、空白だったらエラーを出力する
         if (textFieldUiState.value.schedule.date == Constants.BLANK_SPACE) {
             _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-                isDateValid = true
+                isDateInvalid = true
             )
         }
     }
@@ -98,7 +98,7 @@ class PostScheduleViewModel @Inject constructor(
     fun onRouteValueChange(chosenItem: String) {
         //エラーを非表示にする
         _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-            isRouteValid = false
+            isRouteInvalid = false
         )
 
         //入力されたテキストに更新する
@@ -115,7 +115,7 @@ class PostScheduleViewModel @Inject constructor(
             Constants.ROUTE_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]
         ) {
             _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-                isRouteValid = true
+                isRouteInvalid = true
             )
         }
     }
@@ -125,7 +125,7 @@ class PostScheduleViewModel @Inject constructor(
 
         //エラーを非表示にする
         _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-            isRouteStatusValid = false
+            isRouteStatusInvalid = false
         )
 
         _textFieldUiState.value = _textFieldUiState.value.copy(
@@ -141,7 +141,7 @@ class PostScheduleViewModel @Inject constructor(
             Constants.STATUS_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]
         ) {
             _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-                isRouteStatusValid = true
+                isRouteStatusInvalid = true
             )
         }
     }
@@ -176,13 +176,16 @@ class PostScheduleViewModel @Inject constructor(
 
     //投稿するボタンが押されたときの処理
     fun onPressedPostButton(schedule: Schedule) {
-        viewModelScope.launch {
-            _textFieldUiState.value = _textFieldUiState.value.copy(
-                isLoading = true
-            )
-            firestoreRepository.insertSchedule(schedule)
-            _onPressedPostButtonEvent.emit(true)
+        if (!textFieldErrorUiState.value.isCompanyNameInvalid){
+            viewModelScope.launch {
+                _textFieldUiState.value = _textFieldUiState.value.copy(
+                    isLoading = true
+                )
+                firestoreRepository.insertSchedule(schedule)
+                _onPressedPostButtonEvent.emit(true)
+            }
         }
+
     }
 }
 
@@ -200,9 +203,9 @@ data class PostScheduleUiState(
 )
 
 data class TextFieldError(
-    val isCompanyNameValid: Boolean = false,
-    val isInternshipNameValid: Boolean = false,
-    val isDateValid: Boolean = false,
-    val isRouteValid: Boolean = false,
-    val isRouteStatusValid: Boolean = false
+    val isCompanyNameInvalid: Boolean = false,
+    val isInternshipNameInvalid: Boolean = false,
+    val isDateInvalid: Boolean = false,
+    val isRouteInvalid: Boolean = false,
+    val isRouteStatusInvalid: Boolean = false
 )
