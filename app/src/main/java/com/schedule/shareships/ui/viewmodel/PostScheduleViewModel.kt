@@ -26,10 +26,6 @@ class PostScheduleViewModel @Inject constructor(
     private val _textFieldErrorUiState = MutableStateFlow(TextFieldError())
     val textFieldErrorUiState = _textFieldErrorUiState.asStateFlow()
 
-    //テキストフィールドのエラーメッセージ状態を管理する状態管理
-    private val _textFieldErrorMsgUiState = MutableStateFlow(TextFieldErrorMsg())
-    val textFieldErrorMsgUiState = _textFieldErrorMsgUiState.asStateFlow()
-
     //投稿ボタンが押されたら、リスト画面に戻るイベント
     private val _onPressedPostButtonEvent = MutableSharedFlow<Boolean>()
     val onPressedPostButtonEvent = _onPressedPostButtonEvent.asSharedFlow()
@@ -140,12 +136,4 @@ data class TextFieldError(
     val isDateValid: Boolean = false,
     val isRouteValid: Boolean = false,
     val isRouteStatusValid: Boolean = false
-)
-
-data class TextFieldErrorMsg(
-    val companyName: String = Constants.INPUT_ERROR_MSG,
-    val internshipName: String = Constants.INPUT_ERROR_MSG,
-    val date: String = Constants.INPUT_ERROR_MSG,
-    val route: String = Constants.INPUT_ERROR_MSG,
-    val routeStatus: String = Constants.INPUT_ERROR_MSG
 )
