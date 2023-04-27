@@ -111,7 +111,7 @@ fun PostScheduleScreen(
                 onValueChange = { value ->
                     viewModel.onInternshipNameValueChange(value)
                 },
-                isError = textFieldErrorUiState.isInternshipName,
+                isError = textFieldErrorUiState.isInternshipNameValid,
             )
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)

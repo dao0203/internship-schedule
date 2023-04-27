@@ -132,7 +132,7 @@ data class PostScheduleUiState(
 
 data class TextFieldError(
     val isCompanyNameValid: Boolean = false,
-    val isInternshipName: Boolean = false,
+    val isInternshipNameValid: Boolean = false,
     val isDateValid: Boolean = false,
     val isRouteValid: Boolean = false,
     val isRouteStatusValid: Boolean = false
