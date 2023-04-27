@@ -126,11 +126,11 @@ data class PostScheduleUiState(
     val routeExpanded: Boolean = false,
     val statusExpanded: Boolean = false,
     val schedule: Schedule = Schedule(
-        companyName = "",
-        internshipName = "",
-        date = "",
-        route = "選考を選択してください",
-        routeStatus = "選考状況を選択してください"
+        companyName = Constants.BLANK_SPACE,
+        internshipName = Constants.BLANK_SPACE,
+        date = Constants.BLANK_SPACE,
+        route = Constants.ROUTE_ITEMS[0],
+        routeStatus = Constants.STATUS_ITEMS[0]
     )
 )
 
@@ -146,6 +146,6 @@ data class TextFieldErrorMsg(
     val companyName: String = Constants.BLANK_SPACE,
     val internshipName: String = Constants.BLANK_SPACE,
     val date: String = Constants.BLANK_SPACE,
-    val route: String= Constants.BLANK_SPACE,
-    val routeStatus: String= Constants.BLANK_SPACE
+    val route: String = Constants.BLANK_SPACE,
+    val routeStatus: String = Constants.BLANK_SPACE
 )
