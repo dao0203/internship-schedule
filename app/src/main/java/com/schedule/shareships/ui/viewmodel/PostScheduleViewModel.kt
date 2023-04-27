@@ -32,49 +32,118 @@ class PostScheduleViewModel @Inject constructor(
 
     //会社名のテキストを管理するメソッド
     fun onCompanyNameValueChange(completedText: String) {
+        //エラーを非表示にする
+        _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
+            isCompanyNameValid = false
+        )
+
+        //入力されたテキストに更新する
         _textFieldUiState.value = _textFieldUiState.value.copy(
             schedule = _textFieldUiState.value.schedule.copy(
                 companyName = completedText
             )
         )
+
+        //もし、空白だったらエラーを出力する
+        if (textFieldUiState.value.schedule.companyName == Constants.BLANK_SPACE) {
+            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
+                isCompanyNameValid = true
+            )
+        }
     }
 
     //インターンシップ名のテキストを管理するメソッド
     fun onInternshipNameValueChange(completedText: String) {
+        //エラーを非表示にする
+        _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
+            isInternshipNameValid = false
+        )
+
+        //入力されたテキストに更新する
         _textFieldUiState.value = _textFieldUiState.value.copy(
             schedule = _textFieldUiState.value.schedule.copy(
                 internshipName = completedText
             )
         )
+        //もし、空白だったらエラーを出力する
+        if (textFieldUiState.value.schedule.internshipName == Constants.BLANK_SPACE) {
+            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
+                isInternshipNameValid = true
+            )
+        }
     }
 
     //日付のテキストを管理するメソッド
     fun onDateValueChange(completedDate: String) {
+        //エラーを非表示にする
+        _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
+            isDateValid = false
+        )
+
+        //入力されたテキストに更新する
         _textFieldUiState.value = _textFieldUiState.value.copy(
             schedule = _textFieldUiState.value.schedule.copy(
                 date = completedDate
             )
         )
+        //もし、空白だったらエラーを出力する
+        if (textFieldUiState.value.schedule.date == Constants.BLANK_SPACE) {
+            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
+                isDateValid = true
+            )
+        }
     }
 
     //選考のテキストを管理するメソッド
     fun onRouteValueChange(chosenItem: String) {
+        //エラーを非表示にする
+        _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
+            isRouteValid = false
+        )
+
+        //入力されたテキストに更新する
         _textFieldUiState.value = _textFieldUiState.value.copy(
             schedule = _textFieldUiState.value.schedule.copy(
                 route = chosenItem
             ),
             routeExpanded = false
         )
+
+        //もし、初期状態が入力されたらエラーを表示する
+        if (
+            textFieldUiState.value.schedule.route ==
+            Constants.ROUTE_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]
+        ) {
+            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
+                isRouteValid = true
+            )
+        }
     }
 
     //選考状況のテキストを管理するメソッド
     fun onStatusValueChange(chosenItem: String) {
+
+        //エラーを非表示にする
+        _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
+            isRouteStatusValid = false
+        )
+
         _textFieldUiState.value = _textFieldUiState.value.copy(
             schedule = _textFieldUiState.value.schedule.copy(
                 routeStatus = chosenItem
             ),
             statusExpanded = false
         )
+
+        //初期状態が選ばれたときはエラーを表示する
+        if (
+            textFieldUiState.value.schedule.routeStatus ==
+            Constants.STATUS_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]
+        ) {
+            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
+                isRouteStatusValid = true
+            )
+        }
     }
 
     //選考が選ばれたら、ドロップダウンリストを消去するメソッド
