@@ -116,14 +116,20 @@ fun PostScheduleScreen(
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
             )
-            PostScheduleEditField(
-                label = "日付",
+            OutlinedTextField(
                 value = textFieldUiState.schedule.date,
+                modifier = Modifier.fillMaxWidth(),
                 onValueChange = { value ->
                     viewModel.onDateValueChange(value)
                 },
+                label = { Text("日付") },
+                singleLine = true,
                 isError = textFieldErrorUiState.isDateInvalid,
-            )
+                supportingText = {
+                    if (textFieldErrorUiState.isDateInvalid) {
+                        Text(text = Constants.INPUT_ERROR_MSG)
+                    }
+                })
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
             )
