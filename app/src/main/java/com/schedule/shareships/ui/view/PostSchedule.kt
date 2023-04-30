@@ -39,8 +39,8 @@ fun PostScheduleScreen(
     val textFieldErrorUiState: TextFieldError by viewModel.textFieldErrorUiState.collectAsState()
 
     //投稿ボタンが押されて処理が終わった後のイベント
-    LaunchedEffect(key1 = Unit){
-        viewModel.onPressedPostButtonEvent.collect{
+    LaunchedEffect(key1 = Unit) {
+        viewModel.onPressedPostButtonEvent.collect {
             //投稿ボタンの処理が正常に行われたら、リスト画面に戻る
             navController.popBackStack(
                 Routes.ScheduleListScreen.route,
@@ -129,7 +129,8 @@ fun PostScheduleScreen(
                     if (textFieldErrorUiState.isDateInvalid) {
                         Text(text = Constants.INPUT_ERROR_MSG)
                     }
-                })
+                }
+            )
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
             )
