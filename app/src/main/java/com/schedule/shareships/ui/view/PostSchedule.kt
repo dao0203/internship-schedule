@@ -307,21 +307,3 @@ fun PostScheduleEditField(
             }
         })
 }
-
-fun showDatePickerDialog(
-    context: Context,
-    onDateSet: (Int, Int, Int) -> Unit
-) {
-    val calendar = Calendar.getInstance()
-    val datePickerDialog = DatePickerDialog(
-        context,
-        { _, year, month, dayOfMonth ->
-            onDateSet(year, month, dayOfMonth)
-        },
-        calendar.get(Calendar.YEAR),
-        calendar.get(Calendar.MONTH),
-        calendar.get(Calendar.DAY_OF_MONTH)
-    )
-    datePickerDialog.show()
-
-}
