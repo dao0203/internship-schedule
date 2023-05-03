@@ -190,6 +190,22 @@ class PostScheduleViewModel @Inject constructor(
         }
 
     }
+
+    private fun validateForm(): Boolean {
+        return textFieldUiState.value.schedule.companyName != Constants.BLANK_SPACE
+                &&
+                textFieldUiState.value.schedule.internshipName != Constants.BLANK_SPACE
+                &&
+                textFieldUiState.value.schedule.date != Constants.BLANK_SPACE
+                &&
+                textFieldUiState.value.schedule.route !=
+                Constants.ROUTE_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]
+                &&
+                textFieldUiState.value.schedule.routeStatus !=
+                Constants.STATUS_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]
+    }
+
+
 }
 
 data class PostScheduleUiState(
