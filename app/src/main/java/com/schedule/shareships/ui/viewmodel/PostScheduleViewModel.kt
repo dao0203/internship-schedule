@@ -74,7 +74,7 @@ class PostScheduleViewModel @Inject constructor(
     }
 
     //日付のテキストを管理するメソッド
-    fun onDateValueChange(completedDate: String) {
+    fun onDateValueChange(year: Int, month: Int, dayOfMonth: Int) {
         //エラーを非表示にする
         _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
             isDateInvalid = false
@@ -83,7 +83,7 @@ class PostScheduleViewModel @Inject constructor(
         //入力されたテキストに更新する
         _textFieldUiState.value = _textFieldUiState.value.copy(
             schedule = _textFieldUiState.value.schedule.copy(
-                date = completedDate
+                date = "$year/$month/$dayOfMonth"
             )
         )
         //もし、空白だったらエラーを出力する
@@ -176,7 +176,7 @@ class PostScheduleViewModel @Inject constructor(
 
     //投稿するボタンが押されたときの処理
     fun onPressedPostButton(schedule: Schedule) {
-        if (!textFieldErrorUiState.value.isCompanyNameInvalid){
+        if (!textFieldErrorUiState.value.isCompanyNameInvalid) {
             viewModelScope.launch {
                 _textFieldUiState.value = _textFieldUiState.value.copy(
                     isLoading = true
