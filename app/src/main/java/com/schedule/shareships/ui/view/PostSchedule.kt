@@ -100,6 +100,27 @@ fun PostScheduleScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            //日付を選択するダイアログ
+            MaterialDialog(
+                dialogState = dateDialogState,
+                buttons = {
+                    positiveButton("OK")
+                    negativeButton("キャンセル")
+                },
+
+            ) {
+                datepicker(
+                    initialDate = LocalDate.now(),
+                    title = "日付を選択してください",
+                    onDateChange = { date ->
+                        viewModel.onDateValueChange(
+                            year = date.year,
+                            month = date.monthValue,
+                            dayOfMonth = date.dayOfMonth
+                        )
+                    }
+                )
+            }
             Spacer(
                 modifier = Modifier.padding(vertical = 8.dp)
             )
@@ -141,16 +162,7 @@ fun PostScheduleScreen(
                 trailingIcon = {
                     IconButton(
                         onClick = {
-                            showDatePickerDialog(
-                                context = context,
-                                onDateSet = { year, month, dayOfMonth ->
-                                    viewModel.onDateValueChange(
-                                        year = year,
-                                        month = month,
-                                        dayOfMonth = dayOfMonth
-                                    )
-                                }
-                            )
+                            dateDialogState.show()
                         },
                         content = {
                             Icon(
