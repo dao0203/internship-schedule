@@ -28,6 +28,7 @@ import com.schedule.shareships.ui.viewmodel.PostScheduleUiState
 import com.schedule.shareships.ui.viewmodel.PostScheduleViewModel
 import com.schedule.shareships.ui.viewmodel.TextFieldError
 import com.schedule.shareships.utils.Constants
+import java.util.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(name = "PostScheduleScreen")
@@ -59,6 +60,8 @@ fun PostScheduleScreen(
     val routeItems = Constants.ROUTE_ITEMS
     //選考状況に必要なデータ
     val statusItems = Constants.STATUS_ITEMS
+
+    val context = LocalContext.current
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
