@@ -45,6 +45,9 @@ fun PostScheduleScreen(
     //テキストフィールドのエラー状態を管理する状態管理
     val textFieldErrorUiState: TextFieldError by viewModel.textFieldErrorUiState.collectAsState()
 
+    //投稿ボタンの有効無効を管理する状態管理
+    val isPostButtonEnabled: Boolean by viewModel.isPostButtonEnabled.collectAsState()
+
     //選考に必要なデータ
     val routeItems = Constants.ROUTE_ITEMS
     //選考状況に必要なデータ
@@ -276,7 +279,8 @@ fun PostScheduleScreen(
                 onClick = {
                     viewModel.onPressedPostButton(textFieldUiState.schedule)
                 },
-                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+                enabled = isPostButtonEnabled
             ) {
                 Text(text = "投稿する")
             }
