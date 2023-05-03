@@ -72,6 +72,7 @@ class MainActivity : ComponentActivity() {
                                             AnimatedContentTransitionScope.SlideDirection.End
                                         )
                                     }
+
                                     else -> null
                                 }
                             },
