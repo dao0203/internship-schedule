@@ -53,6 +53,8 @@ class PostScheduleViewModel @Inject constructor(
                 isCompanyNameInvalid = true
             )
         }
+        //投稿ボタンを有効にするかどうかを判断する
+        _isPostButtonEnabled.value = validateForm()
     }
 
     //インターンシップ名のテキストを管理するメソッド
@@ -74,6 +76,8 @@ class PostScheduleViewModel @Inject constructor(
                 isInternshipNameInvalid = true
             )
         }
+        //投稿ボタンを有効にするかどうかを判断する
+        _isPostButtonEnabled.value = validateForm()
     }
 
     //日付のテキストを管理するメソッド
@@ -95,6 +99,8 @@ class PostScheduleViewModel @Inject constructor(
                 isDateInvalid = true
             )
         }
+        //投稿ボタンを有効にするかどうかを判断する
+        _isPostButtonEnabled.value = validateForm()
     }
 
     //選考のテキストを管理するメソッド
@@ -121,6 +127,8 @@ class PostScheduleViewModel @Inject constructor(
                 isRouteInvalid = true
             )
         }
+        //投稿ボタンを有効にするかどうかを判断する
+        _isPostButtonEnabled.value = validateForm()
     }
 
     //選考状況のテキストを管理するメソッド
@@ -143,10 +151,13 @@ class PostScheduleViewModel @Inject constructor(
             textFieldUiState.value.schedule.routeStatus ==
             Constants.STATUS_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]
         ) {
+            //エラーを表示する
             _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
                 isRouteStatusInvalid = true
             )
         }
+        //投稿ボタンを有効にするかどうかを判断する
+        _isPostButtonEnabled.value = validateForm()
     }
 
     //選考が選ばれたら、ドロップダウンリストを消去するメソッド
