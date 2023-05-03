@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.schedule.eachinternshipschedule'
+    namespace 'com.schedule.shareships'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.schedule.eachinternshipschedule"
+        applicationId "com.schedule.shareships"
         minSdk 33
         targetSdk 33
         versionCode 1
@@ -64,6 +64,8 @@ dependencies {
     implementation("androidx.compose.material3:material3-window-size-class:1.0.1")
     //Paging3の依存関係を追加
     implementation("androidx.paging:paging-compose:1.0.0-alpha12")
+
+    implementation ("io.github.vanpra.compose-material-dialogs:datetime:0.9.0")
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
