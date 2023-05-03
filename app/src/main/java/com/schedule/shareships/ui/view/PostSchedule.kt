@@ -142,7 +142,7 @@ fun PostScheduleScreen(
                         onClick = {
                             showDatePickerDialog(
                                 context = context,
-                                onDateSet = {year, month, dayOfMonth ->
+                                onDateSet = { year, month, dayOfMonth ->
                                     viewModel.onDateValueChange(
                                         year = year,
                                         month = month,
@@ -297,8 +297,8 @@ fun PostScheduleEditField(
 
 fun showDatePickerDialog(
     context: Context,
-    onDateSet: ( Int, Int, Int) -> Unit
-){
+    onDateSet: (Int, Int, Int) -> Unit
+) {
     val calendar = Calendar.getInstance()
     val datePickerDialog = DatePickerDialog(
         context,
