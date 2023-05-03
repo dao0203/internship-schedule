@@ -1,7 +1,5 @@
 package com.schedule.shareships.ui.view
 
-import android.app.DatePickerDialog
-import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,7 +15,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -28,6 +25,10 @@ import com.schedule.shareships.ui.viewmodel.PostScheduleUiState
 import com.schedule.shareships.ui.viewmodel.PostScheduleViewModel
 import com.schedule.shareships.ui.viewmodel.TextFieldError
 import com.schedule.shareships.utils.Constants
+import com.vanpra.composematerialdialogs.MaterialDialog
+import com.vanpra.composematerialdialogs.datetime.date.datepicker
+import com.vanpra.composematerialdialogs.rememberMaterialDialogState
+import java.time.LocalDate
 import java.util.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,6 +45,14 @@ fun PostScheduleScreen(
     //テキストフィールドのエラー状態を管理する状態管理
     val textFieldErrorUiState: TextFieldError by viewModel.textFieldErrorUiState.collectAsState()
 
+    //選考に必要なデータ
+    val routeItems = Constants.ROUTE_ITEMS
+    //選考状況に必要なデータ
+    val statusItems = Constants.STATUS_ITEMS
+
+    //ダイアログの状態管理
+    val dateDialogState = rememberMaterialDialogState()
+
     //投稿ボタンが押されて処理が終わった後のイベント
     LaunchedEffect(key1 = Unit) {
         viewModel.onPressedPostButtonEvent.collect {
@@ -54,14 +63,6 @@ fun PostScheduleScreen(
             )
         }
     }
-
-
-    //選考に必要なデータ
-    val routeItems = Constants.ROUTE_ITEMS
-    //選考状況に必要なデータ
-    val statusItems = Constants.STATUS_ITEMS
-
-    val context = LocalContext.current
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
