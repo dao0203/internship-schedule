@@ -1,5 +1,6 @@
 package com.schedule.shareships.ui.view
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +18,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -58,14 +60,26 @@ fun PostScheduleScreen(
     //ダイアログの状態管理
     val dateDialogState = rememberMaterialDialogState()
 
+    val context = LocalContext.current
+
     //投稿ボタンが押されて処理が終わった後のイベント
     LaunchedEffect(key1 = Unit) {
         viewModel.onPressedPostButtonEvent.collect {
-            //投稿ボタンの処理が正常に行われたら、リスト画面に戻る
-            navController.popBackStack(
-                Routes.ScheduleListScreen.route,
-                inclusive = true
-            )
+            //投稿ボタンの処理が正常に行われたら、リスト画面に戻り、以前の画面を消去する
+            if (it) {
+                //トーストテキストを表示
+                Toast.makeText(
+                    context,
+                    "投稿が完了しました",
+                    Toast.LENGTH_SHORT
+                ).show()
+                //リスト画面に戻る
+                navController.navigate(Routes.ScheduleListScreen.route) {
+                    popUpTo(Routes.PostScheduleScreen.route) {
+                        inclusive = true
+                    }
+                }
+            }
         }
     }
 
