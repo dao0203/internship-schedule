@@ -30,6 +30,9 @@ class PostScheduleViewModel @Inject constructor(
     private val _onPressedPostButtonEvent = MutableSharedFlow<Boolean>()
     val onPressedPostButtonEvent = _onPressedPostButtonEvent.asSharedFlow()
 
+    private val _isPostButtonEnabled = MutableStateFlow(false)
+    val isPostButtonEnabled = _isPostButtonEnabled.asStateFlow()
+
     //会社名のテキストを管理するメソッド
     fun onCompanyNameValueChange(completedText: String) {
         //エラーを非表示にする
