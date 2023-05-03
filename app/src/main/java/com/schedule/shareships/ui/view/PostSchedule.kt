@@ -65,7 +65,6 @@ fun PostScheduleScreen(
     //投稿ボタンが押されて処理が終わった後のイベント
     LaunchedEffect(key1 = Unit) {
         viewModel.onPressedPostButtonEvent.collect {
-            //投稿ボタンの処理が正常に行われたら、リスト画面に戻り、以前の画面を消去する
             if (it) {
                 //トーストテキストを表示
                 Toast.makeText(
@@ -73,9 +72,9 @@ fun PostScheduleScreen(
                     "投稿が完了しました",
                     Toast.LENGTH_SHORT
                 ).show()
-                //リスト画面に戻る
+                //投稿ボタンの処理が正常に行われたら、リスト画面に遷移し、これまでの画面を全て削除する
                 navController.navigate(Routes.ScheduleListScreen.route) {
-                    popUpTo(Routes.PostScheduleScreen.route) {
+                    popUpTo(Routes.ScheduleListScreen.route) {
                         inclusive = true
                     }
                 }
@@ -128,7 +127,7 @@ fun PostScheduleScreen(
                     negativeButton("キャンセル")
                 },
 
-            ) {
+                ) {
                 datepicker(
                     initialDate = LocalDate.now(),
                     title = "日付を選択してください",
