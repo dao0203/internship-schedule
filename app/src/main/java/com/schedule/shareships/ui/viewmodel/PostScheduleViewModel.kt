@@ -82,6 +82,17 @@ class PostScheduleViewModel @Inject constructor(
 
     //日付のテキストを管理するメソッド
     fun onDateValueChange(year: Int, month: Int, dayOfMonth: Int) {
+        val pickedYear = year.toString()
+        val pickedMonth = if (month < 10) {
+            "0$month"
+        } else {
+            month.toString()
+        }
+        val pickedDayOfMonth = if (dayOfMonth < 10) {
+            "0$dayOfMonth"
+        } else {
+            dayOfMonth.toString()
+        }
         //エラーを非表示にする
         _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
             isDateInvalid = false
