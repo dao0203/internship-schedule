@@ -40,6 +40,7 @@ fun EachInternshipScheduleAppBar(
                 }
             }
         },
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(MaterialTheme.colorScheme.primary)
     )
 }
 
