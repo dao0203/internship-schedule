@@ -1,7 +1,8 @@
 package com.schedule.shareships
 
-import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -106,11 +107,11 @@ fun EachInternshipScheduleApp(
                 )
             }
         }
-    ) {
+    ) { paddingValues ->
         AnimatedNavHost(
             navController = navController,
             startDestination = Routes.ScheduleListScreen.route,
-            modifier = modifier.padding(it),
+            modifier = modifier.padding(paddingValues),
         ) {
             //TODO: 画面遷移のアニメーションを追加する
             composable(
@@ -119,8 +120,42 @@ fun EachInternshipScheduleApp(
                 exitTransition = {
                     when (initialState.destination.route) {
                         Routes.PostScheduleScreen.route -> {
-                            slideOutOfContainer(
-                                AnimatedContentTransitionScope.SlideDirection.Start
+                            slideOutHorizontally(
+                                targetOffsetX = { -it },
+                            )
+                        }
+
+                        else -> null
+                    }
+                },
+                popExitTransition = {
+                    when (targetState.destination.route) {
+                        Routes.PostScheduleScreen.route -> {
+                            slideOutHorizontally(
+                                targetOffsetX = { -it },
+                            )
+                        }
+
+                        else -> null
+                    }
+                },
+                enterTransition = {
+                    when (targetState.destination.route) {
+                        Routes.PostScheduleScreen.route -> {
+                            slideInHorizontally(
+                                initialOffsetX = { it },
+                            )
+
+                        }
+
+                        else -> null
+                    }
+                },
+                popEnterTransition = {
+                    when (targetState.destination.route) {
+                        Routes.PostScheduleScreen.route -> {
+                            slideInHorizontally(
+                                initialOffsetX = { it },
                             )
                         }
 
@@ -135,8 +170,19 @@ fun EachInternshipScheduleApp(
                 enterTransition = {
                     when (initialState.destination.route) {
                         Routes.ScheduleListScreen.route -> {
-                            slideIntoContainer(
-                                AnimatedContentTransitionScope.SlideDirection.Start
+                            slideInHorizontally(
+                                initialOffsetX = { it },
+                            )
+                        }
+
+                        else -> null
+                    }
+                },
+                popEnterTransition = {
+                    when (targetState.destination.route) {
+                        Routes.ScheduleListScreen.route -> {
+                            slideInHorizontally(
+                                initialOffsetX = { it },
                             )
                         }
 
@@ -146,8 +192,19 @@ fun EachInternshipScheduleApp(
                 popExitTransition = {
                     when (targetState.destination.route) {
                         Routes.ScheduleListScreen.route -> {
-                            slideOutOfContainer(
-                                AnimatedContentTransitionScope.SlideDirection.End
+                            slideOutHorizontally(
+                                targetOffsetX = { it },
+                            )
+                        }
+
+                        else -> null
+                    }
+                },
+                exitTransition = {
+                    when (initialState.destination.route) {
+                        Routes.ScheduleListScreen.route -> {
+                            slideOutHorizontally(
+                                targetOffsetX = { it },
                             )
                         }
 
