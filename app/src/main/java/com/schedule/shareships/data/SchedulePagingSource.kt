@@ -22,12 +22,12 @@ class SchedulePagingSource(private val query: Query) : PagingSource<QuerySnapsho
                 .get()
                 .await()
             val lastVisibleProduct = currentPage.documents[currentPage.size() - 1]
-            val nextPage =query
+            val nextPage = query
                 .limit(Constants.PAGE_SIZE.toLong())
                 .startAfter(lastVisibleProduct)
                 .get()
                 .await()
-             LoadResult.Page(
+            LoadResult.Page(
                 data = currentPage.toObjects(Schedule::class.java),
                 prevKey = null,
                 nextKey = nextPage

@@ -1,10 +1,10 @@
 package com.schedule.shareships.ui.view
 
 import android.widget.Toast
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -23,7 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.schedule.shareships.Routes
 import com.schedule.shareships.ui.viewmodel.PostScheduleUiState
 import com.schedule.shareships.ui.viewmodel.PostScheduleViewModel
@@ -35,12 +35,12 @@ import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 import java.time.LocalDate
 import java.util.*
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Preview(name = "PostScheduleScreen")
 @Composable
 fun PostScheduleScreen(
     modifier: Modifier = Modifier,
-    navController: NavController = rememberNavController(),
+    navController: NavController = rememberAnimatedNavController(),
     viewModel: PostScheduleViewModel = hiltViewModel()
 ) {
     //テキストフィールドのUI状態やローディング状態を管理する状態管理
@@ -82,38 +82,8 @@ fun PostScheduleScreen(
         }
     }
 
-    Scaffold(
-        modifier = modifier.fillMaxSize(),
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "スケジュール投稿",
-                        color = MaterialTheme.colorScheme.onPrimary,
-                    )
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(MaterialTheme.colorScheme.primary),
-            )
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    navController.popBackStack()
-                },
-                containerColor = MaterialTheme.colorScheme.primary,
-                content = {
-                    Text(
-                        text = "戻る",
-                        color = MaterialTheme.colorScheme.onPrimary,
-                    )
-                },
-            )
-        },
-    )
-    {
         Column(
             modifier = Modifier
-                .padding(it)
                 .padding(horizontal = 16.dp)
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Center,
@@ -303,7 +273,6 @@ fun PostScheduleScreen(
         }
 
     }
-}
 
 @ExperimentalMaterial3Api
 @Composable

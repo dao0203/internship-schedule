@@ -25,68 +25,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             EachInternshipScheduleTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    val navController = rememberAnimatedNavController()
-                    AnimatedNavHost(
-                        navController = navController,
-                        startDestination = Routes.ScheduleListScreen.route,
-                    ) {
-                        //TODO: 画面遷移のアニメーションを追加する
-                        composable(
-                            route = Routes.ScheduleListScreen.route,
-
-                            exitTransition = {
-                                when (initialState.destination.route) {
-                                    Routes.PostScheduleScreen.route -> {
-                                        slideOutOfContainer(
-                                            AnimatedContentTransitionScope.SlideDirection.Start
-                                        )
-                                    }
-
-                                    else -> null
-                                }
-                            },
-                        ) {
-                            ScheduleListScreen(navController = navController)
-                        }
-                        composable(
-                            route = Routes.PostScheduleScreen.route,
-                            enterTransition = {
-                                when (initialState.destination.route) {
-                                    Routes.ScheduleListScreen.route -> {
-                                        slideIntoContainer(
-                                            AnimatedContentTransitionScope.SlideDirection.Start
-                                        )
-                                    }
-
-                                    else -> null
-                                }
-                            },
-                            popExitTransition = {
-                                when (targetState.destination.route) {
-                                    Routes.ScheduleListScreen.route -> {
-                                        slideOutOfContainer(
-                                            AnimatedContentTransitionScope.SlideDirection.End
-                                        )
-                                    }
-
-                                    else -> null
-                                }
-                            },
-                        ) {
-                            PostScheduleScreen(navController = navController)
-                        }
-                    }
-                }
+                EachInternshipScheduleApp()
             }
         }
     }
 }
 
-sealed class Routes(val route: String) {
-    object PostScheduleScreen : Routes("postScheduleScreen")
-    object ScheduleListScreen : Routes("scheduleListScreen")
-}
+
