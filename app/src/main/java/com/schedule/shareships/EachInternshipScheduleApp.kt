@@ -112,7 +112,7 @@ fun EachInternshipScheduleApp(
     ) { paddingValues ->
         AnimatedNavHost(
             navController = navController,
-            startDestination = Routes.ScheduleListScreen.route,
+            startDestination = Routes.LoginScreen.route,
             modifier = modifier.padding(paddingValues),
         ) {
             composable(
