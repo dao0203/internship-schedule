@@ -58,6 +58,27 @@ fun EachInternshipScheduleAppBar(
     )
 }
 
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+fun FabToPostScreen(
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberAnimatedNavController(),
+){
+    FloatingActionButton(
+        onClick = {
+            navController.navigate(Routes.PostScheduleScreen.route)
+        },
+        modifier = modifier,
+        containerColor = MaterialTheme.colorScheme.primary,
+    ){
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = "スケジュールを追加する",
+                tint = MaterialTheme.colorScheme.onPrimary,
+            )
+    }
+}
+
 @OptIn(ExperimentalAnimationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun EachInternshipScheduleApp(
@@ -75,6 +96,13 @@ fun EachInternshipScheduleApp(
                 navigateUp = {navController.navigateUp()},
             )
         },
+        floatingActionButton = {
+            if (currentRoute == Routes.ScheduleListScreen){
+                FabToPostScreen(
+                    navController = navController,
+                )
+            }
+        }
     ) {
         AnimatedNavHost(
             navController = navController,
