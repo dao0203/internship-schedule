@@ -101,7 +101,7 @@ class PostScheduleViewModel @Inject constructor(
         //入力されたテキストに更新する
         _textFieldUiState.value = _textFieldUiState.value.copy(
             schedule = _textFieldUiState.value.schedule.copy(
-                date = "$year/$month/$dayOfMonth"
+                date = "$pickedYear/$pickedMonth/$pickedDayOfMonth"
             )
         )
         //もし、空白だったらエラーを出力する
