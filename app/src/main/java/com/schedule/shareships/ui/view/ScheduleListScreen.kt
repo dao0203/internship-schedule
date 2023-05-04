@@ -36,47 +36,49 @@ fun ScheduleListScreen(
 ) {
     val schedules: LazyPagingItems<Schedule> =
         scheduleListViewModel.items.collectAsLazyPagingItems()
-        Box(
-            modifier = modifier,
+
+    Box(
+        modifier = modifier,
+    ) {
+        LazyColumn(
+            modifier = Modifier
+                .padding(horizontal = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            LazyColumn(
-                modifier = Modifier
-                    .padding(horizontal = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                items(
-                    schedules.itemCount,
-                ) { schedule ->
-                    ScheduleItem(schedule = schedules[schedule]!!)
-                }
-                when (schedules.loadState.refresh) {
-                    is LoadState.Loading -> {
-                        item {
-                            ScheduleListScreenWhenLoading(Modifier.fillParentMaxSize())
-                        }
-
-                    }
-
-                    is LoadState.Error -> {
-                        item {
-                            ScheduleListScreenWhenError(Modifier.fillParentMaxSize())
-                        }
-                    }
-
-                    else -> {}
-                }
-                when (schedules.loadState.append) {
-                    is LoadState.Loading -> {
-                        item {
-                            ScheduleListScreenWhenLoading(Modifier.fillMaxSize())
-                        }
-                    }
-                    else -> {}
-                }
-
+            items(
+                schedules.itemCount,
+            ) { schedule ->
+                ScheduleItem(schedule = schedules[schedule]!!)
             }
+            when (schedules.loadState.refresh) {
+                is LoadState.Loading -> {
+                    item {
+                        ScheduleListScreenWhenLoading(Modifier.fillParentMaxSize())
+                    }
+
+                }
+
+                is LoadState.Error -> {
+                    item {
+                        ScheduleListScreenWhenError(Modifier.fillParentMaxSize())
+                    }
+                }
+
+                else -> {}
+            }
+            when (schedules.loadState.append) {
+                is LoadState.Loading -> {
+                    item {
+                        ScheduleListScreenWhenLoading(Modifier.fillMaxSize())
+                    }
+                }
+
+                else -> {}
+            }
+
         }
     }
+}
 
 @Composable
 fun ScheduleListScreenWhenLoading(
