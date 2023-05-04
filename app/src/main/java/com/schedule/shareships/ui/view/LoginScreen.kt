@@ -119,12 +119,11 @@ fun LoginTextField(
             if (isPassword) {
                 IconButton(onClick = { onIconClick() }) {
                     Icon(
-                        //パスワードの目みたいなものが欲しい
                         imageVector = when (isVisible) {
                             false -> Icons.Filled.VisibilityOff
                             true -> Icons.Filled.Visibility
                         },
-                        contentDescription = null,
+                        contentDescription = "パスワードアイコン",
                     )
                 }
             }
