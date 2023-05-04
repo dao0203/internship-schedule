@@ -52,6 +52,7 @@ fun EachInternshipScheduleAppBar(
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = "戻る",
+                        tint = MaterialTheme.colorScheme.onPrimary,
                     )
                 }
             }
@@ -65,19 +66,19 @@ fun EachInternshipScheduleAppBar(
 fun FabToPostScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberAnimatedNavController(),
-){
+) {
     FloatingActionButton(
         onClick = {
             navController.navigate(Routes.PostScheduleScreen.route)
         },
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.primary,
-    ){
-            Icon(
-                imageVector = Icons.Default.Add,
-                contentDescription = "スケジュールを追加する",
-                tint = MaterialTheme.colorScheme.onPrimary,
-            )
+    ) {
+        Icon(
+            imageVector = Icons.Default.Add,
+            contentDescription = "スケジュールを追加する",
+            tint = MaterialTheme.colorScheme.onPrimary,
+        )
     }
 }
 
@@ -95,11 +96,11 @@ fun EachInternshipScheduleApp(
             EachInternshipScheduleAppBar(
                 currentRoute = currentRoute,
                 canNavigateBack = navController.previousBackStackEntry != null,
-                navigateUp = {navController.navigateUp()},
+                navigateUp = { navController.navigateUp() },
             )
         },
         floatingActionButton = {
-            if (currentRoute == Routes.ScheduleListScreen){
+            if (currentRoute == Routes.ScheduleListScreen) {
                 FabToPostScreen(
                     navController = navController,
                 )
