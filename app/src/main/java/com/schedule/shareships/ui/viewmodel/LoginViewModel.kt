@@ -10,15 +10,45 @@ import kotlinx.coroutines.flow.asStateFlow
 
 @HiltViewModel
 class LoginViewModel @Inject constructor() : ViewModel() {
-    private val _loginTextFieldErrorUiState = MutableStateFlow(LoginTextFieldErrorUiState())
-    val loginTextFieldErrorUiState = _loginTextFieldErrorUiState.asStateFlow()
-    private val _loginTextFieldTextUiState = MutableStateFlow(LoginData(
-        email = Constants.BLANK_SPACE,
-        password = Constants.BLANK_SPACE
-    ))
+    private val _loginUiState = MutableStateFlow(LoginUiState())
+    val loginUiState = _loginUiState.asStateFlow()
+
+    fun onEmailValueChange(completedText: String) {
+        _loginUiState.value = _loginUiState.value.copy(
+            loginData = _loginUiState.value.loginData.copy(
+                email = completedText
+            )
+        )
+    }
+
+    fun onPasswordValueChange(completedText: String) {
+        _loginUiState.value = _loginUiState.value.copy(
+            loginData = _loginUiState.value.loginData.copy(
+                password = completedText
+            )
+        )
+    }
+
+//    fun validateForm(): Boolean {
+//        val email = loginUiState.value.loginData.email
+//        val password = loginUiState.value.loginData.password
+//        if (email == Constants.BLANK_SPACE) {
+//            _loginUiState.value = _loginUiState.value.copy(
+//                isEmailInValid = true,
+//                EmailErrorText = "メールアドレスを入力してください"
+//            )
+//        }
+//    }
 }
 
-data class LoginTextFieldErrorUiState(
-    val isMailAddressInValid: Boolean = false,
-    val isPasswordInValid: Boolean = false
+data class LoginUiState(
+    val loginData: LoginData = LoginData(
+        email = Constants.BLANK_SPACE,
+        password = Constants.BLANK_SPACE
+    ),
+    val isEmailInValid: Boolean = false,
+    val isPasswordInValid: Boolean = false,
+    val isLoginButtonEnabled: Boolean = false,
+    val EmailErrorText: String = Constants.BLANK_SPACE,
+    val PasswordErrorText: String = Constants.BLANK_SPACE
 )
