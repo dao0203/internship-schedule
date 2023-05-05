@@ -30,14 +30,11 @@ class PostScheduleViewModel @Inject constructor(
     private val _onPressedPostButtonEvent = MutableSharedFlow<Boolean>()
     val onPressedPostButtonEvent = _onPressedPostButtonEvent.asSharedFlow()
 
-    private val _isPostButtonEnabled = MutableStateFlow(false)
-    val isPostButtonEnabled = _isPostButtonEnabled.asStateFlow()
-
     //会社名のテキストを管理するメソッド
     fun onCompanyNameValueChange(completedText: String) {
         //エラーを非表示にする
         _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-            isCompanyNameInvalid = false
+            isCompanyNameError = false
         )
 
         //入力されたテキストに更新する
@@ -46,22 +43,13 @@ class PostScheduleViewModel @Inject constructor(
                 companyName = completedText
             )
         )
-
-        //もし、空白だったらエラーを出力する
-        if (textFieldUiState.value.schedule.companyName == Constants.BLANK_SPACE) {
-            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-                isCompanyNameInvalid = true
-            )
-        }
-        //投稿ボタンを有効にするかどうかを判断する
-        _isPostButtonEnabled.value = validateForm()
     }
 
     //インターンシップ名のテキストを管理するメソッド
     fun onInternshipNameValueChange(completedText: String) {
         //エラーを非表示にする
         _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-            isInternshipNameInvalid = false
+            isInternshipNameError = false
         )
 
         //入力されたテキストに更新する
@@ -70,14 +58,6 @@ class PostScheduleViewModel @Inject constructor(
                 internshipName = completedText
             )
         )
-        //もし、空白だったらエラーを出力する
-        if (textFieldUiState.value.schedule.internshipName == Constants.BLANK_SPACE) {
-            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-                isInternshipNameInvalid = true
-            )
-        }
-        //投稿ボタンを有効にするかどうかを判断する
-        _isPostButtonEnabled.value = validateForm()
     }
 
     //日付のテキストを管理するメソッド
@@ -95,7 +75,7 @@ class PostScheduleViewModel @Inject constructor(
         }
         //エラーを非表示にする
         _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-            isDateInvalid = false
+            isDateError = false
         )
 
         //入力されたテキストに更新する
@@ -104,21 +84,13 @@ class PostScheduleViewModel @Inject constructor(
                 date = "$pickedYear/$pickedMonth/$pickedDayOfMonth"
             )
         )
-        //もし、空白だったらエラーを出力する
-        if (textFieldUiState.value.schedule.date == Constants.BLANK_SPACE) {
-            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-                isDateInvalid = true
-            )
-        }
-        //投稿ボタンを有効にするかどうかを判断する
-        _isPostButtonEnabled.value = validateForm()
     }
 
     //選考のテキストを管理するメソッド
     fun onRouteValueChange(chosenItem: String) {
         //エラーを非表示にする
         _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-            isRouteInvalid = false
+            isRouteError = false
         )
 
         //入力されたテキストに更新する
@@ -128,18 +100,6 @@ class PostScheduleViewModel @Inject constructor(
             ),
             routeExpanded = false
         )
-
-        //もし、初期状態が入力されたらエラーを表示する
-        if (
-            textFieldUiState.value.schedule.route ==
-            Constants.ROUTE_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]
-        ) {
-            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-                isRouteInvalid = true
-            )
-        }
-        //投稿ボタンを有効にするかどうかを判断する
-        _isPostButtonEnabled.value = validateForm()
     }
 
     //選考状況のテキストを管理するメソッド
@@ -147,28 +107,15 @@ class PostScheduleViewModel @Inject constructor(
 
         //エラーを非表示にする
         _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-            isRouteStatusInvalid = false
+            isRouteStatusError = false
         )
 
         _textFieldUiState.value = _textFieldUiState.value.copy(
             schedule = _textFieldUiState.value.schedule.copy(
                 routeStatus = chosenItem
             ),
-            statusExpanded = false
+            statusExpanded = false,
         )
-
-        //初期状態が選ばれたときはエラーを表示する
-        if (
-            textFieldUiState.value.schedule.routeStatus ==
-            Constants.STATUS_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]
-        ) {
-            //エラーを表示する
-            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-                isRouteStatusInvalid = true
-            )
-        }
-        //投稿ボタンを有効にするかどうかを判断する
-        _isPostButtonEnabled.value = validateForm()
     }
 
     //選考が選ばれたら、ドロップダウンリストを消去するメソッド
@@ -201,33 +148,60 @@ class PostScheduleViewModel @Inject constructor(
 
     //投稿するボタンが押されたときの処理
     fun onPressedPostButton(schedule: Schedule) {
-        if (!textFieldErrorUiState.value.isCompanyNameInvalid) {
-            viewModelScope.launch {
-                _textFieldUiState.value = _textFieldUiState.value.copy(
-                    isLoading = true
-                )
-                firestoreRepository.insertSchedule(schedule)
-                _onPressedPostButtonEvent.emit(true)
-            }
+        //入力されたテキストをデータレイヤに送る
+        viewModelScope.launch {
+            _textFieldUiState.value = _textFieldUiState.value.copy(
+                isLoading = true
+            )
+            firestoreRepository.insertSchedule(schedule)
+            _onPressedPostButtonEvent.emit(true)
         }
 
+
     }
 
-    private fun validateForm(): Boolean {
-        return textFieldUiState.value.schedule.companyName != Constants.BLANK_SPACE
-                &&
-                textFieldUiState.value.schedule.internshipName != Constants.BLANK_SPACE
-                &&
-                textFieldUiState.value.schedule.date != Constants.BLANK_SPACE
-                &&
-                textFieldUiState.value.schedule.route !=
-                Constants.ROUTE_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]
-                &&
-                textFieldUiState.value.schedule.routeStatus !=
-                Constants.STATUS_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]
+    fun validateForm(): Boolean {
+        val companyName = _textFieldUiState.value.schedule.companyName
+        val internshipName = _textFieldUiState.value.schedule.internshipName
+        val date = _textFieldUiState.value.schedule.date
+        val route = _textFieldUiState.value.schedule.route
+        val routeStatus = _textFieldUiState.value.schedule.routeStatus
+
+        //会社名のバリデーション
+        if (companyName.isEmpty()) {
+            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
+                isCompanyNameError = true
+            )
+        }
+        //インターンシップ名のバリデーション
+        if (internshipName.isEmpty()) {
+            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
+                isInternshipNameError = true
+            )
+        }
+        //日付のバリデーション
+        if (date.isEmpty()) {
+            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
+                isDateError = true
+            )
+        }
+        //選考のバリデーション
+        if (route == Constants.ROUTE_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]) {
+            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
+                isRouteError = true
+            )
+        }
+        //選考状況のバリデーション
+        if (routeStatus == Constants.STATUS_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]) {
+            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
+                isRouteStatusError = true
+            )
+        }
+        //バリデーションを通過したらtrueを返す
+        return _textFieldErrorUiState.value.run {
+            !isCompanyNameError && !isInternshipNameError && !isDateError && !isRouteError && !isRouteStatusError
+        }
     }
-
-
 }
 
 data class PostScheduleUiState(
@@ -244,9 +218,9 @@ data class PostScheduleUiState(
 )
 
 data class TextFieldError(
-    val isCompanyNameInvalid: Boolean = false,
-    val isInternshipNameInvalid: Boolean = false,
-    val isDateInvalid: Boolean = false,
-    val isRouteInvalid: Boolean = false,
-    val isRouteStatusInvalid: Boolean = false
+    val isCompanyNameError: Boolean = false,
+    val isInternshipNameError: Boolean = false,
+    val isDateError: Boolean = false,
+    val isRouteError: Boolean = false,
+    val isRouteStatusError: Boolean = false
 )

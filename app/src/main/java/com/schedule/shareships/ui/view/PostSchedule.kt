@@ -33,7 +33,6 @@ import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 import java.time.LocalDate
-import java.util.*
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Preview(name = "PostScheduleScreen")
@@ -48,9 +47,6 @@ fun PostScheduleScreen(
 
     //テキストフィールドのエラー状態を管理する状態管理
     val textFieldErrorUiState: TextFieldError by viewModel.textFieldErrorUiState.collectAsState()
-
-    //投稿ボタンの有効無効を管理する状態管理
-    val isPostButtonEnabled: Boolean by viewModel.isPostButtonEnabled.collectAsState()
 
     //選考に必要なデータ
     val routeItems = Constants.ROUTE_ITEMS
@@ -82,197 +78,197 @@ fun PostScheduleScreen(
         }
     }
 
-        Column(
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            //日付を選択するダイアログ
-            MaterialDialog(
-                dialogState = dateDialogState,
-                buttons = {
-                    positiveButton("OK")
-                    negativeButton("キャンセル")
-                },
+    Column(
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        //日付を選択するダイアログ
+        MaterialDialog(
+            dialogState = dateDialogState,
+            buttons = {
+                positiveButton("OK")
+                negativeButton("キャンセル")
+            },
 
-                ) {
-                datepicker(
-                    initialDate = LocalDate.now(),
-                    title = "日付を選択してください",
-                    onDateChange = { date ->
-                        viewModel.onDateValueChange(
-                            year = date.year,
-                            month = date.monthValue,
-                            dayOfMonth = date.dayOfMonth
-                        )
-                    }
-                )
-            }
-            Spacer(
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
-            PostScheduleEditField(
-                label = "会社名",
-                value = textFieldUiState.schedule.companyName,
-                onValueChange = { value ->
-                    viewModel.onCompanyNameValueChange(value)
-                },
-                isError = textFieldErrorUiState.isCompanyNameInvalid,
-            )
-            Spacer(
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
-            PostScheduleEditField(
-                label = "インターンシップ名",
-                value = textFieldUiState.schedule.internshipName,
-                onValueChange = { value ->
-                    viewModel.onInternshipNameValueChange(value)
-                },
-                isError = textFieldErrorUiState.isInternshipNameInvalid,
-            )
-            Spacer(
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
-            OutlinedTextField(
-                value = textFieldUiState.schedule.date,
-                modifier = Modifier.fillMaxWidth(),
-                onValueChange = {},
-                label = { Text("日付") },
-                singleLine = true,
-                isError = textFieldErrorUiState.isDateInvalid,
-                supportingText = {
-                    if (textFieldErrorUiState.isDateInvalid) {
-                        Text(text = Constants.INPUT_ERROR_MSG)
-                    }
-                },
-                readOnly = true,
-                trailingIcon = {
-                    IconButton(
-                        onClick = {
-                            dateDialogState.show()
-                        },
-                        content = {
-                            Icon(
-                                //カレンダーのアイコン
-                                imageVector = Icons.Default.DateRange,
-                                contentDescription = null,
-                            )
-                        },
+            ) {
+            datepicker(
+                initialDate = LocalDate.now(),
+                title = "日付を選択してください",
+                onDateChange = { date ->
+                    viewModel.onDateValueChange(
+                        year = date.year,
+                        month = date.monthValue,
+                        dayOfMonth = date.dayOfMonth
                     )
                 }
             )
-            Spacer(
-                modifier = Modifier.padding(vertical = 8.dp)
+        }
+        Spacer(
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+        PostScheduleEditField(
+            label = "会社名",
+            value = textFieldUiState.schedule.companyName,
+            onValueChange = { value ->
+                viewModel.onCompanyNameValueChange(value)
+            },
+            isError = textFieldErrorUiState.isCompanyNameError,
+        )
+        Spacer(
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+        PostScheduleEditField(
+            label = "インターンシップ名",
+            value = textFieldUiState.schedule.internshipName,
+            onValueChange = { value ->
+                viewModel.onInternshipNameValueChange(value)
+            },
+            isError = textFieldErrorUiState.isInternshipNameError,
+        )
+        Spacer(
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+        OutlinedTextField(
+            value = textFieldUiState.schedule.date,
+            modifier = Modifier.fillMaxWidth(),
+            onValueChange = {},
+            label = { Text("日付") },
+            singleLine = true,
+            isError = textFieldErrorUiState.isDateError,
+            supportingText = {
+                if (textFieldErrorUiState.isDateError) {
+                    Text(text = Constants.INPUT_ERROR_MSG)
+                }
+            },
+            readOnly = true,
+            trailingIcon = {
+                IconButton(
+                    onClick = {
+                        dateDialogState.show()
+                    },
+                    content = {
+                        Icon(
+                            //カレンダーのアイコン
+                            imageVector = Icons.Default.DateRange,
+                            contentDescription = null,
+                        )
+                    },
+                )
+            }
+        )
+        Spacer(
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+        ExposedDropdownMenuBox(
+            expanded = textFieldUiState.routeExpanded,
+            onExpandedChange = {
+                viewModel.onRouteExpandedChange(textFieldUiState.routeExpanded)
+            },
+        ) {
+            OutlinedTextField(
+                value = textFieldUiState.schedule.route,
+                readOnly = true,
+                onValueChange = {},
+                trailingIcon = {
+                    ExposedDropdownMenuDefaults.TrailingIcon(
+                        expanded = textFieldUiState.routeExpanded,
+                    )
+                },
+                modifier = Modifier
+                    .menuAnchor()
+                    .fillMaxWidth(),
+                colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
+                label = { Text(text = "選考") },
+                isError = textFieldErrorUiState.isRouteError,
+                supportingText = {
+                    if (textFieldErrorUiState.isRouteError) {
+                        Text(text = Constants.INPUT_ERROR_MSG)
+                    }
+                }
             )
-            ExposedDropdownMenuBox(
+            ExposedDropdownMenu(
                 expanded = textFieldUiState.routeExpanded,
-                onExpandedChange = {
-                    viewModel.onRouteExpandedChange(textFieldUiState.routeExpanded)
-                },
-            ) {
-                OutlinedTextField(
-                    value = textFieldUiState.schedule.route,
-                    readOnly = true,
-                    onValueChange = {},
-                    trailingIcon = {
-                        ExposedDropdownMenuDefaults.TrailingIcon(
-                            expanded = textFieldUiState.routeExpanded,
-                        )
-                    },
-                    modifier = Modifier
-                        .menuAnchor()
-                        .fillMaxWidth(),
-                    colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
-                    label = { Text(text = "選考") },
-                    isError = textFieldErrorUiState.isRouteInvalid,
-                    supportingText = {
-                        if (textFieldErrorUiState.isRouteInvalid) {
-                            Text(text = Constants.INPUT_ERROR_MSG)
-                        }
-                    }
-                )
-                ExposedDropdownMenu(
-                    expanded = textFieldUiState.routeExpanded,
-                    onDismissRequest = {
-                        viewModel.onRouteDismissRequest()
-                    }) {
-                    repeat(routeItems.size) {
-                        DropdownMenuItem(
-                            text = {
-                                Text(text = routeItems[it])
-                            },
-                            onClick = {
-                                viewModel.onRouteValueChange(routeItems[it])
-                            },
-                        )
-                    }
+                onDismissRequest = {
+                    viewModel.onRouteDismissRequest()
+                }) {
+                repeat(routeItems.size) {
+                    DropdownMenuItem(
+                        text = {
+                            Text(text = routeItems[it])
+                        },
+                        onClick = {
+                            viewModel.onRouteValueChange(routeItems[it])
+                        },
+                    )
                 }
-            }
-            Spacer(
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
-            ExposedDropdownMenuBox(
-                expanded = textFieldUiState.statusExpanded,
-                onExpandedChange = {
-                    viewModel.onStatusExpandedChange(textFieldUiState.statusExpanded)
-                },
-            ) {
-                OutlinedTextField(
-                    value = textFieldUiState.schedule.routeStatus,
-                    readOnly = true,
-                    onValueChange = {},
-                    trailingIcon = {
-                        ExposedDropdownMenuDefaults.TrailingIcon(
-                            expanded = textFieldUiState.statusExpanded,
-                        )
-                    },
-                    modifier = Modifier
-                        .menuAnchor()
-                        .fillMaxWidth(),
-                    colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
-                    label = { Text(text = "選考状況") },
-                    isError = textFieldErrorUiState.isRouteStatusInvalid,
-                    supportingText = {
-                        if (textFieldErrorUiState.isRouteStatusInvalid) {
-                            Text(text = Constants.INPUT_ERROR_MSG)
-                        }
-                    }
-                )
-                ExposedDropdownMenu(
-                    expanded = textFieldUiState.statusExpanded,
-                    onDismissRequest = {
-                        viewModel.onStatusDismissRequest()
-                    }
-                ) {
-                    repeat(statusItems.size) {
-                        DropdownMenuItem(
-                            text = {
-                                Text(text = statusItems[it])
-                            },
-                            onClick = {
-                                viewModel.onStatusValueChange(statusItems[it])
-                            },
-                        )
-                    }
-                }
-            }
-            Spacer(
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
-            ElevatedButton(
-                onClick = {
-                    viewModel.onPressedPostButton(textFieldUiState.schedule)
-                },
-                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
-                enabled = isPostButtonEnabled
-            ) {
-                Text(text = "投稿する")
             }
         }
-
+        Spacer(
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+        ExposedDropdownMenuBox(
+            expanded = textFieldUiState.statusExpanded,
+            onExpandedChange = {
+                viewModel.onStatusExpandedChange(textFieldUiState.statusExpanded)
+            },
+        ) {
+            OutlinedTextField(
+                value = textFieldUiState.schedule.routeStatus,
+                readOnly = true,
+                onValueChange = {},
+                trailingIcon = {
+                    ExposedDropdownMenuDefaults.TrailingIcon(
+                        expanded = textFieldUiState.statusExpanded,
+                    )
+                },
+                modifier = Modifier
+                    .menuAnchor()
+                    .fillMaxWidth(),
+                colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
+                label = { Text(text = "選考状況") },
+                isError = textFieldErrorUiState.isRouteStatusError,
+                supportingText = {
+                    if (textFieldErrorUiState.isRouteStatusError) {
+                        Text(text = Constants.INPUT_ERROR_MSG)
+                    }
+                }
+            )
+            ExposedDropdownMenu(
+                expanded = textFieldUiState.statusExpanded,
+                onDismissRequest = {
+                    viewModel.onStatusDismissRequest()
+                }
+            ) {
+                repeat(statusItems.size) {
+                    DropdownMenuItem(
+                        text = {
+                            Text(text = statusItems[it])
+                        },
+                        onClick = {
+                            viewModel.onStatusValueChange(statusItems[it])
+                        },
+                    )
+                }
+            }
+        }
+        Spacer(
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+        ElevatedButton(
+            onClick = {
+                if (viewModel.validateForm()) {
+                    viewModel.onPressedPostButton(textFieldUiState.schedule)
+                }
+            },
+            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+        ) {
+            Text(text = "投稿する")
+        }
     }
+}
 
 @ExperimentalMaterial3Api
 @Composable
