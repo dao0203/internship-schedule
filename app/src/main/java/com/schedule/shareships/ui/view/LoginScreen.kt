@@ -20,6 +20,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
@@ -27,16 +29,21 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.schedule.shareships.Routes
+import com.schedule.shareships.ui.viewmodel.LoginUiState
+import com.schedule.shareships.ui.viewmodel.LoginViewModel
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
     navController: NavController = rememberAnimatedNavController(),
+    viewModel: LoginViewModel = hiltViewModel(),
 ) {
+    val uiState: LoginUiState by viewModel.loginUiState.collectAsState()
     Column(
         modifier = modifier
             .padding(horizontal = 8.dp)
