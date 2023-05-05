@@ -17,7 +17,8 @@ class LoginViewModel @Inject constructor() : ViewModel() {
         _loginUiState.value = _loginUiState.value.copy(
             loginData = _loginUiState.value.loginData.copy(
                 email = completedText
-            )
+            ),
+            isEmailInValid = false
         )
     }
 
@@ -25,7 +26,8 @@ class LoginViewModel @Inject constructor() : ViewModel() {
         _loginUiState.value = _loginUiState.value.copy(
             loginData = _loginUiState.value.loginData.copy(
                 password = completedText
-            )
+            ),
+            isPasswordInValid = false
         )
     }
 
