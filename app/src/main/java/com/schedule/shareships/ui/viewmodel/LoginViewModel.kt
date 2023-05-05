@@ -18,7 +18,7 @@ class LoginViewModel @Inject constructor() : ViewModel() {
             loginData = _loginUiState.value.loginData.copy(
                 email = completedText
             ),
-            isEmailInValid = false
+            isEmailError = false
         )
     }
 
@@ -27,7 +27,7 @@ class LoginViewModel @Inject constructor() : ViewModel() {
             loginData = _loginUiState.value.loginData.copy(
                 password = completedText
             ),
-            isPasswordInValid = false
+            isPasswordError = false
         )
     }
 
@@ -48,9 +48,8 @@ data class LoginUiState(
         email = Constants.BLANK_SPACE,
         password = Constants.BLANK_SPACE
     ),
-    val isEmailInValid: Boolean = false,
-    val isPasswordInValid: Boolean = false,
-    val isLoginButtonEnabled: Boolean = false,
+    val isEmailError: Boolean = false,
+    val isPasswordError: Boolean = false,
     val EmailErrorText: String = Constants.BLANK_SPACE,
     val PasswordErrorText: String = Constants.BLANK_SPACE
 )
