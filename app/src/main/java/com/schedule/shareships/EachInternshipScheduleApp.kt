@@ -25,12 +25,14 @@ import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.schedule.shareships.ui.view.LoginScreen
 import com.schedule.shareships.ui.view.PostScheduleScreen
+import com.schedule.shareships.ui.view.RegisterScreen
 import com.schedule.shareships.ui.view.ScheduleListScreen
 
 enum class Routes(val route: String, val title: String) {
     PostScheduleScreen("postScheduleScreen", "スケジュール投稿"),
     ScheduleListScreen("scheduleListScreen", "スケジュール一覧"),
     LoginScreen("loginScreen", "ログイン"),
+    RegisterScreen("registerScreen", "新規登録"),
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -219,6 +221,11 @@ fun EachInternshipScheduleApp(
                 route = Routes.LoginScreen.route,
             ) {
                 LoginScreen(navController = navController)
+            }
+            composable(
+                route = Routes.RegisterScreen.route,
+            ) {
+                RegisterScreen(navController = navController)
             }
         }
     }
