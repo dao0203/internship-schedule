@@ -31,16 +31,37 @@ class LoginViewModel @Inject constructor() : ViewModel() {
         )
     }
 
-//    fun validateForm(): Boolean {
-//        val email = loginUiState.value.loginData.email
-//        val password = loginUiState.value.loginData.password
-//        if (email == Constants.BLANK_SPACE) {
-//            _loginUiState.value = _loginUiState.value.copy(
-//                isEmailInValid = true,
-//                EmailErrorText = "メールアドレスを入力してください"
-//            )
-//        }
-//    }
+    fun validateForm(): Boolean {
+        val email = loginUiState.value.loginData.email
+        val password = loginUiState.value.loginData.password
+
+        //Emailのバリデーション
+        if (email.isEmpty()) {
+            _loginUiState.value = _loginUiState.value.copy(
+                isEmailError = true,
+                EmailErrorText = "メールアドレスを入力してください"
+            )
+        } else if (email.contains(Regex("\"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}\""))
+        ) {
+            _loginUiState.value = _loginUiState.value.copy(
+                isEmailError = true,
+                EmailErrorText = "メールアドレスの形式が正しくありません"
+            )
+        }
+
+        //Passwordのバリデーション
+        if (password == Constants.BLANK_SPACE) {
+            _loginUiState.value = _loginUiState.value.copy(
+                isPasswordError = true,
+                PasswordErrorText = "パスワードを入力してください"
+            )
+
+        }
+        //バリデーションが通ったら、正常に動作するようにする
+        return loginUiState.value.run {
+            !isEmailError && !isPasswordError
+        }
+    }
 }
 
 data class LoginUiState(
