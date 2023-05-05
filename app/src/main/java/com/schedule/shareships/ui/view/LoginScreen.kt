@@ -29,6 +29,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.schedule.shareships.Routes
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -88,7 +89,10 @@ fun LoginScreen(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            onClick = {},
+            onClick = {
+                //新規登録画面に遷移
+                navController.navigate(Routes.RegisterScreen.route)
+            },
             colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
         ) {
             Text(text = "新規登録")
