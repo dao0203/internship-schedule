@@ -19,7 +19,8 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
         _registerUiState.value = _registerUiState.value.copy(
             registerData = _registerUiState.value.registerData.copy(
                 email = completedText
-            )
+            ),
+            isEmailError = false
         )
     }
 
@@ -28,7 +29,8 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
         _registerUiState.value = _registerUiState.value.copy(
             registerData = _registerUiState.value.registerData.copy(
                 userName = completedText
-            )
+            ),
+            isUserNameError = false
         )
     }
 
@@ -37,7 +39,8 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
         _registerUiState.value = _registerUiState.value.copy(
             registerData = _registerUiState.value.registerData.copy(
                 githubId = completedText
-            )
+            ),
+            isGithubIdError = false
         )
     }
 
@@ -46,14 +49,16 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
         _registerUiState.value = _registerUiState.value.copy(
             registerData = _registerUiState.value.registerData.copy(
                 password = completedText
-            )
+            ),
+            isPasswordError = false
         )
     }
 
     //再入力Passwordのテキストを管理するメソッド
     fun onReenteredPasswordValueChange(completedText: String) {
         _registerUiState.value = _registerUiState.value.copy(
-            reenteredPassword = completedText
+            reenteredPassword = completedText,
+            isReenteredPasswordError = false
         )
     }
 
