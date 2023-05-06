@@ -7,7 +7,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DefaultFirestoreRepository @Inject constructor(
+class FirestoreRepositoryImpl @Inject constructor(
     private val firestoreDataSource: FirestoreDataSource
 ) : FirestoreRepository {
 
