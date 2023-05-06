@@ -19,5 +19,6 @@ object Constants {
     const val DROPDOWN_MENU_OF_INITIAL_STATE_INDEX = 0
     const val BLANK_SPACE = ""
     const val EMAIL_INVALID_ERROR_MSG = "メールアドレスの形式が正しくありません"
+    const val PASSWORD_NOT_MATCH_ERROR_MSG = "パスワードが一致しません"
     const val INPUT_ERROR_MSG = "入力してください"
 }
