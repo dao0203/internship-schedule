@@ -54,11 +54,13 @@ fun LoginScreen(
         LoginTextField(
             modifier = Modifier
                 .fillMaxWidth(),
-            label = "Email",
-            value = "",
-            errorMsg = "Email is required",
-            isError = false,
-            onValueChange = {},
+            label = "メールアドレス",
+            value = uiState.loginData.email,
+            errorMsg = uiState.EmailErrorText,
+            isError = uiState.isEmailError,
+            onValueChange = {
+                viewModel.onEmailValueChange(it)
+            },
             isPassword = false,
             isVisible = false,
             onIconClick = {}
@@ -67,11 +69,13 @@ fun LoginScreen(
         LoginTextField(
             modifier = Modifier
                 .fillMaxWidth(),
-            label = "Password",
-            value = "",
-            errorMsg = "Password is required",
-            isError = false,
-            onValueChange = {},
+            label = "パスワード",
+            value = uiState.loginData.password,
+            errorMsg = uiState.PasswordErrorText,
+            isError = uiState.isPasswordError,
+            onValueChange = {
+                viewModel.onPasswordValueChange(it)
+            },
             isPassword = true,
             isVisible = false,
             onIconClick = {},
@@ -81,7 +85,12 @@ fun LoginScreen(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            onClick = {},
+            onClick = {
+                //TODO: ログイン処理
+                if (viewModel.validateForm()) {
+                    navController.navigate(Routes.ScheduleListScreen.route)
+                }
+            },
             colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
         ) {
             Text(text = "ログイン")
