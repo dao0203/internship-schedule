@@ -1,7 +1,7 @@
 package com.schedule.shareships.data.repository
 
-import com.schedule.shareships.data.FirestoreDataSource
-import com.schedule.shareships.data.SchedulePagingSource
+import com.schedule.shareships.data.source.FirestoreDataSource
+import com.schedule.shareships.data.source.SchedulePagingSource
 import com.schedule.shareships.model.Schedule
 import javax.inject.Inject
 import javax.inject.Singleton
