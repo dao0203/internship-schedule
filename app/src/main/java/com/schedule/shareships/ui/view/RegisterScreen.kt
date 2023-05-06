@@ -14,8 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.schedule.shareships.ui.viewmodel.RegisterViewModel
 
 @OptIn(ExperimentalAnimationApi::class, ExperimentalMaterial3Api::class)
 @Preview("RegisterScreen")
@@ -23,6 +25,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 fun RegisterScreen(
     modifier: Modifier = Modifier,
     navController: NavController = rememberAnimatedNavController(),
+    viewModel: RegisterViewModel = hiltViewModel(),
 ) {
     Column(
         modifier = modifier
