@@ -16,12 +16,15 @@ data class RegisterUiState(
         githubId = Constants.BLANK_SPACE,
         password = Constants.BLANK_SPACE
     ),
+    val reenteredPassword: String = Constants.BLANK_SPACE,
     val isEmailError: Boolean = false,
     val isUserNameError: Boolean = false,
     val isGithubIdError: Boolean = false,
     val isPasswordError: Boolean = false,
-    val EmailErrorText: String = "",
-    val UserNameErrorText: String = "",
-    val GithubIdErrorText: String = "",
-    val PasswordErrorText: String = "",
+    val isReenteredPasswordError: Boolean = false,
+    val EmailErrorText: String = Constants.BLANK_SPACE,
+    val UserNameErrorText: String = Constants.BLANK_SPACE,
+    val GithubIdErrorText: String = Constants.BLANK_SPACE,
+    val PasswordErrorText: String = Constants.BLANK_SPACE,
+    val ReenteredPasswordErrorText: String = Constants.BLANK_SPACE
 )
