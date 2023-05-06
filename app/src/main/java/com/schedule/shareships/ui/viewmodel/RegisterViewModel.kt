@@ -11,10 +11,10 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
 
 data class RegisterUiState(
     val registerData: RegisterData = RegisterData(
-        email = "",
-        userName = "",
-        githubId = "",
-        password = ""
+        email = Constants.BLANK_SPACE,
+        userName = Constants.BLANK_SPACE,
+        githubId = Constants.BLANK_SPACE,
+        password = Constants.BLANK_SPACE
     ),
     val isEmailError: Boolean = false,
     val isUserNameError: Boolean = false,
