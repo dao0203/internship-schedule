@@ -91,9 +91,12 @@ fun LoginScreen(
                     navController.navigate(Routes.ScheduleListScreen.route)
                 }
             },
-            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+            colors = ButtonDefaults.elevatedButtonColors(MaterialTheme.colorScheme.primary),
         ) {
-            Text(text = "ログイン")
+            Text(
+                text = "ログイン",
+                color = MaterialTheme.colorScheme.onPrimary,
+            )
         }
         Spacer(modifier = modifier.padding(vertical = 16.dp))
         Text(
@@ -109,9 +112,12 @@ fun LoginScreen(
                 //新規登録画面に遷移
                 navController.navigate(Routes.RegisterScreen.route)
             },
-            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+            colors = ButtonDefaults.elevatedButtonColors(MaterialTheme.colorScheme.primary),
         ) {
-            Text(text = "新規登録")
+            Text(
+                text = "新規登録",
+                color = MaterialTheme.colorScheme.onPrimary,
+            )
         }
     }
 }
