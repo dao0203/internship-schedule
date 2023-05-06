@@ -6,7 +6,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,6 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.schedule.shareships.Routes
+import com.schedule.shareships.ui.viewmodel.RegisterUiState
 import com.schedule.shareships.ui.viewmodel.RegisterViewModel
 
 @OptIn(ExperimentalAnimationApi::class, ExperimentalMaterial3Api::class)
@@ -80,7 +85,7 @@ fun RegisterScreen(
         )
         Spacer(modifier = modifier.padding(vertical = 16.dp))
         //登録ボタン
-        OutlinedTextField(
+        ElevatedButton(
             modifier = modifier
                 .fillMaxWidth(),
             value = "",
