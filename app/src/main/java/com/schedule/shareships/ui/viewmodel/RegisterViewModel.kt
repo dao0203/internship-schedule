@@ -68,45 +68,45 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
         if (email.isEmpty()) {
             _registerUiState.value = _registerUiState.value.copy(
                 isEmailError = true,
-                EmailErrorText = Constants.INPUT_ERROR_MSG
+                emailErrorText = Constants.INPUT_ERROR_MSG
             )
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             _registerUiState.value = _registerUiState.value.copy(
                 isEmailError = true,
-                EmailErrorText = Constants.EMAIL_INVALID_ERROR_MSG
+                emailErrorText = Constants.EMAIL_INVALID_ERROR_MSG
             )
         }
         //UserNameのバリデーション
         if (userName.isEmpty()) {
             _registerUiState.value = _registerUiState.value.copy(
                 isUserNameError = true,
-                UserNameErrorText = Constants.INPUT_ERROR_MSG
+                userNameErrorText = Constants.INPUT_ERROR_MSG
             )
         }
         //GithubIdのバリデーション
         if (githubId.isEmpty()) {
             _registerUiState.value = _registerUiState.value.copy(
                 isGithubIdError = true,
-                GithubIdErrorText = Constants.INPUT_ERROR_MSG
+                githubIdErrorText = Constants.INPUT_ERROR_MSG
             )
         }
         //Passwordのバリデーション
         if (password.isEmpty()) {
             _registerUiState.value = _registerUiState.value.copy(
                 isPasswordError = true,
-                PasswordErrorText = Constants.INPUT_ERROR_MSG
+                passwordErrorText = Constants.INPUT_ERROR_MSG
             )
         }
         //再入力Passwordのバリデーション
         if (reenteredPassword.isEmpty()) {
             _registerUiState.value = _registerUiState.value.copy(
                 isReenteredPasswordError = true,
-                ReenteredPasswordErrorText = Constants.INPUT_ERROR_MSG
+                reenteredPasswordErrorText = Constants.INPUT_ERROR_MSG
             )
         } else if (password != reenteredPassword) {
             _registerUiState.value = _registerUiState.value.copy(
                 isReenteredPasswordError = true,
-                ReenteredPasswordErrorText = Constants.PASSWORD_NOT_MATCH_ERROR_MSG
+                reenteredPasswordErrorText = Constants.PASSWORD_NOT_MATCH_ERROR_MSG
             )
         }
 
@@ -135,9 +135,9 @@ data class RegisterUiState(
     val isGithubIdError: Boolean = false,
     val isPasswordError: Boolean = false,
     val isReenteredPasswordError: Boolean = false,
-    val EmailErrorText: String = Constants.BLANK_SPACE,
-    val UserNameErrorText: String = Constants.BLANK_SPACE,
-    val GithubIdErrorText: String = Constants.BLANK_SPACE,
-    val PasswordErrorText: String = Constants.BLANK_SPACE,
-    val ReenteredPasswordErrorText: String = Constants.BLANK_SPACE
+    val emailErrorText: String = Constants.BLANK_SPACE,
+    val userNameErrorText: String = Constants.BLANK_SPACE,
+    val githubIdErrorText: String = Constants.BLANK_SPACE,
+    val passwordErrorText: String = Constants.BLANK_SPACE,
+    val reenteredPasswordErrorText: String = Constants.BLANK_SPACE
 )
