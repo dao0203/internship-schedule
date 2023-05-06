@@ -139,7 +139,7 @@ fun RegisterScreen(
                     navController.navigate(
                         route = Routes.ScheduleListScreen.route
                     ) {
-                        popUpTo(Routes.RegisterScreen.route) {
+                        popUpTo(Routes.LoginScreen.route) {
                             inclusive = true
                         }
                     }
