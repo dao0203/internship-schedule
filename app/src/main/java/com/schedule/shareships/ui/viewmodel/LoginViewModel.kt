@@ -1,5 +1,6 @@
 package com.schedule.shareships.ui.viewmodel
 
+import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import com.schedule.shareships.model.LoginData
 import com.schedule.shareships.utils.Constants
@@ -41,8 +42,7 @@ class LoginViewModel @Inject constructor() : ViewModel() {
                 isEmailError = true,
                 EmailErrorText = "メールアドレスを入力してください"
             )
-        } else if (email.contains(Regex("\"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}\""))
-        ) {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             _loginUiState.value = _loginUiState.value.copy(
                 isEmailError = true,
                 EmailErrorText = "メールアドレスの形式が正しくありません"
