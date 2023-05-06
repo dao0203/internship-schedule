@@ -13,6 +13,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,6 +34,8 @@ fun RegisterScreen(
     navController: NavController = rememberAnimatedNavController(),
     viewModel: RegisterViewModel = hiltViewModel(),
 ) {
+    val uiState: RegisterUiState by viewModel.registerUiState.collectAsState()
+
     Column(
         modifier = modifier
             .padding(horizontal = 8.dp)
@@ -43,54 +47,110 @@ fun RegisterScreen(
         OutlinedTextField(
             modifier = modifier
                 .fillMaxWidth(),
-            value = "",
+            value = uiState.registerData.email,
             label = { Text(text = "メールアドレス") },
-            onValueChange = {}
+            isError = uiState.isEmailError,
+            supportingText = {
+                if (uiState.isEmailError) {
+                    Text(text = uiState.emailErrorText)
+                }
+            },
+            onValueChange = {
+                viewModel.onEmailValueChange(it)
+            }
         )
         Spacer(modifier = modifier.padding(vertical = 16.dp))
         //ユーザー名を入力するOutlinedTextField
         OutlinedTextField(
             modifier = modifier
                 .fillMaxWidth(),
-            value = "",
+            value = uiState.registerData.userName,
             label = { Text(text = "ユーザ名") },
-            onValueChange = {}
+            isError = uiState.isUserNameError,
+            supportingText = {
+                if (uiState.isUserNameError) {
+                    Text(text = uiState.userNameErrorText)
+                }
+            },
+            onValueChange = {
+                viewModel.onUserNameValueChange(it)
+            }
         )
         Spacer(modifier = modifier.padding(vertical = 16.dp))
         //Github IDを入力するOutlinedTextField
         OutlinedTextField(
             modifier = modifier
                 .fillMaxWidth(),
-            value = "",
+            value = uiState.registerData.githubId,
             label = { Text(text = "Github ID") },
-            onValueChange = {}
+            isError = uiState.isGithubIdError,
+            supportingText = {
+                if (uiState.isGithubIdError) {
+                    Text(text = uiState.githubIdErrorText)
+                }
+            },
+            onValueChange = {
+                viewModel.onGithubIdValueChange(it)
+            }
         )
         Spacer(modifier = modifier.padding(vertical = 16.dp))
         //パスワードを入力するOutlinedTextField
         OutlinedTextField(
             modifier = modifier
                 .fillMaxWidth(),
-            value = "",
+            value = uiState.registerData.password,
             label = { Text(text = "パスワード") },
-            onValueChange = {}
+            isError = uiState.isPasswordError,
+            supportingText = {
+                if (uiState.isPasswordError) {
+                    Text(text = uiState.passwordErrorText)
+                }
+            },
+            onValueChange = {
+                viewModel.onPasswordValueChange(it)
+            }
         )
         Spacer(modifier = modifier.padding(vertical = 16.dp))
         //パスワードを再入力するOutlinedTextField
         OutlinedTextField(
             modifier = modifier
                 .fillMaxWidth(),
-            value = "",
+            value = uiState.reenteredPassword,
             label = { Text(text = "パスワードを再入力") },
-            onValueChange = {}
+            isError = uiState.isReenteredPasswordError,
+            supportingText = {
+                if (uiState.isReenteredPasswordError) {
+                    Text(text = uiState.reenteredPasswordErrorText)
+                }
+            },
+            onValueChange = {
+                viewModel.onReenteredPasswordValueChange(it)
+            }
         )
         Spacer(modifier = modifier.padding(vertical = 16.dp))
         //登録ボタン
         ElevatedButton(
             modifier = modifier
-                .fillMaxWidth(),
-            value = "",
-            label = { Text(text = "登録") },
-            onValueChange = {}
-        )
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            onClick = {
+                if (viewModel.validateForm()) {
+                    //TODO:登録処理
+                    navController.navigate(
+                        route = Routes.ScheduleListScreen.route
+                    ) {
+                        popUpTo(Routes.RegisterScreen.route) {
+                            inclusive = true
+                        }
+                    }
+                }
+            },
+            colors = ButtonDefaults.elevatedButtonColors(MaterialTheme.colorScheme.primary)
+        ) {
+            Text(
+                text = "登録",
+                color = MaterialTheme.colorScheme.onPrimary,
+            )
+        }
     }
 }
