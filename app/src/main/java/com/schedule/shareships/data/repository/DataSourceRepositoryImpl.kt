@@ -1,18 +1,18 @@
 package com.schedule.shareships.data.repository
 
-import com.schedule.shareships.data.FirestoreDataSource
-import com.schedule.shareships.data.SchedulePagingSource
+import com.schedule.shareships.data.source.FirestoreDataSource
+import com.schedule.shareships.data.source.SchedulePagingSource
 import com.schedule.shareships.model.Schedule
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DefaultFirestoreRepository @Inject constructor(
+class DataSourceRepositoryImpl @Inject constructor(
     private val firestoreDataSource: FirestoreDataSource
-) : FirestoreRepository {
+) : DataSourceRepository {
 
     override fun getSchedule(): SchedulePagingSource {
-        return SchedulePagingSource(firestoreDataSource.getScheduleQuery())
+        return SchedulePagingSource(firestoreDataSource.getSchedulesQuery())
     }
 
     override suspend fun insertSchedule(schedule: Schedule) {

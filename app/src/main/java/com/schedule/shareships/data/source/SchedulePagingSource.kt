@@ -1,4 +1,4 @@
-package com.schedule.shareships.data
+package com.schedule.shareships.data.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
