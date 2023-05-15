@@ -1,21 +1,20 @@
 package com.schedule.shareships.data.source
 
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.schedule.shareships.model.Schedule
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class FirestoreDataSource @Inject constructor(
-    firestore: FirebaseFirestore
-) {
+interface FirestoreDataSource {
+    fun getSchedulesQuery(): Query
+    suspend fun insertSchedule(schedule: Schedule)
 
-    private val scheduleRef = firestore.collection("schedule")
+    //TODO：返り値は現状String型だが、後々変更する可能性あり
+    suspend fun getUserData(email: String): String
 
-    fun getScheduleQuery() = scheduleRef.orderBy("date", Query.Direction.ASCENDING)
+    suspend fun getFollowedUsersQuery(email: String): Query
 
-    fun insertSchedule(schedule: Schedule) {
-        scheduleRef.add(schedule)
-    }
+    suspend fun getFollowingUsersQuery(email: String): Query
+
+    suspend fun getUsersSchedulesQuery(email: String): Query
+
+    suspend fun followUser(email: String, followedUserEmail: String)
 }
