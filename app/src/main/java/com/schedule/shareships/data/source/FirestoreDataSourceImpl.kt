@@ -23,6 +23,10 @@ class FirestoreDataSourceImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
+    override suspend fun getFollowingUsersQuery(email: String): Query {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getFollowedUsersSchedulesQuery(email: String): Query {
         TODO("Not yet implemented")
     }
