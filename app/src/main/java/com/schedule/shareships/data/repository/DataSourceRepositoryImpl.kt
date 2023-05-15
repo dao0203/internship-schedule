@@ -12,7 +12,7 @@ class DataSourceRepositoryImpl @Inject constructor(
 ) : DataSourceRepository {
 
     override fun getSchedule(): SchedulePagingSource {
-        return SchedulePagingSource(firestoreDataSource.getScheduleQuery())
+        return SchedulePagingSource(firestoreDataSource.getSchedulesQuery())
     }
 
     override suspend fun insertSchedule(schedule: Schedule) {
