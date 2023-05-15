@@ -7,9 +7,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DefaultFirestoreRepository @Inject constructor(
+class DataSourceRepositoryImpl @Inject constructor(
     private val firestoreDataSource: FirestoreDataSource
-) : FirestoreRepository {
+) : DataSourceRepository {
 
     override fun getSchedule(): SchedulePagingSource {
         return SchedulePagingSource(firestoreDataSource.getScheduleQuery())
