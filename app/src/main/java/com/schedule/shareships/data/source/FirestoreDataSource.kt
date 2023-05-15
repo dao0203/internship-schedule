@@ -14,7 +14,7 @@ interface FirestoreDataSource {
 
     suspend fun getFollowingUsersQuery(email: String): Query
 
-    suspend fun getFollowedUsersSchedulesQuery(email: String): Query
+    suspend fun getUsersSchedulesQuery(email: String): Query
 
     suspend fun followUser(email: String, followedUserEmail: String)
 }
