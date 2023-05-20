@@ -87,6 +87,44 @@ fun LoginScreen(
                 isVisible = false,
                 onIconClick = {},
         )
+        OutlinedTextField(
+                modifier = modifier
+                        .fillMaxWidth(),
+                label = { Text(text = "パスワード") },
+                value = uiState.loginData.password,
+                singleLine = true,
+                isError = uiState.isPasswordError,
+                supportingText = {
+                    if (uiState.isPasswordError) {
+                        Text(text = uiState.PasswordErrorText)
+                    }
+                },
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done,
+                ),
+                trailingIcon = {
+                    IconButton(
+                            onClick = {
+                                viewModel.onPasswordVisibilityChange()
+                            },
+                    ) {
+                        Icon(
+                                imageVector = if (uiState.isPasswordVisible) {
+                                    Icons.Filled.Visibility
+                                } else {
+                                    Icons.Filled.VisibilityOff
+                                },
+                                contentDescription = "パスワード表示切り替え",
+                        )
+                    }
+                },
+                onValueChange = {
+                    viewModel.onPasswordValueChange(it)
+                },
+
+                )
         Spacer(modifier = modifier.padding(vertical = 16.dp))
         ElevatedButton(
                 modifier = modifier
