@@ -72,5 +72,6 @@ data class LoginUiState(
     val isEmailError: Boolean = false,
     val isPasswordError: Boolean = false,
     val EmailErrorText: String = Constants.BLANK_SPACE,
-    val PasswordErrorText: String = Constants.BLANK_SPACE
+    val PasswordErrorText: String = Constants.BLANK_SPACE,
+    val isPasswordVisible: Boolean = false,
 )
