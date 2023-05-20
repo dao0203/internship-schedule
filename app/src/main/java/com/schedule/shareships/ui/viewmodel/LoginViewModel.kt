@@ -32,6 +32,12 @@ class LoginViewModel @Inject constructor() : ViewModel() {
         )
     }
 
+    fun onPasswordVisibilityChange() {
+        _loginUiState.value = _loginUiState.value.copy(
+            isPasswordVisible = !_loginUiState.value.isPasswordVisible
+        )
+    }
+
     fun validateForm(): Boolean {
         val email = loginUiState.value.loginData.email
         val password = loginUiState.value.loginData.password
