@@ -39,17 +39,17 @@ import com.schedule.shareships.ui.viewmodel.LoginViewModel
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun LoginScreen(
-    modifier: Modifier = Modifier,
-    navController: NavController = rememberAnimatedNavController(),
-    viewModel: LoginViewModel = hiltViewModel(),
+        modifier: Modifier = Modifier,
+        navController: NavController = rememberAnimatedNavController(),
+        viewModel: LoginViewModel = hiltViewModel(),
 ) {
     val uiState: LoginUiState by viewModel.loginUiState.collectAsState()
     Column(
-        modifier = modifier
-            .padding(horizontal = 8.dp)
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier
+                    .padding(horizontal = 8.dp)
+                    .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         LoginTextField(
             modifier = Modifier
@@ -67,52 +67,52 @@ fun LoginScreen(
         )
         Spacer(modifier = modifier.padding(vertical = 16.dp))
         LoginTextField(
-            modifier = Modifier
-                .fillMaxWidth(),
-            label = "パスワード",
-            value = uiState.loginData.password,
-            errorMsg = uiState.PasswordErrorText,
-            isError = uiState.isPasswordError,
-            onValueChange = {
-                viewModel.onPasswordValueChange(it)
-            },
-            isPassword = true,
-            isVisible = false,
-            onIconClick = {},
+                modifier = Modifier
+                        .fillMaxWidth(),
+                label = "パスワード",
+                value = uiState.loginData.password,
+                errorMsg = uiState.PasswordErrorText,
+                isError = uiState.isPasswordError,
+                onValueChange = {
+                    viewModel.onPasswordValueChange(it)
+                },
+                isPassword = true,
+                isVisible = false,
+                onIconClick = {},
         )
         Spacer(modifier = modifier.padding(vertical = 16.dp))
         ElevatedButton(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            onClick = {
-                //TODO: ログイン処理
-                if (viewModel.validateForm()) {
-                    navController.navigate(Routes.ScheduleListScreen.route)
-                }
-            },
-            colors = ButtonDefaults.elevatedButtonColors(MaterialTheme.colorScheme.primary),
+                modifier = modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                onClick = {
+                    //TODO: ログイン処理
+                    if (viewModel.validateForm()) {
+                        navController.navigate(Routes.ScheduleListScreen.route)
+                    }
+                },
+                colors = ButtonDefaults.elevatedButtonColors(MaterialTheme.colorScheme.primary),
         ) {
             Text(
-                text = "ログイン",
-                color = MaterialTheme.colorScheme.onPrimary,
+                    text = "ログイン",
+                    color = MaterialTheme.colorScheme.onPrimary,
             )
         }
         Spacer(modifier = modifier.padding(vertical = 16.dp))
         Text(
-            text = "アカウントをお持ちでない方はこちら",
-            style = MaterialTheme.typography.bodyMedium,
+                text = "アカウントをお持ちでない方はこちら",
+                style = MaterialTheme.typography.bodyMedium,
         )
         Spacer(modifier = modifier.padding(vertical = 8.dp))
         ElevatedButton(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            onClick = {
-                //新規登録画面に遷移
-                navController.navigate(Routes.RegisterScreen.route)
-            },
-            colors = ButtonDefaults.elevatedButtonColors(MaterialTheme.colorScheme.primary),
+                modifier = modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                onClick = {
+                    //新規登録画面に遷移
+                    navController.navigate(Routes.RegisterScreen.route)
+                },
+                colors = ButtonDefaults.elevatedButtonColors(MaterialTheme.colorScheme.primary),
         ) {
             Text(
                 text = "新規登録",
@@ -125,48 +125,48 @@ fun LoginScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginTextField(
-    modifier: Modifier = Modifier,
-    label: String,
-    value: String,
-    errorMsg: String,
-    isError: Boolean,
-    onValueChange: (String) -> Unit,
-    isPassword: Boolean,
-    isVisible: Boolean = false,
-    onIconClick: () -> Unit,
+        modifier: Modifier = Modifier,
+        label: String,
+        value: String,
+        errorMsg: String,
+        isError: Boolean,
+        onValueChange: (String) -> Unit,
+        isPassword: Boolean,
+        isVisible: Boolean = false,
+        onIconClick: () -> Unit,
 ) {
     OutlinedTextField(
-        value = value,
-        modifier = modifier.fillMaxWidth(),
-        onValueChange = onValueChange,
-        label = { Text(label) },
-        singleLine = true,
-        isError = isError,
-        visualTransformation = if (isPassword) PasswordVisualTransformation()
-        else VisualTransformation.None,
-        keyboardOptions = KeyboardOptions(
-            keyboardType = when (isPassword) {
-                false -> KeyboardType.Email
-                true -> KeyboardType.Password
-            },
-            imeAction = ImeAction.Next
-        ),
-        trailingIcon = {
-            if (isPassword) {
-                IconButton(onClick = { onIconClick() }) {
-                    Icon(
-                        imageVector = when (isVisible) {
-                            false -> Icons.Filled.VisibilityOff
-                            true -> Icons.Filled.Visibility
-                        },
-                        contentDescription = "パスワードアイコン",
-                    )
+            value = value,
+            modifier = modifier.fillMaxWidth(),
+            onValueChange = onValueChange,
+            label = { Text(label) },
+            singleLine = true,
+            isError = isError,
+            visualTransformation = if (isPassword) PasswordVisualTransformation()
+            else VisualTransformation.None,
+            keyboardOptions = KeyboardOptions(
+                    keyboardType = when (isPassword) {
+                        false -> KeyboardType.Email
+                        true -> KeyboardType.Password
+                    },
+                    imeAction = ImeAction.Next
+            ),
+            trailingIcon = {
+                if (isPassword) {
+                    IconButton(onClick = { onIconClick() }) {
+                        Icon(
+                                imageVector = when (isVisible) {
+                                    false -> Icons.Filled.VisibilityOff
+                                    true -> Icons.Filled.Visibility
+                                },
+                                contentDescription = "パスワードアイコン",
+                        )
+                    }
                 }
-            }
-        },
-        supportingText = {
-            if (isError) {
-                Text(text = errorMsg)
-            }
-        })
+            },
+            supportingText = {
+                if (isError) {
+                    Text(text = errorMsg)
+                }
+            })
 }
