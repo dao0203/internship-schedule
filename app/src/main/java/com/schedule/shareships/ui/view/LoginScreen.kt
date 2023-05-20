@@ -36,6 +36,7 @@ import com.schedule.shareships.Routes
 import com.schedule.shareships.ui.viewmodel.LoginUiState
 import com.schedule.shareships.ui.viewmodel.LoginViewModel
 
+@ExperimentalMaterial3Api
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun LoginScreen(
@@ -51,19 +52,25 @@ fun LoginScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        LoginTextField(
-            modifier = Modifier
-                .fillMaxWidth(),
-            label = "メールアドレス",
-            value = uiState.loginData.email,
-            errorMsg = uiState.EmailErrorText,
-            isError = uiState.isEmailError,
-            onValueChange = {
-                viewModel.onEmailValueChange(it)
-            },
-            isPassword = false,
-            isVisible = false,
-            onIconClick = {}
+        OutlinedTextField(
+                modifier = modifier
+                        .fillMaxWidth(),
+                value = uiState.loginData.email,
+                onValueChange = {
+                    viewModel.onEmailValueChange(it)
+                },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Next,
+                ),
+                label = { Text(text = "メールアドレス") },
+                isError = uiState.isEmailError,
+                supportingText = {
+                    if (uiState.isEmailError) {
+                        Text(text = uiState.EmailErrorText)
+                    }
+                },
         )
         Spacer(modifier = modifier.padding(vertical = 16.dp))
         LoginTextField(
@@ -115,8 +122,8 @@ fun LoginScreen(
                 colors = ButtonDefaults.elevatedButtonColors(MaterialTheme.colorScheme.primary),
         ) {
             Text(
-                text = "新規登録",
-                color = MaterialTheme.colorScheme.onPrimary,
+                    text = "新規登録",
+                    color = MaterialTheme.colorScheme.onPrimary,
             )
         }
     }
