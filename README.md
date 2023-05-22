@@ -1,1 +1,1 @@
-# each-internship-schedule
+# 就活状況共有アプリ
