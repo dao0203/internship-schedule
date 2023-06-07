@@ -47,7 +47,7 @@ fun RegisterScreen(
         OutlinedTextField(
             modifier = modifier
                 .fillMaxWidth(),
-            value = uiState.registerData.email,
+            value = uiState.email,
             label = { Text(text = "メールアドレス") },
             isError = uiState.isEmailError,
             supportingText = {
@@ -64,7 +64,7 @@ fun RegisterScreen(
         OutlinedTextField(
             modifier = modifier
                 .fillMaxWidth(),
-            value = uiState.registerData.userName,
+            value = uiState.userName,
             label = { Text(text = "ユーザ名") },
             isError = uiState.isUserNameError,
             supportingText = {
@@ -81,7 +81,7 @@ fun RegisterScreen(
         OutlinedTextField(
             modifier = modifier
                 .fillMaxWidth(),
-            value = uiState.registerData.githubId,
+            value = uiState.githubId,
             label = { Text(text = "Github ID") },
             isError = uiState.isGithubIdError,
             supportingText = {
@@ -98,7 +98,7 @@ fun RegisterScreen(
         OutlinedTextField(
             modifier = modifier
                 .fillMaxWidth(),
-            value = uiState.registerData.password,
+            value = uiState.password,
             label = { Text(text = "パスワード") },
             isError = uiState.isPasswordError,
             supportingText = {

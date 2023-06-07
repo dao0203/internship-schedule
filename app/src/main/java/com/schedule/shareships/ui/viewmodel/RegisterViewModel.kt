@@ -2,7 +2,6 @@ package com.schedule.shareships.ui.viewmodel
 
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
-import com.schedule.shareships.model.RegisterData
 import com.schedule.shareships.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -17,9 +16,7 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
     //Emailのテキストを管理するメソッド
     fun onEmailValueChange(completedText: String) {
         _registerUiState.value = _registerUiState.value.copy(
-            registerData = _registerUiState.value.registerData.copy(
-                email = completedText
-            ),
+            email = completedText,
             isEmailError = false
         )
     }
@@ -27,9 +24,7 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
     //UserNameのテキストを管理するメソッド
     fun onUserNameValueChange(completedText: String) {
         _registerUiState.value = _registerUiState.value.copy(
-            registerData = _registerUiState.value.registerData.copy(
-                userName = completedText
-            ),
+            userName = completedText,
             isUserNameError = false
         )
     }
@@ -37,9 +32,7 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
     //GithubIdのテキストを管理するメソッド
     fun onGithubIdValueChange(completedText: String) {
         _registerUiState.value = _registerUiState.value.copy(
-            registerData = _registerUiState.value.registerData.copy(
-                githubId = completedText
-            ),
+            githubId = completedText,
             isGithubIdError = false
         )
     }
@@ -47,9 +40,7 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
     //Passwordのテキストを管理するメソッド
     fun onPasswordValueChange(completedText: String) {
         _registerUiState.value = _registerUiState.value.copy(
-            registerData = _registerUiState.value.registerData.copy(
-                password = completedText
-            ),
+            password = completedText,
             isPasswordError = false
         )
     }
@@ -64,10 +55,10 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
 
     //バリデーションを行うメソッド
     fun validateForm(): Boolean {
-        val email = registerUiState.value.registerData.email
-        val userName = registerUiState.value.registerData.userName
-        val githubId = registerUiState.value.registerData.githubId
-        val password = registerUiState.value.registerData.password
+        val email = registerUiState.value.email
+        val userName = registerUiState.value.userName
+        val githubId = registerUiState.value.githubId
+        val password = registerUiState.value.password
         val reenteredPassword = registerUiState.value.reenteredPassword
         //Emailのバリデーション
         if (email.isEmpty()) {
@@ -128,18 +119,21 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
 }
 
 data class RegisterUiState(
-    val registerData: RegisterData = RegisterData(
-        email = Constants.BLANK_SPACE,
-        userName = Constants.BLANK_SPACE,
-        githubId = Constants.BLANK_SPACE,
-        password = Constants.BLANK_SPACE
-    ),
+    //記入項目
+    val email: String = Constants.BLANK_SPACE,
+    val userName: String = Constants.BLANK_SPACE,
+    val githubId: String = Constants.BLANK_SPACE,
+    val password: String = Constants.BLANK_SPACE,
     val reenteredPassword: String = Constants.BLANK_SPACE,
+
+    //エラー項目
     val isEmailError: Boolean = false,
     val isUserNameError: Boolean = false,
     val isGithubIdError: Boolean = false,
     val isPasswordError: Boolean = false,
     val isReenteredPasswordError: Boolean = false,
+
+    //エラーメッセージ
     val emailErrorText: String = Constants.BLANK_SPACE,
     val userNameErrorText: String = Constants.BLANK_SPACE,
     val githubIdErrorText: String = Constants.BLANK_SPACE,
