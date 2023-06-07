@@ -55,7 +55,7 @@ fun LoginScreen(
         OutlinedTextField(
                 modifier = modifier
                         .fillMaxWidth(),
-                value = uiState.loginData.email,
+                value = uiState.email,
                 onValueChange = {
                     viewModel.onEmailValueChange(it)
                 },
@@ -77,7 +77,7 @@ fun LoginScreen(
                 modifier = modifier
                         .fillMaxWidth(),
                 label = { Text(text = "パスワード") },
-                value = uiState.loginData.password,
+                value = uiState.password,
                 singleLine = true,
                 isError = uiState.isPasswordError,
                 supportingText = {
@@ -149,7 +149,7 @@ fun LoginScreen(
                     //新規登録画面に遷移
                     navController.navigate(Routes.RegisterScreen.route)
                 },
-                colors = ButtonDefaults.elevatedButtonColors(MaterialTheme.colorScheme.primary),
+                colors = ButtonDefaults.elevatedButtonColors(MaterialTheme.colorScheme.secondary),
         ) {
             Text(
                     text = "新規登録",

@@ -2,7 +2,6 @@ package com.schedule.shareships.ui.viewmodel
 
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
-import com.schedule.shareships.model.LoginData
 import com.schedule.shareships.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -16,18 +15,14 @@ class LoginViewModel @Inject constructor() : ViewModel() {
 
     fun onEmailValueChange(completedText: String) {
         _loginUiState.value = _loginUiState.value.copy(
-            loginData = _loginUiState.value.loginData.copy(
-                email = completedText
-            ),
+            email = completedText,
             isEmailError = false
         )
     }
 
     fun onPasswordValueChange(completedText: String) {
         _loginUiState.value = _loginUiState.value.copy(
-            loginData = _loginUiState.value.loginData.copy(
-                password = completedText
-            ),
+            password = completedText,
             isPasswordError = false
         )
     }
@@ -39,8 +34,8 @@ class LoginViewModel @Inject constructor() : ViewModel() {
     }
 
     fun validateForm(): Boolean {
-        val email = loginUiState.value.loginData.email
-        val password = loginUiState.value.loginData.password
+        val email = loginUiState.value.email
+        val password = loginUiState.value.password
 
         //Emailのバリデーション
         if (email.isEmpty()) {
@@ -71,10 +66,8 @@ class LoginViewModel @Inject constructor() : ViewModel() {
 }
 
 data class LoginUiState(
-    val loginData: LoginData = LoginData(
-        email = Constants.BLANK_SPACE,
-        password = Constants.BLANK_SPACE
-    ),
+    val email: String = Constants.BLANK_SPACE,
+    val password: String = Constants.BLANK_SPACE,
     val isEmailError: Boolean = false,
     val isPasswordError: Boolean = false,
     val EmailErrorText: String = Constants.BLANK_SPACE,
