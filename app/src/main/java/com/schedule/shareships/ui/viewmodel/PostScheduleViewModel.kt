@@ -2,7 +2,7 @@ package com.schedule.shareships.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.schedule.shareships.data.repository.DataSourceRepository
+import com.schedule.shareships.data.repositories.DataSourceRepository
 import com.schedule.shareships.model.Schedule
 import com.schedule.shareships.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,7 +1,7 @@
 package com.schedule.shareships.di
 
-import com.schedule.shareships.data.repository.DataSourceRepositoryImpl
-import com.schedule.shareships.data.repository.DataSourceRepository
+import com.schedule.shareships.data.repositories.DataSourceRepositoryImpl
+import com.schedule.shareships.data.repositories.DataSourceRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

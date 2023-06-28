@@ -8,7 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.schedule.shareships.utils.Constants
 import com.schedule.shareships.model.Schedule
-import com.schedule.shareships.data.repository.DataSourceRepository
+import com.schedule.shareships.data.repositories.DataSourceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
