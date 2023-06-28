@@ -2,14 +2,14 @@ package com.schedule.shareships.data.repositories
 
 import com.schedule.shareships.data.source.FirestoreDataSource
 import com.schedule.shareships.data.source.SchedulePagingSource
-import com.schedule.shareships.model.Schedule
+import com.schedule.shareships.data.model.Schedule
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DataSourceRepositoryImpl @Inject constructor(
+class ScheduleRepositoryImpl @Inject constructor(
     private val firestoreDataSource: FirestoreDataSource
-) : DataSourceRepository {
+) : ScheduleRepository {
 
     override fun getSchedule(): SchedulePagingSource {
         return SchedulePagingSource(firestoreDataSource.getSchedulesQuery())

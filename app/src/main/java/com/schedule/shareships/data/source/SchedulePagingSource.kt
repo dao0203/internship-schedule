@@ -5,7 +5,7 @@ import androidx.paging.PagingState
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.schedule.shareships.utils.Constants
-import com.schedule.shareships.model.Schedule
+import com.schedule.shareships.data.model.Schedule
 import kotlinx.coroutines.tasks.await
 
 class SchedulePagingSource(private val query: Query) : PagingSource<QuerySnapshot, Schedule>() {

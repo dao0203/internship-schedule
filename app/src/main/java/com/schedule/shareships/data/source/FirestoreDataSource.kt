@@ -1,7 +1,7 @@
 package com.schedule.shareships.data.source
 
 import com.google.firebase.firestore.Query
-import com.schedule.shareships.model.Schedule
+import com.schedule.shareships.data.model.Schedule
 
 interface FirestoreDataSource {
     fun getSchedulesQuery(): Query

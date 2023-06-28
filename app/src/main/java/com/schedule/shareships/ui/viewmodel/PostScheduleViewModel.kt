@@ -2,8 +2,8 @@ package com.schedule.shareships.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.schedule.shareships.data.repositories.DataSourceRepository
-import com.schedule.shareships.model.Schedule
+import com.schedule.shareships.data.repositories.ScheduleRepository
+import com.schedule.shareships.data.model.Schedule
 import com.schedule.shareships.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class PostScheduleViewModel @Inject constructor(
-        private val dataSourceRepository: DataSourceRepository
+        private val scheduleRepository: ScheduleRepository
 ) : ViewModel() {
 
     //テキストフィールドのUI状態やローディング状態を管理する状態管理
@@ -153,7 +153,7 @@ class PostScheduleViewModel @Inject constructor(
             _textFieldUiState.value = _textFieldUiState.value.copy(
                     isLoading = true
             )
-            dataSourceRepository.insertSchedule(schedule)
+            scheduleRepository.insertSchedule(schedule)
             _onPressedPostButtonEvent.emit(true)
         }
     }

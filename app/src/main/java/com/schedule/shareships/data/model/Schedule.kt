@@ -1,4 +1,4 @@
-package com.schedule.shareships.model
+package com.schedule.shareships.data.model
 
 data class Schedule(
     val companyName: String,
