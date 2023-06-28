@@ -4,7 +4,7 @@ import android.icu.text.SimpleDateFormat
 import com.google.firebase.Timestamp
 import com.schedule.shareships.data.models.ScheduleModel
 import com.schedule.shareships.data.sources.FirestoreDataSource
-import com.schedule.shareships.data.sources.SchedulePagingSource
+import com.schedule.shareships.data.pagingsources.SchedulePagingSource
 import com.schedule.shareships.domain.objects.Schedule
 import javax.inject.Inject
 import javax.inject.Singleton
