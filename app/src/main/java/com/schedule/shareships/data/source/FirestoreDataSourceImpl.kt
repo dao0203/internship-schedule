@@ -2,7 +2,7 @@ package com.schedule.shareships.data.source
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.schedule.shareships.data.model.Schedule
+import com.schedule.shareships.data.models.ScheduleModel
 import javax.inject.Inject
 import javax.inject.Singleton
 

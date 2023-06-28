@@ -1,11 +1,11 @@
 package com.schedule.shareships.data.source
 
 import com.google.firebase.firestore.Query
-import com.schedule.shareships.data.model.Schedule
+import com.schedule.shareships.data.models.ScheduleModel
 
 interface FirestoreDataSource {
     fun getSchedulesQuery(): Query
-    suspend fun insertSchedule(schedule: Schedule)
+    suspend fun insertSchedule(scheduleModel: ScheduleModel)
 
     //TODO：返り値は現状String型だが、後々変更する可能性あり
     suspend fun getUserData(email: String): String

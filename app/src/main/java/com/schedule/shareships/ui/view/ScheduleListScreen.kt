@@ -22,10 +22,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.schedule.shareships.data.model.Schedule
 import com.schedule.shareships.ui.viewmodel.ScheduleListViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.schedule.shareships.domain.objects.Schedule
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
