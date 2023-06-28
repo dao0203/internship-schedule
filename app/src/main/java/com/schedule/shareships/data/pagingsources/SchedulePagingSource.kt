@@ -31,13 +31,13 @@ class SchedulePagingSource(private val query: Query) : PagingSource<QuerySnapsho
                 data = currentPage.documents.map {
                     Schedule(
                         id = it.id,
-                        companyName = it.getString("companyName")!!,
-                        internshipName = it.getString("internshipName")!!,
-                        date = it.getDate("date").toString(),
-                        route = it.getString("route")!!,
-                        routeStatus = it.getString("routeStatus")!!,
-                        createdAt = it.getDate("createdAt").toString(),
-                        updatedAt = it.getDate("updatedAt").toString()
+                        companyName = it.getString("companyName") ?: "",
+                        internshipName = it.getString("internshipName") ?: "",
+                        date = it.getDate("date").toString() ?: "",
+                        route = it.getString("route") ?: "",
+                        routeStatus = it.getString("routeStatus") ?: "",
+                        createdAt = it.getDate("createdAt").toString() ?: "",
+                        updatedAt = it.getDate("updatedAt").toString() ?: ""
                     )
                 },
                 prevKey = null,
