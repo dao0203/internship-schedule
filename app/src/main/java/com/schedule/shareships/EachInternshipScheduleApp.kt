@@ -23,12 +23,16 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.schedule.shareships.ui.view.LoginScreen
 import com.schedule.shareships.ui.view.PostScheduleScreen
+import com.schedule.shareships.ui.view.RegisterScreen
 import com.schedule.shareships.ui.view.ScheduleListScreen
 
 enum class Routes(val route: String, val title: String) {
     PostScheduleScreen("postScheduleScreen", "スケジュール投稿"),
     ScheduleListScreen("scheduleListScreen", "スケジュール一覧"),
+    LoginScreen("loginScreen", "ログイン"),
+    RegisterScreen("registerScreen", "新規登録"),
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -110,10 +114,9 @@ fun EachInternshipScheduleApp(
     ) { paddingValues ->
         AnimatedNavHost(
             navController = navController,
-            startDestination = Routes.ScheduleListScreen.route,
+            startDestination = Routes.LoginScreen.route,
             modifier = modifier.padding(paddingValues),
         ) {
-            //TODO: 画面遷移のアニメーションを追加する
             composable(
                 route = Routes.ScheduleListScreen.route,
 
@@ -213,6 +216,16 @@ fun EachInternshipScheduleApp(
                 },
             ) {
                 PostScheduleScreen(navController = navController)
+            }
+            composable(
+                route = Routes.LoginScreen.route,
+            ) {
+                LoginScreen(navController = navController)
+            }
+            composable(
+                route = Routes.RegisterScreen.route,
+            ) {
+                RegisterScreen(navController = navController)
             }
         }
     }

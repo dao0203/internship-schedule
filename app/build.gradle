@@ -67,6 +67,9 @@ dependencies {
 
     implementation ("io.github.vanpra.compose-material-dialogs:datetime:0.9.0")
 
+    //Material Iconsの依存関係を追加
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -74,9 +77,12 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
-    //Firebase BoMとFirestoreの依存関係を追加
+    //Firebase BoMの依存関係を追加
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
+    //Firebase Firestoreの依存関係を追加
     implementation('com.google.firebase:firebase-firestore-ktx')
+    //Firebase Authenticationの依存関係を追加
+    implementation('com.google.firebase:firebase-auth-ktx')
 
     //Hiltの依存関係を追加
     implementation('com.google.dagger:hilt-android:2.44')
