@@ -3,8 +3,8 @@ package com.schedule.shareships.data.repositories
 import android.icu.text.SimpleDateFormat
 import com.google.firebase.Timestamp
 import com.schedule.shareships.data.models.ScheduleModel
-import com.schedule.shareships.data.source.FirestoreDataSource
-import com.schedule.shareships.data.source.SchedulePagingSource
+import com.schedule.shareships.data.sources.FirestoreDataSource
+import com.schedule.shareships.data.sources.SchedulePagingSource
 import com.schedule.shareships.domain.objects.Schedule
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -19,6 +19,17 @@ class ScheduleRepositoryImpl @Inject constructor(
     }
 
     override suspend fun insertSchedule(schedule: Schedule) {
-        firestoreDataSource.insertSchedule(schedule)
+        //TODO: Convert Schedule to ScheduleModel
+        firestoreDataSource.insertSchedule(
+            ScheduleModel(
+                companyName = schedule.companyName,
+                internshipName = schedule.internshipName,
+                date = Timestamp(SimpleDateFormat("yyyy/MM/dd").parse(schedule.date)),
+                route = schedule.route,
+                routeStatus = schedule.routeStatus,
+                createdAt = Timestamp.now(),
+                updatedAt = Timestamp.now(),
+            )
+        )
     }
 }

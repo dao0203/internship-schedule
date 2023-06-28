@@ -1,4 +1,4 @@
-package com.schedule.shareships.data.source
+package com.schedule.shareships.data.sources
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -35,7 +35,7 @@ class FirestoreDataSourceImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun insertSchedule(schedule: Schedule) {
-        scheduleRef.add(schedule)
+    override suspend fun insertSchedule(scheduleModel: ScheduleModel) {
+        scheduleRef.add(scheduleModel)
     }
 }

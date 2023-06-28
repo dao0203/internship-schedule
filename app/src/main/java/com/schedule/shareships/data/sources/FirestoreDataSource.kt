@@ -1,4 +1,4 @@
-package com.schedule.shareships.data.source
+package com.schedule.shareships.data.sources
 
 import com.google.firebase.firestore.Query
 import com.schedule.shareships.data.models.ScheduleModel

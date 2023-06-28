@@ -1,4 +1,4 @@
-package com.schedule.shareships.data.source
+package com.schedule.shareships.data.sources
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
@@ -28,7 +28,18 @@ class SchedulePagingSource(private val query: Query) : PagingSource<QuerySnapsho
                 .get()
                 .await()
             LoadResult.Page(
-                data = currentPage.toObjects(Schedule::class.java),
+                data = currentPage.documents.map {
+                    Schedule(
+                        id = it.id,
+                        companyName = it.getString("companyName")!!,
+                        internshipName = it.getString("internshipName")!!,
+                        date = it.getDate("date").toString(),
+                        route = it.getString("route")!!,
+                        routeStatus = it.getString("routeStatus")!!,
+                        createdAt = it.getDate("createdAt").toString(),
+                        updatedAt = it.getDate("updatedAt").toString()
+                    )
+                },
                 prevKey = null,
                 nextKey = nextPage
             )

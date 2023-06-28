@@ -1,4 +1,4 @@
-package com.schedule.shareships.data.source
+package com.schedule.shareships.data.sources
 
 interface AccountService {
     fun getCurrentUser(): String?

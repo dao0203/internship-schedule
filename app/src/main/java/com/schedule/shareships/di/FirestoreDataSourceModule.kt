@@ -1,7 +1,7 @@
 package com.schedule.shareships.di
 
-import com.schedule.shareships.data.source.FirestoreDataSource
-import com.schedule.shareships.data.source.FirestoreDataSourceImpl
+import com.schedule.shareships.data.sources.FirestoreDataSource
+import com.schedule.shareships.data.sources.FirestoreDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

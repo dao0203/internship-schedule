@@ -1,4 +1,4 @@
-package com.schedule.shareships.data.source
+package com.schedule.shareships.data.sources
 
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
