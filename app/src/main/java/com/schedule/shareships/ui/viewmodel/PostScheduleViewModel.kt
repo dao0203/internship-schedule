@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class PostScheduleViewModel @Inject constructor(
-    private val scheduleRepository: ScheduleRepository
+    private val postScheduleUseCase: PostScheduleUseCase
 ) : ViewModel() {
 
     //テキストフィールドのUI状態やローディング状態を管理する状態管理
@@ -117,10 +117,8 @@ class PostScheduleViewModel @Inject constructor(
     fun onPressedPostButton() {
         //入力されたテキストをデータレイヤに送る
         viewModelScope.launch {
-            _textFieldUiState.value = _textFieldUiState.value.copy(
-                isLoading = true
-            )
-            scheduleRepository.insertSchedule(schedule)
+            _textFieldUiState.update { it.copy(isLoading = true) }
+            postScheduleUseCase(_textFieldUiState.value.schedule)
             _onPressedPostButtonEvent.emit(true)
         }
     }
