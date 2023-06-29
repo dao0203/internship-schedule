@@ -1,12 +1,13 @@
-package com.schedule.shareships.domain.objects
+package com.schedule.shareships.domains
+
 
 data class Schedule(
-    val id: String,
+    var id: String = "",
     val companyName: String,
     val internshipName: String,
     val date: String,
     val route: String,
     val routeStatus: String,
-    val createdAt: String,
-    val updatedAt: String
+    var createdAt: String = "",
+    var updatedAt: String = ""
 )
