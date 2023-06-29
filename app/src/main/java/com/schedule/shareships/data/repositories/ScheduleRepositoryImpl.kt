@@ -1,35 +1,29 @@
 package com.schedule.shareships.data.repositories
 
-import android.icu.text.SimpleDateFormat
-import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.schedule.shareships.data.models.ScheduleModel
-import com.schedule.shareships.data.sources.FirestoreDataSource
 import com.schedule.shareships.data.pagingsources.SchedulePagingSource
-import com.schedule.shareships.domain.objects.Schedule
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class ScheduleRepositoryImpl @Inject constructor(
-    private val firestoreDataSource: FirestoreDataSource
+    firestore: FirebaseFirestore,
 ) : ScheduleRepository {
 
+    private val scheduleRef = firestore.collection("schedule")
+    private val scheduleQuery = scheduleRef.orderBy("date", Query.Direction.ASCENDING)
+
     override fun getSchedule(): SchedulePagingSource {
-        return SchedulePagingSource(firestoreDataSource.getSchedulesQuery())
+        return SchedulePagingSource(scheduleQuery)
     }
 
-    override suspend fun insertSchedule(schedule: Schedule) {
-        //TODO: Convert Schedule to ScheduleModel
-        firestoreDataSource.insertSchedule(
-            ScheduleModel(
-                companyName = schedule.companyName,
-                internshipName = schedule.internshipName,
-                date = Timestamp(SimpleDateFormat("yyyy/MM/dd").parse(schedule.date)),
-                route = schedule.route,
-                routeStatus = schedule.routeStatus,
-                createdAt = Timestamp.now(),
-                updatedAt = Timestamp.now(),
-            )
-        )
+    override suspend fun insertSchedule(scheduleModel: ScheduleModel) {
+        withContext(Dispatchers.IO) {
+            scheduleRef.add(scheduleModel)
+        }
     }
 }
