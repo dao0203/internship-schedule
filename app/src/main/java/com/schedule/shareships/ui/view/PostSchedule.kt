@@ -164,9 +164,7 @@ fun PostScheduleScreen(
         )
         ExposedDropdownMenuBox(
             expanded = textFieldUiState.routeExpanded,
-            onExpandedChange = {
-                viewModel.onRouteExpandedChange(textFieldUiState.routeExpanded)
-            },
+            onExpandedChange = { viewModel.onRouteExpandedChange(textFieldUiState.routeExpanded) }
         ) {
             OutlinedTextField(
                 value = textFieldUiState.schedule.route,
@@ -211,9 +209,7 @@ fun PostScheduleScreen(
         )
         ExposedDropdownMenuBox(
             expanded = textFieldUiState.statusExpanded,
-            onExpandedChange = {
-                viewModel.onStatusExpandedChange(textFieldUiState.statusExpanded)
-            },
+            onExpandedChange = { viewModel.onStatusExpandedChange(textFieldUiState.statusExpanded) }
         ) {
             OutlinedTextField(
                 value = textFieldUiState.schedule.routeStatus,
@@ -260,7 +256,7 @@ fun PostScheduleScreen(
         ElevatedButton(
             onClick = {
                 if (viewModel.validateForm()) {
-                    viewModel.onPressedPostButton(textFieldUiState.schedule)
+                    viewModel.onPressedPostButton()
                 }
             },
             colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
@@ -290,5 +286,6 @@ fun PostScheduleEditField(
             if (isError) {
                 Text(text = errorMsg)
             }
-        })
+        },
+    )
 }
