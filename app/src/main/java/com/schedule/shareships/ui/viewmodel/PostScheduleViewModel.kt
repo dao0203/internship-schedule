@@ -2,9 +2,8 @@ package com.schedule.shareships.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.Timestamp
-import com.schedule.shareships.data.repositories.ScheduleRepository
-import com.schedule.shareships.domain.objects.Schedule
+import com.schedule.shareships.domains.Schedule
+import com.schedule.shareships.usecases.PostScheduleUseCase
 import com.schedule.shareships.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -12,6 +11,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -34,31 +34,17 @@ class PostScheduleViewModel @Inject constructor(
     //会社名のテキストを管理するメソッド
     fun onCompanyNameValueChange(completedText: String) {
         //エラーを非表示にする
-        _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-            isCompanyNameError = false
-        )
-
+        _textFieldErrorUiState.update { it.copy(isCompanyNameError = false) }
         //入力されたテキストに更新する
-        _textFieldUiState.value = _textFieldUiState.value.copy(
-            schedule = _textFieldUiState.value.schedule.copy(
-                companyName = completedText
-            )
-        )
+        _textFieldUiState.update { it.copy(schedule = it.schedule.copy(companyName = completedText)) }
     }
 
     //インターンシップ名のテキストを管理するメソッド
     fun onInternshipNameValueChange(completedText: String) {
         //エラーを非表示にする
-        _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-            isInternshipNameError = false
-        )
-
+        _textFieldErrorUiState.update { it.copy(isInternshipNameError = false) }
         //入力されたテキストに更新する
-        _textFieldUiState.value = _textFieldUiState.value.copy(
-            schedule = _textFieldUiState.value.schedule.copy(
-                internshipName = completedText
-            )
-        )
+        _textFieldUiState.update { it.copy(schedule = it.schedule.copy(internshipName = completedText)) }
     }
 
     //日付のテキストを管理するメソッド
@@ -75,80 +61,60 @@ class PostScheduleViewModel @Inject constructor(
             dayOfMonth.toString()
         }
         //エラーを非表示にする
-        _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-            isDateError = false
-        )
-
-        //入力されたテキストに更新する
-        _textFieldUiState.value = _textFieldUiState.value.copy(
-            schedule = _textFieldUiState.value.schedule.copy(
-                date = "$pickedYear/$pickedMonth/$pickedDayOfMonth"
-            )
-        )
+        _textFieldErrorUiState.update { it.copy(isDateError = false) }
+        //入力された日付に更新する
+        _textFieldUiState.update { it.copy(schedule = it.schedule.copy(date = "$pickedYear/$pickedMonth/$pickedDayOfMonth")) }
     }
 
     //選考のテキストを管理するメソッド
     fun onRouteValueChange(chosenItem: String) {
         //エラーを非表示にする
-        _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-            isRouteError = false
-        )
-
-        //入力されたテキストに更新する
-        _textFieldUiState.value = _textFieldUiState.value.copy(
-            schedule = _textFieldUiState.value.schedule.copy(
-                route = chosenItem
-            ),
-            routeExpanded = false
-        )
+        _textFieldErrorUiState.update { it.copy(isRouteError = false) }
+        //入力された選考に更新する
+        _textFieldUiState.update {
+            it.copy(
+                routeExpanded = false,
+                schedule = it.schedule.copy(route = chosenItem),
+            )
+        }
     }
 
     //選考状況のテキストを管理するメソッド
     fun onStatusValueChange(chosenItem: String) {
-
         //エラーを非表示にする
-        _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-            isRouteStatusError = false
-        )
-
-        _textFieldUiState.value = _textFieldUiState.value.copy(
-            schedule = _textFieldUiState.value.schedule.copy(
-                routeStatus = chosenItem
-            ),
-            statusExpanded = false,
-        )
+        _textFieldErrorUiState.update { it.copy(isRouteStatusError = false) }
+        //入力された選考状況に更新する
+        _textFieldUiState.update {
+            it.copy(
+                statusExpanded = false,
+                schedule = it.schedule.copy(routeStatus = chosenItem),
+            )
+        }
     }
 
     //選考が選ばれたら、ドロップダウンリストを消去するメソッド
     fun onRouteExpandedChange(routeExpanded: Boolean) {
-        _textFieldUiState.value = _textFieldUiState.value.copy(
-            routeExpanded = !routeExpanded
-        )
+        _textFieldUiState.update { it.copy(routeExpanded = !routeExpanded) }
     }
+
 
     //ドロップダウンリストの外面をタップしたら、ドロップダウンリストを消去するメソッド
     fun onRouteDismissRequest() {
-        _textFieldUiState.value = _textFieldUiState.value.copy(
-            routeExpanded = false
-        )
+        _textFieldUiState.update { it.copy(routeExpanded = false) }
     }
 
     //選考状況が選ばれたら、ドロップダウンリストを消去するメソッド
     fun onStatusExpandedChange(statusExpanded: Boolean) {
-        _textFieldUiState.value = _textFieldUiState.value.copy(
-            statusExpanded = !statusExpanded,
-        )
+        _textFieldUiState.update { it.copy(statusExpanded = !statusExpanded) }
     }
 
     //ドロップダウンリストの外面をタップしたら、ドロップダウンリストを消去するメソッド
     fun onStatusDismissRequest() {
-        _textFieldUiState.value = _textFieldUiState.value.copy(
-            statusExpanded = false
-        )
+        _textFieldUiState.update { it.copy(statusExpanded = false) }
     }
 
     //投稿するボタンが押されたときの処理
-    fun onPressedPostButton(schedule: Schedule) {
+    fun onPressedPostButton() {
         //入力されたテキストをデータレイヤに送る
         viewModelScope.launch {
             _textFieldUiState.value = _textFieldUiState.value.copy(
@@ -168,33 +134,23 @@ class PostScheduleViewModel @Inject constructor(
 
         //会社名のバリデーション
         if (companyName.isEmpty()) {
-            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-                isCompanyNameError = true
-            )
+            _textFieldErrorUiState.update { it.copy(isCompanyNameError = true) }
         }
         //インターンシップ名のバリデーション
         if (internshipName.isEmpty()) {
-            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-                isInternshipNameError = true
-            )
+            _textFieldErrorUiState.update { it.copy(isInternshipNameError = true) }
         }
         //日付のバリデーション
         if (date.isEmpty()) {
-            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-                isDateError = true
-            )
+            _textFieldErrorUiState.update { it.copy(isDateError = true) }
         }
         //選考のバリデーション
         if (route == Constants.ROUTE_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]) {
-            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-                isRouteError = true
-            )
+            _textFieldErrorUiState.update { it.copy(isRouteError = true) }
         }
         //選考状況のバリデーション
         if (routeStatus == Constants.STATUS_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]) {
-            _textFieldErrorUiState.value = _textFieldErrorUiState.value.copy(
-                isRouteStatusError = true
-            )
+            _textFieldErrorUiState.update { it.copy(isRouteStatusError = true) }
         }
         //バリデーションを通過したらtrueを返す
         return _textFieldErrorUiState.value.run {
@@ -208,14 +164,11 @@ data class PostScheduleUiState(
     val routeExpanded: Boolean = false,
     val statusExpanded: Boolean = false,
     val schedule: Schedule = Schedule(
-        id = Constants.BLANK_SPACE,
         companyName = Constants.BLANK_SPACE,
         internshipName = Constants.BLANK_SPACE,
         date = Constants.BLANK_SPACE,
         route = Constants.ROUTE_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX],
-        routeStatus = Constants.STATUS_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX],
-        createdAt = Timestamp.now().toString(),
-        updatedAt = Timestamp.now().toString(),
+        routeStatus = Constants.STATUS_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]
     )
 )
 
