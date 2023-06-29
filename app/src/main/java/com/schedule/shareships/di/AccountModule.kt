@@ -1,7 +1,7 @@
 package com.schedule.shareships.di
 
-import com.schedule.shareships.data.source.AccountService
-import com.schedule.shareships.data.source.AccountServiceImpl
+import com.schedule.shareships.data.sources.AccountService
+import com.schedule.shareships.data.sources.AccountServiceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
