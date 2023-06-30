@@ -1,7 +1,25 @@
 <resources>
-    <string name="app_name">EachInternshipSchedule</string>
+    <string name="app_name">就活状況共有アプリ</string>
     <string name="company_name">会社名</string>>
     <string name="internship_name">インターンシップ名</string>
     <string name="date">日付</string>
-    <string name="selection_status">選考状況</string>
+    <string name="route">選考</string>
+    <string name="route_status">選考状況</string>
+    <string-array name="route_items">
+        <item>選考を選択してください</item>
+        <item>書類選考</item>
+        <item>技術選考</item>
+        <item>一次面接</item>
+        <item>二次面接</item>
+        <item>最終面接</item>
+    </string-array>
+    <string-array name="status_items">
+        <item>選考状況を選択してください</item>
+        <item>実施日(提出)</item>
+        <item>選考中</item>
+        <item>通過</item>
+    </string-array>
+    <string name="email_invalid_message">メールアドレスの形式が正しくありません</string>
+    <string name="password_invalid_message">パスワードが一致しません</string>
+    <string name="empty_message">入力してください</string>
 </resources>
