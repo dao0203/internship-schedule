@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.schedule.shareships.domains.Schedule
 import com.schedule.shareships.usecases.PostScheduleUseCase
-import com.schedule.shareships.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -143,11 +142,11 @@ class PostScheduleViewModel @Inject constructor(
             _textFieldErrorUiState.update { it.copy(isDateError = true) }
         }
         //選考のバリデーション
-        if (route == Constants.ROUTE_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]) {
+        if (route.contentEquals("選考を選択してください")) {
             _textFieldErrorUiState.update { it.copy(isRouteError = true) }
         }
         //選考状況のバリデーション
-        if (routeStatus == Constants.STATUS_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]) {
+        if (routeStatus.contentEquals("選考状況を選択してください")) {
             _textFieldErrorUiState.update { it.copy(isRouteStatusError = true) }
         }
         //バリデーションを通過したらtrueを返す
@@ -162,11 +161,11 @@ data class PostScheduleUiState(
     val routeExpanded: Boolean = false,
     val statusExpanded: Boolean = false,
     val schedule: Schedule = Schedule(
-        companyName = Constants.BLANK_SPACE,
-        internshipName = Constants.BLANK_SPACE,
-        date = Constants.BLANK_SPACE,
-        route = Constants.ROUTE_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX],
-        routeStatus = Constants.STATUS_ITEMS[Constants.DROPDOWN_MENU_OF_INITIAL_STATE_INDEX]
+        companyName = "",
+        internshipName = "",
+        date = "",
+        route = "",
+        routeStatus = ""
     )
 )
 

@@ -2,7 +2,6 @@ package com.schedule.shareships.ui.viewmodel
 
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
-import com.schedule.shareships.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -64,45 +63,38 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
         if (email.isEmpty()) {
             _registerUiState.value = _registerUiState.value.copy(
                 isEmailError = true,
-                emailErrorText = Constants.INPUT_ERROR_MSG
             )
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             _registerUiState.value = _registerUiState.value.copy(
                 isEmailError = true,
-                emailErrorText = Constants.EMAIL_INVALID_ERROR_MSG
             )
         }
         //UserNameのバリデーション
         if (userName.isEmpty()) {
             _registerUiState.value = _registerUiState.value.copy(
                 isUserNameError = true,
-                userNameErrorText = Constants.INPUT_ERROR_MSG
             )
         }
         //GithubIdのバリデーション
         if (githubId.isEmpty()) {
             _registerUiState.value = _registerUiState.value.copy(
                 isGithubIdError = true,
-                githubIdErrorText = Constants.INPUT_ERROR_MSG
             )
         }
         //Passwordのバリデーション
         if (password.isEmpty()) {
             _registerUiState.value = _registerUiState.value.copy(
                 isPasswordError = true,
-                passwordErrorText = Constants.INPUT_ERROR_MSG
             )
         }
         //再入力Passwordのバリデーション
         if (reenteredPassword.isEmpty()) {
             _registerUiState.value = _registerUiState.value.copy(
                 isReenteredPasswordError = true,
-                reenteredPasswordErrorText = Constants.INPUT_ERROR_MSG
             )
         } else if (password != reenteredPassword) {
             _registerUiState.value = _registerUiState.value.copy(
                 isReenteredPasswordError = true,
-                reenteredPasswordErrorText = Constants.PASSWORD_NOT_MATCH_ERROR_MSG
             )
         }
 
@@ -120,11 +112,11 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
 
 data class RegisterUiState(
     //記入項目
-    val email: String = Constants.BLANK_SPACE,
-    val userName: String = Constants.BLANK_SPACE,
-    val githubId: String = Constants.BLANK_SPACE,
-    val password: String = Constants.BLANK_SPACE,
-    val reenteredPassword: String = Constants.BLANK_SPACE,
+    val email: String = "",
+    val userName: String = "",
+    val githubId: String = "",
+    val password: String = "",
+    val reenteredPassword: String = "",
 
     //エラー項目
     val isEmailError: Boolean = false,
@@ -132,11 +124,4 @@ data class RegisterUiState(
     val isGithubIdError: Boolean = false,
     val isPasswordError: Boolean = false,
     val isReenteredPasswordError: Boolean = false,
-
-    //エラーメッセージ
-    val emailErrorText: String = Constants.BLANK_SPACE,
-    val userNameErrorText: String = Constants.BLANK_SPACE,
-    val githubIdErrorText: String = Constants.BLANK_SPACE,
-    val passwordErrorText: String = Constants.BLANK_SPACE,
-    val reenteredPasswordErrorText: String = Constants.BLANK_SPACE
 )

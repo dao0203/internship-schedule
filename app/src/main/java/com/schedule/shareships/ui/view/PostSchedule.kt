@@ -24,11 +24,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.schedule.shareships.R
 import com.schedule.shareships.Routes
 import com.schedule.shareships.ui.viewmodel.PostScheduleUiState
 import com.schedule.shareships.ui.viewmodel.PostScheduleViewModel
 import com.schedule.shareships.ui.viewmodel.TextFieldError
-import com.schedule.shareships.utils.Constants
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
@@ -48,15 +48,17 @@ fun PostScheduleScreen(
     //テキストフィールドのエラー状態を管理する状態管理
     val textFieldErrorUiState: TextFieldError by viewModel.textFieldErrorUiState.collectAsState()
 
+    val context = LocalContext.current
+
     //選考に必要なデータ
-    val routeItems = Constants.ROUTE_ITEMS
+    val routeItems = context.resources.getStringArray(R.array.route_items)
     //選考状況に必要なデータ
-    val statusItems = Constants.STATUS_ITEMS
+    val statusItems = context.resources.getStringArray(R.array.status_items)
 
     //ダイアログの状態管理
     val dateDialogState = rememberMaterialDialogState()
 
-    val context = LocalContext.current
+
 
     //投稿ボタンが押されて処理が終わった後のイベント
     LaunchedEffect(key1 = Unit) {
@@ -116,6 +118,7 @@ fun PostScheduleScreen(
                 viewModel.onCompanyNameValueChange(value)
             },
             isError = textFieldErrorUiState.isCompanyNameError,
+            errorMsg = context.resources.getString(R.string.empty_message)
         )
         Spacer(
             modifier = Modifier.padding(vertical = 8.dp)
@@ -127,6 +130,7 @@ fun PostScheduleScreen(
                 viewModel.onInternshipNameValueChange(value)
             },
             isError = textFieldErrorUiState.isInternshipNameError,
+            errorMsg = context.resources.getString(R.string.empty_message)
         )
         Spacer(
             modifier = Modifier.padding(vertical = 8.dp)
@@ -140,7 +144,7 @@ fun PostScheduleScreen(
             isError = textFieldErrorUiState.isDateError,
             supportingText = {
                 if (textFieldErrorUiState.isDateError) {
-                    Text(text = Constants.INPUT_ERROR_MSG)
+                    Text(text = context.resources.getString(R.string.empty_message))
                 }
             },
             readOnly = true,
@@ -183,7 +187,7 @@ fun PostScheduleScreen(
                 isError = textFieldErrorUiState.isRouteError,
                 supportingText = {
                     if (textFieldErrorUiState.isRouteError) {
-                        Text(text = Constants.INPUT_ERROR_MSG)
+                        Text(text = context.resources.getString(R.string.empty_message))
                     }
                 }
             )
@@ -228,7 +232,7 @@ fun PostScheduleScreen(
                 isError = textFieldErrorUiState.isRouteStatusError,
                 supportingText = {
                     if (textFieldErrorUiState.isRouteStatusError) {
-                        Text(text = Constants.INPUT_ERROR_MSG)
+                        Text(text = context.resources.getString(R.string.empty_message))
                     }
                 }
             )
@@ -273,7 +277,7 @@ fun PostScheduleEditField(
     value: String,
     onValueChange: (String) -> Unit,
     isError: Boolean,
-    errorMsg: String = Constants.INPUT_ERROR_MSG
+    errorMsg: String,
 ) {
     OutlinedTextField(
         value = value,

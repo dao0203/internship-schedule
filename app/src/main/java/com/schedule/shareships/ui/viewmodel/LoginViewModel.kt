@@ -2,7 +2,6 @@ package com.schedule.shareships.ui.viewmodel
 
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
-import com.schedule.shareships.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -51,7 +50,7 @@ class LoginViewModel @Inject constructor() : ViewModel() {
         }
 
         //Passwordのバリデーション
-        if (password == Constants.BLANK_SPACE) {
+        if (password.isEmpty()) {
             _loginUiState.value = _loginUiState.value.copy(
                 isPasswordError = true,
                 PasswordErrorText = "パスワードを入力してください"
@@ -66,11 +65,11 @@ class LoginViewModel @Inject constructor() : ViewModel() {
 }
 
 data class LoginUiState(
-    val email: String = Constants.BLANK_SPACE,
-    val password: String = Constants.BLANK_SPACE,
+    val email: String = "",
+    val password: String = "",
     val isEmailError: Boolean = false,
     val isPasswordError: Boolean = false,
-    val EmailErrorText: String = Constants.BLANK_SPACE,
-    val PasswordErrorText: String = Constants.BLANK_SPACE,
+    val EmailErrorText: String = "",
+    val PasswordErrorText: String = "",
     val isPasswordVisible: Boolean = false,
 )

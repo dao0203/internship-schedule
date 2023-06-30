@@ -6,7 +6,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
-import com.schedule.shareships.utils.Constants
 import com.schedule.shareships.domains.Schedule
 import kotlinx.coroutines.tasks.await
 import java.util.Locale
@@ -21,12 +20,12 @@ class SchedulePagingSource(private val query: Query) : PagingSource<QuerySnapsho
         return try {
 
             val currentPage = params.key ?: query
-                .limit(Constants.PAGE_SIZE.toLong())
+                .limit(20.toLong())
                 .get()
                 .await()
             val lastVisibleProduct = currentPage.documents[currentPage.size() - 1]
             val nextPage = query
-                .limit(Constants.PAGE_SIZE.toLong())
+                .limit(20.toLong())
                 .startAfter(lastVisibleProduct)
                 .get()
                 .await()

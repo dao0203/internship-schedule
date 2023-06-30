@@ -17,11 +17,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.schedule.shareships.R
 import com.schedule.shareships.Routes
 import com.schedule.shareships.ui.viewmodel.RegisterUiState
 import com.schedule.shareships.ui.viewmodel.RegisterViewModel
@@ -35,7 +37,7 @@ fun RegisterScreen(
     viewModel: RegisterViewModel = hiltViewModel(),
 ) {
     val uiState: RegisterUiState by viewModel.registerUiState.collectAsState()
-
+    val context = LocalContext.current
     Column(
         modifier = modifier
             .padding(horizontal = 8.dp)
@@ -52,7 +54,7 @@ fun RegisterScreen(
             isError = uiState.isEmailError,
             supportingText = {
                 if (uiState.isEmailError) {
-                    Text(text = uiState.emailErrorText)
+                    Text(text = context.getString(R.string.empty_message))
                 }
             },
             onValueChange = {
@@ -69,7 +71,7 @@ fun RegisterScreen(
             isError = uiState.isUserNameError,
             supportingText = {
                 if (uiState.isUserNameError) {
-                    Text(text = uiState.userNameErrorText)
+                    Text(text = context.getString(R.string.empty_message))
                 }
             },
             onValueChange = {
@@ -86,7 +88,7 @@ fun RegisterScreen(
             isError = uiState.isGithubIdError,
             supportingText = {
                 if (uiState.isGithubIdError) {
-                    Text(text = uiState.githubIdErrorText)
+                    Text(text = context.getString(R.string.empty_message))
                 }
             },
             onValueChange = {
@@ -103,7 +105,7 @@ fun RegisterScreen(
             isError = uiState.isPasswordError,
             supportingText = {
                 if (uiState.isPasswordError) {
-                    Text(text = uiState.passwordErrorText)
+                    Text(text = context.getString(R.string.empty_message))
                 }
             },
             onValueChange = {
@@ -120,7 +122,7 @@ fun RegisterScreen(
             isError = uiState.isReenteredPasswordError,
             supportingText = {
                 if (uiState.isReenteredPasswordError) {
-                    Text(text = uiState.reenteredPasswordErrorText)
+                    Text(text = context.getString(R.string.empty_message))
                 }
             },
             onValueChange = {
