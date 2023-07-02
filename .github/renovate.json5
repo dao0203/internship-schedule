@@ -1,0 +1,15 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    //タイムゾーン
+    "timezone:Asia/Tokyo",
+  ],
+  //自動マージ
+  automerge: true,
+  //全てのPRにラベルを付与
+  labels: ["dependencies"],
+
+  //ダッシュボードを無効化
+  dependencyDashboard: false
+}
