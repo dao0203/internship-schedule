@@ -6,7 +6,7 @@
   //タイムゾーン
   "timezone": "Asia/Tokyo",
   //自動マージ
-  automerge: true,
+  automerge: false,
   //全てのPRにラベルを付与
   labels: [
     "dependencies"
